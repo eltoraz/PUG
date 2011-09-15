@@ -1,0 +1,15 @@
+Pick Up Games Software
+Major Objectives:
+-Create Profile (name, location, stats, games created/joined, teams)
+-Team Profile (name, home field/court, stats)
+-Create games (possibly repeating)
+-Add games to Google calender
+-Search for games
+-Join games found
+-Show games by location (on a google map)
+-Add teams (search for teams)
+-Ranking system (played most, created most)
+-Game types (free for all, team game)
+-Auto create teams option (based on skill, stats, how often they play)
+-Private match (invite-only, full control of teams, etc)
+
