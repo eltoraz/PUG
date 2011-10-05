@@ -1,6 +1,5 @@
 package eltoraz.pug;
 
-import eltoraz.pug.*;
 import java.util.GregorianCalendar;
 
 /**
@@ -12,6 +11,7 @@ import java.util.GregorianCalendar;
 public class Game {
 	protected Location location;
 	protected GregorianCalendar dateTime;
+	protected Person owner, creator;
 	
 	// TODO: add fields for additional rules, privacy options
 	
@@ -21,5 +21,8 @@ public class Game {
 	public Game() {
 		location = new Location();
 		dateTime = new GregorianCalendar();
+		owner = creator = new Person();
 	}
+	
+	// TODO: add more constructors for location, owner
 }
