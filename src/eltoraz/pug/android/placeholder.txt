@@ -1,0 +1,3 @@
+package eltoraz.pug.android
+
+placeholder to make git add the directory
