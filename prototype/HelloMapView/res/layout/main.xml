@@ -12,10 +12,14 @@
         android:clickable="true"
         android:apiKey="0O-v7fSRiZc6FQdXRTdk85zupye3jPmyE-dfvJA"
     />
-    <RelativeLayout android:layout_height="wrap_content" android:id="@+id/relativeLayout1" android:layout_width="match_parent" android:layout_alignParentBottom="true">
-        <QuickContactBadge android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/quickContactBadge1" android:layout_alignParentLeft="false" android:layout_alignParentBottom="true" android:layout_alignParentTop="false" android:src="@drawable/icon"></QuickContactBadge>
-        <Spinner android:id="@+id/spinner1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentRight="true" android:layout_alignParentBottom="true"></Spinner>
-        <RatingBar android:layout_height="wrap_content" android:id="@+id/ratingBar1" android:layout_width="wrap_content" android:layout_above="@+id/spinner1" android:layout_alignParentRight="true" android:layout_marginBottom="15dp" android:layout_alignParentTop="true" android:layout_centerInParent="false" android:layout_alignParentLeft="true"></RatingBar>
+    <RelativeLayout android:layout_height="wrap_content" android:id="@+id/relativeLayout1" android:layout_width="match_parent" android:layout_alignParentTop="true">
+        <QuickContactBadge android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/quickContactBadge1" android:layout_alignParentLeft="false" android:src="@drawable/icon" android:layout_alignParentRight="true" android:layout_alignParentBottom="false" android:layout_alignParentTop="true"></QuickContactBadge>
     </RelativeLayout>
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/relativeLayout2" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true" android:layout_alignParentRight="true">
+        <Button android:layout_height="wrap_content" android:id="@+id/button1" android:layout_width="wrap_content" android:layout_marginBottom="78dp" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:text="Search"></Button>
+        <Button android:layout_height="wrap_content" android:id="@+id/button2" android:layout_width="wrap_content" android:layout_centerHorizontal="true" android:layout_alignParentBottom="true" android:layout_alignParentTop="false" android:text="Create Game"></Button>
+        <Button android:layout_height="wrap_content" android:layout_marginLeft="66dp" android:id="@+id/button3" android:layout_width="wrap_content" android:layout_marginBottom="44dp" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" android:text="Settings"></Button>
+    </RelativeLayout>
+    <Button android:layout_height="wrap_content" android:id="@+id/button4" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_alignParentLeft="true" android:text="List"></Button>
 
 </RelativeLayout>
