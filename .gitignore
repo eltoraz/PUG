@@ -1,7 +1,9 @@
-# Eclipse-specific files to ignore #
+# Eclipse- and Android-specific files to ignore #
 .classpath
 .project
 bin
+proguard.cfg
+default.properties
 
 # Github suggested files #
 # Compiled source #
@@ -26,11 +28,9 @@ bin
 *.tar
 *.zip
 
-# Logs and databases #
+# Logs #
 ######################
 *.log
-*.sql
-*.sqlite
 
 # OS generated files #
 ######################

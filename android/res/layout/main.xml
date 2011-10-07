@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainlayout"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <com.google.android.maps.MapView
+        android:id="@+id/mapview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clickable="true"
+        android:apiKey="0O-v7fSRiZc6FQdXRTdk85zupye3jPmyE-dfvJA"
+    />
+    <RelativeLayout android:layout_height="wrap_content" android:id="@+id/relativeLayout1" android:layout_width="match_parent" android:layout_alignParentBottom="true">
+        <QuickContactBadge android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/quickContactBadge1" android:layout_alignParentLeft="false" android:layout_alignParentBottom="true" android:layout_alignParentTop="false" android:src="@drawable/icon"></QuickContactBadge>
+        <Spinner android:id="@+id/spinner1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentRight="true" android:layout_alignParentBottom="true"></Spinner>
+        <RatingBar android:layout_height="wrap_content" android:id="@+id/ratingBar1" android:layout_width="wrap_content" android:layout_above="@+id/spinner1" android:layout_alignParentRight="true" android:layout_marginBottom="15dp" android:layout_alignParentTop="true" android:layout_centerInParent="false" android:layout_alignParentLeft="true"></RatingBar>
+    </RelativeLayout>
+
+</RelativeLayout>

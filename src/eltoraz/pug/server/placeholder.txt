@@ -1,3 +1,0 @@
-package eltoraz.pug.server
-
-placeholder to make git pull in the server/ directory
