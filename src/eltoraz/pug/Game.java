@@ -24,5 +24,26 @@ public class Game {
 		owner = creator = new Person();
 	}
 	
+	public setlocation(Location loc)
+	{
+		location = loc;
+	}
+	public setdateTime(GregorianCalendar dt)
+	{
+		dateTime = dt;
+	}
+	public setowner(Person p)
+	{
+		owner = p;
+	}
+	public setowner(Person p)
+	{
+		creator = p;
+	}
+	public getlocation() { return location; }
+	public getdateTime() { return dateTime; }
+	public getowner() { return owner; }
+	public getcreator() { return creator; }
+	
 	// TODO: add more constructors for location, owner
 }
