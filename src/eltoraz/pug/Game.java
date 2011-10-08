@@ -24,26 +24,66 @@ public class Game {
 		owner = creator = new Person();
 	}
 	
-	public setlocation(Location loc)
+	// TODO: add more constructors for location, owner
+	
+	
+	///Set members////
+	/**
+	 * Set the location
+	 * @param loc - instance of Location 
+	 */
+	public void setLocation(Location loc)
 	{
 		location = loc;
 	}
-	public setdateTime(GregorianCalendar dt)
+	/**
+	 * Set the date and time
+	 * @param dt - instance of Gregorian Calendar 
+	 */
+	public void setDateTime(GregorianCalendar dt)
 	{
 		dateTime = dt;
 	}
-	public setowner(Person p)
+	/**
+	 * Set the owner
+	 * @param p - instance of Person
+	 */
+	public void setOwner(Person p)
 	{
 		owner = p;
 	}
-	public setowner(Person p)
+	/**
+	 * Set the creator
+	 * @param p - instance of Person
+	 */
+	public void setCreator(Person p)
 	{
 		creator = p;
 	}
-	public getlocation() { return location; }
-	public getdateTime() { return dateTime; }
-	public getowner() { return owner; }
-	public getcreator() { return creator; }
 	
-	// TODO: add more constructors for location, owner
+	/////GET MEMBERS/////
+	
+	/**
+	 * Get the location of the game .
+	 * @return the location
+	 */
+	public Location getLocation() { return location; }
+	
+	/**
+	 * Get the date and time of the game .
+	 * @return the dateTime
+	 */
+	public GregorianCalendar getDateTime() { return dateTime; }
+	/**
+	 * Get the owner of the game .
+	 * @return the owner
+	 */
+	public Person getOwner() { return owner; }
+	/**
+	 * Get the creater of the game .
+	 * @return the creator
+	 */
+	public Person getCreator() { return creator; }
+	
+	
 }

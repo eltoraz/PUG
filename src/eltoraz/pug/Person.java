@@ -30,6 +30,24 @@ public class Person {
 	}
 	
 	/**
+	 * Set the <code>Person</code>'s name
+	 * @return a <code>String</code> containing the <code>Person</code>'s name
+	 */
+	public void setName(String a_name)
+	{
+		name = a_name;
+	}
+	
+	/**
+	 * Set the <code>Person</code>'s ID number
+	 * @return a <code>int</code> containing the <code>Person</code>'s ID number
+	 */
+	public void setId(int i)
+	{
+		id = i;
+	}
+	
+	/**
 	 * Get the <code>Person</code>'s name
 	 * @return a <code>String</code> containing the <code>Person</code>'s name
 	 */

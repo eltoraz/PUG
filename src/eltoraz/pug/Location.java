@@ -31,6 +31,24 @@ public class Location {
 	}
 	
 	/**
+	 * Set the latitude portion of this <code>Location</code>.
+	 * @param lat - the latitude component, in microdegrees (degrees * 1E6)
+	 */
+	public void setLat(int lat)
+	{
+		latitude = lat;
+	}
+	
+	/**
+	 * Set the longitude portion of this <code>Location</code>.
+	 * @return the longitude component, in microdegrees (degrees * 1E6)
+	 */
+	public void setLon(int lon)
+	{
+		longitude = lon;
+	}
+	
+	/**
 	 * Get the latitude portion of this <code>Location</code>.
 	 * @return the latitude component, in microdegrees (degrees * 1E6)
 	 */

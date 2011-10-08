@@ -39,6 +39,8 @@ public class MySQLconnect {
 		try{
 			Vector<Game> allgames;
 			Game tempgame;
+			Person tempperson;
+			Location templocation;
 		
 			statement = connect.createStatement();
 			
