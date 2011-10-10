@@ -24,26 +24,25 @@ public class Game {
 		owner = creator = new Person();
 	}
 	
-	public setlocation(Location loc)
-	{
+	/**
+	 * Create a new <code>Game</code> with the specified creator/owner, at the specified location, at the specified time.
+	 * @param loc <code>Location</code> for the <code>Game</code>
+	 * @param cal <code>GregorianCalendar</code> specifying the date and time of the <code>Game</code>
+	 * @param p <code>Person</code> who created the <code>Game</code>; when initializing, this person is also the owner
+	 */
+	public Game(Location loc, GregorianCalendar cal, Person p) {
 		location = loc;
+		dateTime = cal;
+		owner = creator = p;
 	}
-	public setdateTime(GregorianCalendar dt)
-	{
-		dateTime = dt;
-	}
-	public setowner(Person p)
-	{
-		owner = p;
-	}
-	public setowner(Person p)
-	{
-		creator = p;
-	}
-	public getlocation() { return location; }
-	public getdateTime() { return dateTime; }
-	public getowner() { return owner; }
-	public getcreator() { return creator; }
 	
-	// TODO: add more constructors for location, owner
+	public void setlocation(Location loc) { location = loc; }
+	public void setdateTime(GregorianCalendar dt) { dateTime = dt; }
+	public void setOwner(Person p) { owner = p; }
+	public void setCreator(Person p) { creator = p; }
+	
+	public Location getlocation() { return location; }
+	public GregorianCalendar getDateTime() { return dateTime; }
+	public Person getowner() { return owner; }
+	public Person getcreator() { return creator; }
 }

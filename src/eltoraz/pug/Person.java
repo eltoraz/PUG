@@ -2,7 +2,7 @@ package eltoraz.pug;
 
 /**
  * The <code>Person</code> class represents a person, not necessarily a user of the PUG service.
- * @author Bill Jameosn
+ * @author Bill Jameson
  * @version 0.1
  */
 public class Person {
