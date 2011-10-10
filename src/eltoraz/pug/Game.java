@@ -16,7 +16,7 @@ public class Game {
 	// TODO: add fields for additional rules, privacy options
 	
 	/**
-	 * Create a new <code>Game</code> with null location at the current date/time.
+	 * Create a new <code>Game</code> with null location and owner at the current date/time.
 	 */
 	public Game() {
 		location = new Location();
@@ -36,13 +36,70 @@ public class Game {
 		owner = creator = p;
 	}
 	
-	public void setlocation(Location loc) { location = loc; }
-	public void setdateTime(GregorianCalendar dt) { dateTime = dt; }
-	public void setOwner(Person p) { owner = p; }
-	public void setCreator(Person p) { creator = p; }
+	///Set members////
+	/**
+	 * Set the location
+	 * @param loc <code>Location</code> of the game
+	 */
+	public void setLocation(Location loc) {
+		location = loc;
+	}
 	
-	public Location getlocation() { return location; }
-	public GregorianCalendar getDateTime() { return dateTime; }
-	public Person getowner() { return owner; }
-	public Person getcreator() { return creator; }
+	/**
+	 * Set the date and time
+	 * @param dt <code>GregorianCalendar</code> containing the date & time of the game
+	 */
+	public void setDateTime(GregorianCalendar dt) {
+		dateTime = dt;
+	}
+	
+	/**
+	 * Set the owner
+	 * @param p <code>Person</code> who is the owner of the game
+	 */
+	public void setOwner(Person p) {
+		owner = p;
+	}
+	
+	/**
+	 * Set the creator
+	 * @param p <code>Person</code> who created the game
+	 */
+	public void setCreator(Person p) {
+		creator = p;
+	}
+	
+	/////GET MEMBERS/////
+	
+	/**
+	 * Get the location of the game .
+	 * @return the location
+	 */
+	public Location getLocation() {
+		return location;
+	}
+	
+	/**
+	 * Get the date and time of the game .
+	 * @return the date/time as a <code>GregorianCalendar</code> object
+	 */
+	public GregorianCalendar getDateTime() {
+		return dateTime;
+	}
+	
+	/**
+	 * Get the owner of the game .
+	 * @return the owner
+	 */
+	public Person getOwner() {
+		return owner;
+	}
+	
+	/**
+	 * Get the creator of the game .
+	 * @return the creator
+	 */
+	public Person getCreator() {
+		return creator;
+	}
 }

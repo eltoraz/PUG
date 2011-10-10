@@ -11,7 +11,15 @@ import java.util.Date;
 import eltoraz.pug.*;
 import java.util.Vector;;
 
+
+/**
+ * This function connects to the MySQL database
+ * @author Brian Orecchio
+ *	
+ */
 public class MySQLconnect {
+	
+	//private member variables, might change some of these around
 	private Connection connect = null;
 	private Statement statement = null;
 	private PreparedStatement preparedStatement = null;
@@ -25,8 +33,7 @@ public class MySQLconnect {
 			connect = DriverManager
 					.getConnection("jdbc:mysql://localhost/pug?"
 							+ "user=sqluser&password=sqluserpw");
-
-			
+		
 			
 		} catch (Exception e) {
 			throw e;
@@ -34,19 +41,38 @@ public class MySQLconnect {
 
 	}
 	
-	
-	public Vector<Game> getAllGames() {
+	/**
+	 * This function finds all games in the database and puts them into a vector 
+	 * @return Vector<Game>
+	 * @throws Exception
+	 */
+	public Vector<Game> getAllGames() throws Exception {
 		try{
-			Vector<Game> allgames;
-			Game tempgame;
+			Vector<Game> allgames = new Vector<Game>();
 		
+			//create statement
 			statement = connect.createStatement();
-			
 			//issue query to get all the games in database
-			resultSet = statement.executeQuery("Select g.sport, l.lat, l.longi, l.name, u.first_name, u.last_name from games g, locations l, users u where g.location = l.id and g.creator = u.id;");
+			resultSet = statement.executeQuery("Select g.sport, l.lat, l.longi, l.name,u.id, u.first_name, u.last_name from games g, locations l, users u where g.location = l.id and g.creator = u.id;");
 			
 			//put all the info into a vector of games
-			//tempgame
+			while( resultSet.next() )
+			{
+				Game tempgame = new Game();
+				Person tempperson = new Person();
+				Location templocation = new Location();
+				
+				tempperson.setId( resultSet.getInt(5) );
+				tempperson.setName( resultSet.getString(6) + " " + resultSet.getString(7) );
+				
+				templocation.setLat( resultSet.getInt(2) );
+				templocation.setLon( resultSet.getInt(3));
+				
+				tempgame.setCreator(tempperson);
+				tempgame.setLocation(templocation);
+			
+				allgames.add(tempgame);
+			}
 			
 			//STUFF from the tutorial-------->>>
 			/*//resultSet = statement.executeQuery( " insert INTO FEEDBACK>COMMENTS VALUES(default,sharon,?,?,?,?,?)" );
@@ -79,6 +105,7 @@ public class MySQLconnect {
 			resultSet = statement
 			.executeQuery("select * from FEEDBACK.COMMENTS");
 			//writeMetaData(resultSet); */		
+			///////////////////////////////////////////////////////////////////////////////////
 			
 			return allgames;
 		}
@@ -87,10 +114,48 @@ public class MySQLconnect {
 		} finally{
 			
 		}
-			
+				
+	}
+	
+	
+	/**
+	 * This function sends all the Games int the DB to the client for view on the map
+	 * @param allgames - a vector of the class Game
+	 */
+	public void sendGames( Vector<Game> games )
+	{
+		//function to send all games to client, still need to impliment
+		//Use tcp sockets?
 		
+		//just print all the games now
+		printGames( games );
+		
+		return;
+	}
+	
+	/**
+	 * This function prints the information about a bunch of games
+	 * @param games - Vector of Games that you want printed
+	 */
+	public void printGames( Vector<Game> games)
+	{
+		
+		for(int i=0; i<games.size(); i++)
+		{
+			Game temp = games.elementAt(i);
+			System.out.println("Game " + i);
+			System.out.println( "Latitude: " + temp.getLocation().getLat() );
+			System.out.println( "Longitude: " + temp.getLocation().getLon() );
+			System.out.println( "Creator: " + temp.getCreator().getName() );
+			
+		}
+		
+		return;
 	}
 
+	
+	
+	//function from tutorial, prob will not be used
 	private void writeMetaData(ResultSet resultSet) throws SQLException {
 		// 	Now get some metadata from the database
 		// Result set get the result of the SQL query
@@ -102,7 +167,7 @@ public class MySQLconnect {
 			System.out.println("Column " +i  + " "+ resultSet.getMetaData().getColumnName(i));
 		}
 	}
-
+	//function from tutorial, prob will not use
 	private void writeResultSet(ResultSet resultSet) throws SQLException {
 		// ResultSet is initially before the first data set
 		while (resultSet.next()) {
