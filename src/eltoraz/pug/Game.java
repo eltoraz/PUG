@@ -15,6 +15,8 @@ public class Game {
 	
 	// TODO: add fields for additional rules, privacy options
 	
+	/* ***** CONSTRUCTORS ***** */
+	
 	/**
 	 * Create a new <code>Game</code> with null location and owner at the current date/time.
 	 */
@@ -36,7 +38,19 @@ public class Game {
 		owner = creator = p;
 	}
 	
-	///Set members////
+	/**
+	 * Create a new <code>Game</code> from an existing <code>Game</code>, copying the old game's fields
+	 * @param g <code>Game</code> of which the new <code>Game</code> will be a copy
+	 */
+	public Game(Game g) {
+		location = new Location(g.location);
+		dateTime = (GregorianCalendar) g.dateTime.clone();
+		creator = new Person(g.creator);
+		owner = new Person(g.owner);
+	}
+	
+	/* ***** SET METHODS ***** */
+	
 	/**
 	 * Set the location
 	 * @param loc <code>Location</code> of the game
@@ -69,7 +83,7 @@ public class Game {
 		creator = p;
 	}
 	
-	/////GET MEMBERS/////
+	/* ***** GET METHODS ***** */
 	
 	/**
 	 * Get the location of the game .
