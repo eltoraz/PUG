@@ -117,6 +117,33 @@ public class MySQLconnect {
 				
 	}
 	
+	/**
+	 * This function takes in a Game and inserts it into the DB
+	 * @param instance of Game class that you want to add to DB
+	 * 
+	 */
+	public void addGameToDB( Game game ) throws Exception
+	{
+		try{
+			Statement stmt = connect.createStatement();
+			String query = "INSERT INTO games VALUES(";
+			
+			Location loc = game.getLocation();
+			Person p = game.getCreator();
+			
+			//need function to either get the ID of location or to make a new location in the DB and return that id
+			
+			//do the same with the creator
+			
+			return;
+		}
+		catch(Exception e){
+			throw e;
+		}finally{
+		}
+		
+	}
+	
 	
 	/**
 	 * This function sends all the Games int the DB to the client for view on the map
