@@ -12,7 +12,7 @@ public class Location {
 	protected int longitude;
 	
 	/**
-	 * Create a new <code>Location</code> with default values (0, 0).
+	 * Create a new <code>Location</code> object with default values (0, 0).
 	 */
 	public Location() {
 		latitude = 0;
@@ -20,7 +20,7 @@ public class Location {
 	}
 	
 	/**
-	 * Create a new <code>Location</code> with the specified latitude and longitude
+	 * Create a new <code>Location</code> object with the specified latitude and longitude
 	 * @param lat <code>int</code>, -80 <= lat <= 80 to correspond to GeoPoint Google Maps API class
 	 * @param lon <code>int</code>, -180 <= lon <= 180 to correspond to GeoPoint Google Maps API class
 	 */
@@ -29,6 +29,19 @@ public class Location {
 		latitude = lat;
 		longitude = lon;
 	}
+	
+	/* ***** CONSTRUCTORS ***** */
+	
+	/**
+	 * Create a new <code>Location</code> object as a copy of the specified one
+	 * @param loc <code>Location</code> object to be cloned to create this one
+	 */
+	public Location(Location loc) {
+		latitude = loc.latitude;
+		longitude = loc.longitude;
+	}
+	
+	/* ***** SET METHODS ***** */
 	
 	/**
 	 * Set the latitude portion of this <code>Location</code>.
@@ -45,6 +58,8 @@ public class Location {
 	public void setLon(int lon) {
 		longitude = lon;
 	}
+	
+	/* ***** GET METHODS ***** */
 	
 	/**
 	 * Get the latitude portion of this <code>Location</code>.
