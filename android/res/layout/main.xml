@@ -17,7 +17,7 @@
     </RelativeLayout>
     <RelativeLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/relativeLayout2" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true" android:layout_alignParentRight="true">
         <Button android:layout_height="wrap_content" android:id="@+id/button1" android:layout_width="wrap_content" android:layout_marginBottom="78dp" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:text="Search"></Button>
-        <Button android:layout_height="wrap_content" android:id="@+id/button2" android:layout_width="wrap_content" android:layout_centerHorizontal="true" android:layout_alignParentBottom="true" android:layout_alignParentTop="false" android:text="Create Game"></Button>
+        <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_centerHorizontal="true" android:layout_alignParentBottom="true" android:layout_alignParentTop="false" android:text="Create Game" android:id="@+id/create"></Button>
         <Button android:layout_height="wrap_content" android:layout_marginLeft="66dp" android:id="@+id/button3" android:layout_width="wrap_content" android:layout_marginBottom="44dp" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" android:text="Settings"></Button>
     </RelativeLayout>
     <Button android:layout_height="wrap_content" android:id="@+id/button4" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_alignParentLeft="true" android:text="List"></Button>
