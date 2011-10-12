@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <TextView android:id="@+id/textView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_alignParentLeft="true" android:layout_marginTop="16dp"></TextView>
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignTop="@+id/textView1" android:layout_alignParentLeft="true" android:text="@string/sport" android:id="@+id/sportTextView"></TextView>
+    <Spinner android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/sportSelectSpinner" android:layout_below="@+id/sportTextView" android:layout_alignParentLeft="true"></Spinner>
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/sportSelectSpinner" android:layout_alignParentLeft="true" android:layout_marginTop="16dp" android:id="@+id/locationTextView" android:text="@string/location"></TextView>
+    <EditText android:inputType="textPostalAddress" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/editText1" android:layout_below="@+id/locationTextView" android:layout_alignParentLeft="true">
+        <requestFocus></requestFocus>
+    </EditText>
+    <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/findLocationButton" android:layout_below="@+id/editText1" android:layout_alignParentLeft="true" android:text="@string/findLocation"></Button>
+    
+</RelativeLayout>

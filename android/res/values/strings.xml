@@ -2,4 +2,7 @@
 <resources>
     <string name="hello">Hello World, PugAndroidActivity!</string>
     <string name="app_name">PickUpGames</string>
+    <string name="sport">Sport</string>
+    <string name="location">Location</string>
+    <string name="findLocation">Find on Map</string>
 </resources>
