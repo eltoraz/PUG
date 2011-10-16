@@ -5,7 +5,6 @@ import com.google.android.maps.*;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.*;
 
 public class PugAndroidActivity extends MapActivity {
@@ -13,7 +12,6 @@ public class PugAndroidActivity extends MapActivity {
 	private MapView mapView;
 	
 	private Button createGameButton;
-	private Intent createGameIntent;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -23,10 +21,10 @@ public class PugAndroidActivity extends MapActivity {
 		
 		// define functionality for the buttons
 		createGameButton = (Button) findViewById(R.id.createButton);
-		createGameIntent = new Intent(this, CreateGameActivity.class);
-		createGameButton.setOnClickListener(new OnClickListener() {
+		createGameButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				startActivity(createGameIntent);
+				Intent intent = new Intent(v.getContext(), CreateGameActivity.class);
+				startActivity(intent);
 			}
 		});
 		
