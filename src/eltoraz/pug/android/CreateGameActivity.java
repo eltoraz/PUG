@@ -22,17 +22,15 @@ public class CreateGameActivity extends Activity {
 	
 	public class CreateGameOnItemSelectedListener implements OnItemSelectedListener {
 		public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-			
 			try {
 				// use reflection to create the right type of game
-				// all the options in the spinner will have a corresponding class that extends Game
+				// Note: all the options in this spinner must have a corresponding class that extends Game
+				// Adapted from sample code at http://www.rgagnon.com/javadetails/java-0351.html
 				String gameType = "eltoraz.pug." + parent.getItemAtPosition(pos).toString() + "Game";
 				Class<?> cl = Class.forName(gameType);
 				java.lang.reflect.Constructor<?> constructor = cl.getConstructor(new Class[] {Person.class});
 				Object invoker = constructor.newInstance(new Object[] {user});
-				
-				// TODO: use reflection to instantiate game using the correct subclass
-				// see http://www.rgagnon.com/javadetails/java-0351.html
+				game = (Game) invoker;
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -55,7 +53,9 @@ public class CreateGameActivity extends Activity {
 		else					// This should theoretically never be called
 			user = new Person("Test User", -1);
 		
-		// define functionality for UI elements
+		/* ***** DEFINE	UI ELEMENT FUNCTIONALITY ***** */
+		
+		// GAME SELECTION SPINNER
 		sportSelectSpinner = (Spinner) findViewById(R.id.sportSelectSpinner);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sports_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
