@@ -12,6 +12,7 @@ public class Game {
 	protected Location location;
 	protected GregorianCalendar dateTime;
 	protected Person owner, creator;
+	protected boolean privateGame;
 	
 	// TODO: add fields for additional rules, privacy options
 	
@@ -24,6 +25,18 @@ public class Game {
 		location = new Location();
 		dateTime = new GregorianCalendar();
 		owner = creator = new Person();
+		privateGame = false;
+	}
+	
+	/**
+	 * Create a new <code>Game</code> with the specified <code>Person</code> as the creator/owner
+	 * @param p <code>Person</code> who created the <code>Game</code>
+	 */
+	public Game(Person p) {
+		location = new Location();
+		dateTime = new GregorianCalendar();
+		owner = creator = p;
+		privateGame = false;
 	}
 	
 	/**
@@ -36,6 +49,21 @@ public class Game {
 		location = loc;
 		dateTime = cal;
 		owner = creator = p;
+		privateGame = false;
+	}
+	
+	/**
+	 * Create a new <code>Game</code> with the specified creator/owner, at the specified location, at the specified time.
+	 * @param loc <code>Location</code> for the <code>Game</code>
+	 * @param cal <code>GregorianCalendar</code> specifying the date and time of the <code>Game</code>
+	 * @param p <code>Person</code> who created the <code>Game</code>; when initializing, this person is also the owner
+	 * @param privacy <code>boolean</code> representing the visibility status of the <code>Game</code>
+	 */
+	public Game(Location loc, GregorianCalendar cal, Person p, boolean privacy) {
+		location = loc;
+		dateTime = cal;
+		owner = creator = p;
+		privateGame = privacy;
 	}
 	
 	/**
@@ -47,6 +75,7 @@ public class Game {
 		dateTime = (GregorianCalendar) g.dateTime.clone();
 		creator = new Person(g.creator);
 		owner = new Person(g.owner);
+		privateGame = g.privateGame;
 	}
 	
 	/* ***** SET METHODS ***** */
@@ -83,10 +112,18 @@ public class Game {
 		creator = p;
 	}
 	
+	/**
+	 * Set the privacy option for the game
+	 * @param tf <code>boolean</code> representing the game's privacy: true = private, false (default) = public
+	 */
+	public void setPrivate(boolean tf) {
+		privateGame = tf;
+	}
+	
 	/* ***** GET METHODS ***** */
 	
 	/**
-	 * Get the location of the game .
+	 * Get the location of the game
 	 * @return the location
 	 */
 	public Location getLocation() {
@@ -94,7 +131,7 @@ public class Game {
 	}
 	
 	/**
-	 * Get the date and time of the game .
+	 * Get the date and time of the game
 	 * @return the date/time as a <code>GregorianCalendar</code> object
 	 */
 	public GregorianCalendar getDateTime() {
@@ -102,7 +139,7 @@ public class Game {
 	}
 	
 	/**
-	 * Get the owner of the game .
+	 * Get the owner of the game
 	 * @return the owner
 	 */
 	public Person getOwner() {
@@ -110,10 +147,18 @@ public class Game {
 	}
 	
 	/**
-	 * Get the creator of the game .
+	 * Get the creator of the game
 	 * @return the creator
 	 */
 	public Person getCreator() {
 		return creator;
+	}
+	
+	/**
+	 * Get the privacy status of the game
+	 * @return whether the game is private
+	 */
+	public boolean getPrivate() {
+		return privateGame;
 	}
 }

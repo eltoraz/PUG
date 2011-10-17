@@ -1,5 +1,7 @@
 package eltoraz.pug.android;
 
+import eltoraz.pug.*;
+
 import com.google.android.maps.*;
 
 import android.content.Intent;
@@ -10,6 +12,7 @@ import android.widget.*;
 public class PugAndroidActivity extends MapActivity {
 	// private LinearLayout linearLayout;
 	private MapView mapView;
+	private Person user;
 	
 	private Button createGameButton;
 
@@ -19,11 +22,14 @@ public class PugAndroidActivity extends MapActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
+		user = new Person("Test User", -1);
+		
 		// define functionality for the buttons
 		createGameButton = (Button) findViewById(R.id.createButton);
 		createGameButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), CreateGameActivity.class);
+				intent.putExtra("user", user);
 				startActivity(intent);
 			}
 		});

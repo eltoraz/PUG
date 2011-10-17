@@ -5,4 +5,16 @@
     <string name="sport">Sport</string>
     <string name="location">Location</string>
     <string name="findLocation">Find on Map</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="maxPlayers">Number of Players</string>
+    <string name="visibility">Visibility</string>
+    <string name="pub">Public</string>
+    <string name="priv">Private</string>
+    <string name="sport_prompt">Choose a sport:</string>
+    <string-array name="sports_array">
+    	<item>Basketball</item>
+    	<item>Baseball</item>
+    	<item>Football</item>
+    </string-array>
 </resources>

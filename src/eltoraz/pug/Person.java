@@ -1,11 +1,17 @@
 package eltoraz.pug;
 
+import java.io.Serializable;
+
 /**
  * The <code>Person</code> class represents a person, not necessarily a user of the PUG service.
  * @author Bill Jameson
  * @version 0.1
  */
-public class Person {
+public class Person implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String name;
 	protected int id;
 	
