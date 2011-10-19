@@ -4,7 +4,7 @@
 bin
 gen
 proguard.cfg
-default.properties
+*.properties
 
 # Github suggested files #
 # Compiled source #
