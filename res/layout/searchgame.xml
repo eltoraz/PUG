@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainlayout"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    <LinearLayout android:layout_width="wrap_content" android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:orientation="vertical" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_alignParentTop="true" android:layout_alignParentBottom="true">
+        <TextView android:text="Latitude" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView1"></TextView>
+        <EditText android:id="@+id/LatitudeText" android:layout_height="wrap_content" android:layout_width="match_parent">
+            <requestFocus></requestFocus>
+        </EditText>
+        <TextView android:text="Longitude" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView2"></TextView>
+        <EditText android:id="@+id/LongitudeText" android:layout_height="wrap_content" android:layout_width="match_parent"></EditText>
+        <Button android:text="Search" android:id="@+id/searchSubmitButton" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+    </LinearLayout>
+
+</RelativeLayout>

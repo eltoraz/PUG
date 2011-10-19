@@ -17,6 +17,8 @@
 		</activity>
 		<activity android:name=".CreateGameActivity"
 				  android:label="Create a Game" />
+	  <activity android:name=".SearchGameActivity"
+				  android:label="Search for a Game" />
 
 	</application>
 </manifest>

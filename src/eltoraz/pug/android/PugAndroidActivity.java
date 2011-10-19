@@ -15,7 +15,7 @@ public class PugAndroidActivity extends MapActivity {
 	private Person user;
 	
 	private Button createGameButton;
-
+	private Button searchButton;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,15 @@ public class PugAndroidActivity extends MapActivity {
 		createGameButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), CreateGameActivity.class);
+				intent.putExtra("user", user);
+				startActivity(intent);
+			}
+		});
+		
+		searchButton = (Button) findViewById(R.id.searchButton);
+		searchButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(v.getContext(), SearchGameActivity.class);
 				intent.putExtra("user", user);
 				startActivity(intent);
 			}
