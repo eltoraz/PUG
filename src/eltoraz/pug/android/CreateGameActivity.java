@@ -22,6 +22,8 @@ public class CreateGameActivity extends Activity {
 	
 	public class CreateGameOnItemSelectedListener implements OnItemSelectedListener {
 		public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+			// avoid exceptions by making sure to reference only classes that exist and have a constructor
+			//   taking a Person as an argument
 			try {
 				// use reflection to create the right type of game
 				// Note: all the options in this spinner must have a corresponding class that extends Game
@@ -29,8 +31,8 @@ public class CreateGameActivity extends Activity {
 				String gameType = "eltoraz.pug." + parent.getItemAtPosition(pos).toString() + "Game";
 				Class<?> cl = Class.forName(gameType);
 				java.lang.reflect.Constructor<?> constructor = cl.getConstructor(new Class[] {Person.class});
-				Object invoker = constructor.newInstance(new Object[] {user});
-				game = (Game) invoker;
+				Object newGameType = constructor.newInstance(new Object[] {user});
+				game = (Game) newGameType;
 			}
 			catch (Exception e) {
 				e.printStackTrace();

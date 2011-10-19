@@ -11,15 +11,15 @@
     <EditText android:inputType="textPostalAddress" android:layout_height="wrap_content" android:layout_below="@+id/locationTextView" android:layout_alignParentLeft="true" android:id="@+id/locationEditText" android:layout_width="fill_parent">
         <requestFocus></requestFocus>
     </EditText>
-    <EditText android:layout_height="wrap_content" android:inputType="date" android:layout_width="wrap_content" android:layout_below="@+id/dateTextView" android:layout_alignParentLeft="true" android:id="@+id/dateEditText"></EditText>
     <Button android:layout_height="wrap_content" android:id="@+id/findLocationButton" android:text="@string/findLocation" android:layout_width="wrap_content" android:layout_below="@+id/locationEditText" android:layout_alignParentLeft="true"></Button>
-    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/dateEditText" android:layout_alignParentLeft="true" android:id="@+id/timeTextView" android:text="@string/time"></TextView>
     <TextView android:layout_height="wrap_content" android:text="@string/date" android:layout_width="wrap_content" android:id="@+id/dateTextView" android:layout_below="@+id/findLocationButton" android:layout_alignParentLeft="true"></TextView>
     <TextView android:layout_height="wrap_content" android:text="@string/location" android:layout_width="wrap_content" android:id="@+id/locationTextView" android:layout_below="@+id/sportSelectSpinner" android:layout_alignParentLeft="true"></TextView>
-    <EditText android:layout_height="wrap_content" android:inputType="time" android:id="@+id/editText1" android:layout_width="wrap_content" android:layout_below="@+id/timeTextView" android:layout_alignParentLeft="true"></EditText>
-    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/editText1" android:layout_alignParentLeft="true" android:id="@+id/maxPlayersTextView" android:text="@string/maxPlayers"></TextView>
     <EditText android:layout_height="wrap_content" android:inputType="number" android:id="@+id/editText2" android:layout_width="wrap_content" android:layout_below="@+id/maxPlayersTextView" android:layout_alignParentLeft="true"></EditText>
     <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/editText2" android:layout_alignParentLeft="true" android:id="@+id/visibilityTextView" android:text="@string/visibility"></TextView>
     <ToggleButton android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/visibilityTextView" android:layout_alignParentLeft="true" android:id="@+id/visibilityToggleButton" android:textOff="@string/pub" android:textOn="@string/priv"></ToggleButton>
+    <TimePicker android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@+id/timeTextView" android:layout_alignLeft="@+id/timeTextView" android:id="@+id/timePicker"></TimePicker>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/maxPlayersTextView" android:text="@string/maxPlayers" android:layout_below="@+id/timePicker" android:layout_alignParentLeft="true"></TextView>
+    <TextView android:layout_height="wrap_content" android:id="@+id/timeTextView" android:text="@string/time" android:layout_below="@+id/datePicker" android:layout_alignLeft="@+id/dateTextView" android:layout_width="wrap_content"></TextView>
+    <DatePicker android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/datePicker" android:layout_below="@+id/dateTextView" android:layout_alignLeft="@+id/dateTextView"></DatePicker>
     
 </RelativeLayout>
