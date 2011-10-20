@@ -7,13 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
+import android.widget.TextView;
+import android.widget.*;
 public class SearchGameActivity extends Activity {
 	private Person user;
 	private Button searchSubmitButton;
 	private EditText LongitudeText;
 	private EditText LatitudeText;
-
+	private TextView LatitudeView;
+	private TextView LongitudeView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -26,7 +28,6 @@ public class SearchGameActivity extends Activity {
 		else					// This should theoretically never be called
 			user = new Person("Test User", -1);
 	
-	
 		searchSubmitButton = (Button) findViewById(R.id.searchSubmitButton);
 		searchSubmitButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -35,5 +36,9 @@ public class SearchGameActivity extends Activity {
 				startActivity(intent);
 			}
 		});
+	}
+	
+	public CharSequence get_lat() {
+		return LatitudeView.getText();
 	}
 }
