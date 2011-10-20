@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import android.*;
+import android.content.*;
 
 public class PugAndroidActivity extends MapActivity {
 	// private LinearLayout linearLayout;
@@ -51,8 +53,17 @@ public class PugAndroidActivity extends MapActivity {
 	protected boolean isRouteDisplayed() {
 		return false;
 	}
+	
+	@Override
+	protected void onResume() {
+	super.onResume();
+	Context context = getApplicationContext();
+	CharSequence text = "Hello toast!";
+	int duration = Toast.LENGTH_SHORT;
 
-
-
-
+	Toast toast = Toast.makeText(context, text, duration);
+	toast.show();
+	
+	}
+	
 }
