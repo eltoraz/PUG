@@ -17,4 +17,5 @@
     	<item>Baseball</item>
     	<item>Football</item>
     </string-array>
+    <string name="create">Create</string>
 </resources>
