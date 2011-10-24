@@ -5,7 +5,8 @@
   android:padding="10dip"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
-	<Button android:id="@+id/createButton" android:layout_height="wrap_content" android:layout_width="match_parent" android:text="@string/create" android:layout_alignParentLeft="true"></Button>
+	<Button android:id="@+id/createButton" android:layout_height="wrap_content" android:layout_width="match_parent"
+			android:text="@string/create" android:layout_alignParentLeft="true"></Button>
 	<ScrollView
 	  android:id="@+id/createGameScrollView"
 	  android:layout_width="match_parent"
@@ -15,22 +16,33 @@
 		  android:orientation="vertical"
 		  android:layout_width="match_parent"
 		  android:layout_height="wrap_content">
-		    <TextView android:id="@+id/textView1" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_alignParentLeft="true" android:layout_marginTop="16dp"></TextView>
-		    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignTop="@+id/textView1" android:layout_alignParentLeft="true" android:text="@string/sport" android:id="@+id/sportTextView"></TextView>
-		    <Spinner android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/sportSelectSpinner" android:layout_below="@+id/sportTextView" android:layout_alignParentLeft="true" android:prompt="@string/sport_prompt"></Spinner>
-		    <EditText android:inputType="textPostalAddress" android:layout_height="wrap_content" android:layout_below="@+id/locationTextView" android:layout_alignParentLeft="true" android:id="@+id/locationEditText" android:layout_width="match_parent">
-		        <requestFocus></requestFocus>
-		    </EditText>
-		    <Button android:layout_height="wrap_content" android:id="@+id/findLocationButton" android:text="@string/findLocation" android:layout_width="wrap_content" android:layout_below="@+id/locationEditText" android:layout_alignParentLeft="true"></Button>
-		    <TextView android:layout_height="wrap_content" android:text="@string/date" android:layout_width="wrap_content" android:id="@+id/dateTextView" android:layout_below="@+id/findLocationButton" android:layout_alignParentLeft="true"></TextView>
-		    <TextView android:layout_height="wrap_content" android:text="@string/location" android:layout_width="wrap_content" android:id="@+id/locationTextView" android:layout_below="@+id/sportSelectSpinner" android:layout_alignParentLeft="true"></TextView>
-		    <EditText android:layout_height="wrap_content" android:inputType="number" android:id="@+id/maxPlayersEditText" android:layout_width="wrap_content" android:layout_below="@+id/maxPlayersTextView" android:layout_alignParentLeft="true"></EditText>
-		    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/maxPlayersEditText" android:layout_alignParentLeft="true" android:id="@+id/visibilityTextView" android:text="@string/visibility"></TextView>
-		    <ToggleButton android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_below="@+id/visibilityTextView" android:layout_alignParentLeft="true" android:id="@+id/visibilityToggleButton" android:textOff="@string/pub" android:textOn="@string/priv"></ToggleButton>
-		    <TimePicker android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@+id/timeTextView" android:layout_alignParentLeft="true" android:id="@+id/timePicker"></TimePicker>
-		    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/maxPlayersTextView" android:text="@string/maxPlayers" android:layout_below="@+id/timePicker" android:layout_alignParentLeft="true"></TextView>
-		    <TextView android:layout_height="wrap_content" android:id="@+id/timeTextView" android:text="@string/time" android:layout_below="@+id/datePicker" android:layout_alignParentLeft="true" android:layout_width="wrap_content"></TextView>
-		    <DatePicker android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/datePicker" android:layout_below="@+id/dateTextView" android:layout_alignParentLeft="true"></DatePicker>
+		    <TextView android:id="@+id/sportTextView" android:layout_height="wrap_content" android:layout_width="wrap_content"
+		        	  android:layout_alignParentTop="true" android:layout_alignParentLeft="true" android:text="@string/sport"></TextView>
+		    <Spinner  android:id="@+id/sportSelectSpinner" android:layout_height="wrap_content" android:layout_width="match_parent"
+					  android:layout_below="@+id/sportTextView" android:layout_alignParentLeft="true" android:prompt="@string/sport_prompt"></Spinner>
+		    <TextView android:id="@+id/locationTextView" android:layout_height="wrap_content" android:layout_width="wrap_content" 
+		        	  android:text="@string/location" android:layout_below="@+id/sportSelectSpinner" android:layout_alignParentLeft="true"></TextView>
+		    <EditText android:id="@+id/locationEditText" android:layout_height="wrap_content" android:layout_width="match_parent"
+		        	  android:inputType="textPostalAddress" android:layout_below="@+id/locationTextView" android:layout_alignParentLeft="true">
+		        <requestFocus></requestFocus></EditText>
+		    <Button   android:id="@+id/findLocationButton" android:layout_height="wrap_content" android:layout_width="match_parent"
+		        	  android:text="@string/findLocation" android:layout_below="@+id/locationEditText" android:layout_alignParentLeft="true"></Button>
+		    <TextView android:id="@+id/dateTextView" android:layout_height="wrap_content" android:layout_width="wrap_content"
+		        	  android:text="@string/date" android:layout_below="@+id/findLocationButton" android:layout_alignParentLeft="true"></TextView>
+		    <Button   android:id="@+id/datePickButton" android:layout_height="wrap_content" android:layout_width="match_parent"
+					  android:layout_below="@+id/dateTextView" android:layout_alignParentLeft="true"></Button>
+		    <TextView android:id="@+id/timeTextView" android:layout_height="wrap_content" android:layout_width="wrap_content"
+		        	  android:text="@string/time" android:layout_below="@+id/datePickButton" android:layout_alignParentLeft="true"></TextView>
+		    <Button   android:id="@+id/timePickButton" android:layout_height="wrap_content" android:layout_width="match_parent"
+		        	  android:layout_below="@+id/timeTextView" android:layout_alignParentLeft="true"></Button>
+		    <TextView android:id="@+id/maxPlayersTextView" android:layout_height="wrap_content" android:layout_width="wrap_content"
+		        	  android:text="@string/maxPlayers" android:layout_below="@+id/timePickButton" android:layout_alignParentLeft="true"></TextView>
+		    <EditText android:id="@+id/maxPlayersEditText" android:layout_height="wrap_content" android:layout_width="match_parent"
+		        	  android:inputType="number" android:layout_below="@+id/maxPlayersTextView" android:layout_alignParentLeft="true"></EditText>
+		    <TextView android:id="@+id/visibilityTextView" android:layout_height="wrap_content" android:layout_width="wrap_content"
+		        	  android:layout_below="@+id/maxPlayersEditText" android:layout_alignParentLeft="true" android:text="@string/visibility"></TextView>
+		    <ToggleButton android:id="@+id/visibilityToggleButton" android:layout_height="wrap_content" android:layout_width="wrap_content"
+		        		  android:layout_below="@+id/visibilityTextView" android:layout_alignParentLeft="true" android:textOff="@string/pub" android:textOn="@string/priv"></ToggleButton>
 		</RelativeLayout>
 	</ScrollView>
 </LinearLayout>
