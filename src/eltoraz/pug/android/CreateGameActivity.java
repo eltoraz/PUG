@@ -187,6 +187,9 @@ public class CreateGameActivity extends Activity {
 					Context context = getApplicationContext();
 					CharSequence msg = "Invalid address, try another one.";
 					Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+
+					return;
+
 				}
 				else
 					loc = new Location();
