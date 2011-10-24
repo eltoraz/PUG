@@ -2,17 +2,27 @@ package eltoraz.pug.android;
 
 import eltoraz.pug.*;
 
-//import java.lang.reflect.*;
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.*;
 import android.widget.AdapterView.OnItemSelectedListener;
+
+// TODO: Javadoc comments
 
 /**
  * An <code>Activity</code> for game creation based on user specifications
@@ -63,30 +73,6 @@ public class CreateGameActivity extends Activity {
 				}
 			};
 	
-	public class CreateGameOnItemSelectedListener implements OnItemSelectedListener {
-		public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-			// avoid runtime exceptions by making sure to reference only classes that exist and have a constructor
-			//   taking a Person as an argument
-			try {
-				// use reflection to create the right type of game
-				// Note: all the options in this spinner must have a corresponding class that extends Game
-				// Adapted from sample code at http://www.rgagnon.com/javadetails/java-0351.html
-				String gameType = "eltoraz.pug." + parent.getItemAtPosition(pos).toString() + "Game";
-				Class<?> cl = Class.forName(gameType);
-				java.lang.reflect.Constructor<?> constructor = cl.getConstructor(new Class[] {Person.class});
-				Object newGameType = constructor.newInstance(new Object[] {user});
-				game = (Game) newGameType;
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		public void onNothingSelected(AdapterView<?> parent) {
-			// do nothing
-		}
-	}
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -111,14 +97,31 @@ public class CreateGameActivity extends Activity {
 		/* ***** DEFINE	UI ELEMENT FUNCTIONALITY ***** */
 		
 		// GAME SELECTION SPINNER
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sports_array, android.R.layout.simple_spinner_item);
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.sports_array,
+																			 android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		sportSelectSpinner.setAdapter(adapter);
-		//sportSelectSpinner.setOnItemSelectedListener(new CreateGameOnItemSelectedListener());
 		
 		// LOCATION TEXT FIELD
+		// TODO: input verification
+		locationEditText.setOnKeyListener(new View.OnKeyListener() {
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+					(keyCode == KeyEvent.KEYCODE_ENTER)) {
+					// TODO: once findLocationButton is implemented, have Enter on this text field be equiv. to pressing it
+					return true;
+				}
+				return false;
+			}
+		});
 		
 		// FIND LOCATION BUTTON
+		findLocationButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO: bring up a map centered on either specified or GPS location
+			}
+		});
 		
 		// DATE PICKER BUTTON
 		final Calendar c = Calendar.getInstance();
@@ -145,8 +148,64 @@ public class CreateGameActivity extends Activity {
 		});
 		
 		// MAX PLAYERS TEXT FIELD
+		maxPlayersEditText.setText("2");
+		// maybe some input validation here
 		
-		// VISIBILITY TOGGLE
+		// CREATE GAME BUTTON
+		createGameButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// Get all the parameters to create a new game
+				String sport = sportSelectSpinner.getSelectedItem().toString();
+				int maxPlayers = Integer.parseInt(maxPlayersEditText.getText().toString());
+				boolean privacy = visibilityToggleButton.isChecked();
+				String addr = locationEditText.getText().toString();
+				Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+				List<Address> locations = null;
+				Location loc = null;
+				GregorianCalendar dt = new GregorianCalendar(mYear, mMonth, mDay, mHour, mMinute);
+				
+				// Note: There's a known issue with Android emulator > API level 8 where this will always throw an
+				//   IOException. It should work on an actual device. 
+				try {
+					locations = geocoder.getFromLocationName(addr, 1);
+				}
+				catch (IOException e) {
+					Log.e("IOException", e.getMessage());
+					Context context = getApplicationContext();
+					CharSequence errmsg = "Error: Network unavailable, try again later. IOException: " + e.getMessage();
+					Toast.makeText(context, errmsg, Toast.LENGTH_SHORT).show();
+					e.printStackTrace();
+				}
+				
+				if (locations != null && locations.size()>0) {
+					int lat = (int) (locations.get(0).getLatitude() * 1000000);
+					int lon = (int) (locations.get(0).getLongitude() * 1000000);
+					loc = new Location(lat, lon, addr);
+				}
+				else
+					loc = new Location();
+				
+				// create the game using reflection
+				// To avoid exceptions, make sure the spinner only has sports that correspond to a -Game class
+				//   in the eltoraz.pug package, and the corresponding class has a constructor taking one Person as an arg.
+				try {
+					String gameType = "eltoraz.pug." + sport + "Game";
+					Class<?> cl = Class.forName(gameType);
+					java.lang.reflect.Constructor<?> constructor = cl.getConstructor(new Class[] {Person.class});
+					Object newGameType = constructor.newInstance(new Object[] {user});
+					game = (Game) newGameType;
+					
+					game.setDateTime(dt);
+					game.setLocation(loc);
+					game.setPrivate(privacy);
+					game.setMaxPlayers(maxPlayers);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	@Override

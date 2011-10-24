@@ -13,8 +13,10 @@ public class Game {
 	protected GregorianCalendar dateTime;
 	protected Person owner, creator;
 	protected boolean privateGame;
+	protected int maxPlayers;
 	
 	// TODO: add fields for additional rules, privacy options
+	// TODO: remove useless constructors
 	
 	/* ***** CONSTRUCTORS ***** */
 	
@@ -26,6 +28,7 @@ public class Game {
 		dateTime = new GregorianCalendar();
 		owner = creator = new Person();
 		privateGame = false;
+		maxPlayers = 2;
 	}
 	
 	/**
@@ -37,6 +40,7 @@ public class Game {
 		dateTime = new GregorianCalendar();
 		owner = creator = p;
 		privateGame = false;
+		maxPlayers = 2;
 	}
 	
 	/**
@@ -50,6 +54,7 @@ public class Game {
 		dateTime = cal;
 		owner = creator = p;
 		privateGame = false;
+		maxPlayers = 2;
 	}
 	
 	/**
@@ -64,6 +69,23 @@ public class Game {
 		dateTime = cal;
 		owner = creator = p;
 		privateGame = privacy;
+		maxPlayers = 2;
+	}
+	
+	/**
+	 * Create a new <code>Game</code> with the specified creator/owner, at the specified location, at the specified time.
+	 * @param loc <code>Location</code> for the <code>Game</code>
+	 * @param cal <code>GregorianCalendar</code> specifying the date and time of the <code>Game</code>
+	 * @param p <code>Person</code> who created the <code>Game</code>; when initializing, this person is also the owner
+	 * @param privacy <code>boolean</code> representing the visibility status of the <code>Game</code>
+	 * @param n <code>int</code> equal to the maximum number of players who can participate in the <code>Game</code>
+	 */
+	public Game(Location loc, GregorianCalendar cal, Person p, boolean privacy, int n) {
+		location = loc;
+		dateTime = cal;
+		owner = creator = p;
+		privateGame = privacy;
+		maxPlayers = n;
 	}
 	
 	/**
@@ -76,6 +98,7 @@ public class Game {
 		creator = new Person(g.creator);
 		owner = new Person(g.owner);
 		privateGame = g.privateGame;
+		maxPlayers = g.maxPlayers;
 	}
 	
 	/* ***** SET METHODS ***** */
@@ -120,6 +143,14 @@ public class Game {
 		privateGame = tf;
 	}
 	
+	/**
+	 * Set the maximum number of participating players for the game
+	 * @param n <code>int</code> equal to the maximum number of players who can participate in the <code>Game</code>
+	 */
+	public void setMaxPlayers(int n) {
+		maxPlayers = n;
+	}
+	
 	/* ***** GET METHODS ***** */
 	
 	/**
@@ -160,5 +191,13 @@ public class Game {
 	 */
 	public boolean getPrivate() {
 		return privateGame;
+	}
+	
+	/**
+	 * Get the maximum number of players for the game
+	 * @return the maximum number of players who can join the game
+	 */
+	public int getMaxPlayers() {
+		return maxPlayers;
 	}
 }
