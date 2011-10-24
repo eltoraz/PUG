@@ -20,7 +20,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.*;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 // TODO: Javadoc comments
 
@@ -166,14 +165,15 @@ public class CreateGameActivity extends Activity {
 				GregorianCalendar dt = new GregorianCalendar(mYear, mMonth, mDay, mHour, mMinute);
 				
 				// Note: There's a known issue with Android emulator > API level 8 where this will always throw an
-				//   IOException. It should work on an actual device. 
+				//   IOException. It should work on an actual device.
+				// @reference http://code.google.com/p/android/issues/detail?id=8816
 				try {
 					locations = geocoder.getFromLocationName(addr, 1);
 				}
 				catch (IOException e) {
 					Log.e("IOException", e.getMessage());
 					Context context = getApplicationContext();
-					CharSequence errmsg = "Error: Network unavailable, try again later. IOException: " + e.getMessage();
+					CharSequence errmsg = "Error: Network unavailable. IOException: " + e.getMessage();
 					Toast.makeText(context, errmsg, Toast.LENGTH_SHORT).show();
 					e.printStackTrace();
 				}
@@ -182,6 +182,12 @@ public class CreateGameActivity extends Activity {
 					int lat = (int) (locations.get(0).getLatitude() * 1000000);
 					int lon = (int) (locations.get(0).getLongitude() * 1000000);
 					loc = new Location(lat, lon, addr);
+				}
+				else if (locations.size() == 0) {
+					Context context = getApplicationContext();
+					CharSequence msg = "Invalid address, try another one.";
+					Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+					return;
 				}
 				else
 					loc = new Location();
