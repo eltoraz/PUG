@@ -109,7 +109,17 @@ public class PugNetworkInterface {
 			JSONObject jsonGame = jsonInterface.packGame(game);
 			
 			//send the JSONObject to the server for processing using some HTTPClient call or something
-			
+			HttpClient httpclient= new DefaultHttpClient();
+            HttpResponse response;
+            HttpPost httppost= new HttpPost ("http://pug.myrpi.org/creategame.php");
+            StringEntity se=new StringEntity (jsonGame.toString());
+            httppost.setEntity(se);
+            System.out.print(se);
+            httppost.setHeader("Accept", "application/json");
+            httppost.setHeader("Content-type", "application/json");
+
+            response=httpclient.execute(httppost);
+            
 			
 		}
 		catch(Exception e) {

@@ -106,8 +106,11 @@ public class JsonObjectInterface {
 		try{
 			JSONObject jsonGame = new JSONObject();
 			
-			jsonGame.put("sport", "Unknown Sport");  //How is this implimentation going to work
-			jsonGame.put("descr", "Description Here");  
+			jsonGame.put("sport", "Soccer");  //How is this implementation going to work
+			jsonGame.put("descr", "WTFFFFF"); 
+			long time = System.currentTimeMillis();
+			java.sql.Timestamp timestamp = new java.sql.Timestamp(time);
+			jsonGame.put("datetime", timestamp.toString());
 			
 			jsonGame.put("creator", packPerson(game.getCreator()) );
 			
@@ -130,7 +133,7 @@ public class JsonObjectInterface {
 		try{
 			JSONObject jsonPerson = new JSONObject();
 			//put the person id into the json
-			jsonPerson.put("id", person.getId() );
+			//jsonPerson.put("id", person.getId() );
 			
 			//split the name into first and last components and put into json
 			String name = person.getName();
@@ -155,9 +158,9 @@ public class JsonObjectInterface {
 		try{
 			JSONObject jsonLocation = new JSONObject();
 			
-			jsonLocation.put("id", -1);  //currently the Location class does not have an id, should it?
+			//jsonLocation.put("id", -1);  //currently the Location class does not have an id, should it?
 			
-			jsonLocation.put("name", "Joe Schmoe");  //currently the Location class does not have a name, should it?
+			jsonLocation.put("name", "Location");  //currently the Location class does not have a name, should it?
 			
 			//out location class has an address component but our DB doesn't.  We should add this
 			
