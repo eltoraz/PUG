@@ -110,7 +110,7 @@ public class JsonObjectInterface {
 			jsonGame.put("descr", "WTFFFFF"); 
 			long time = System.currentTimeMillis();
 			java.sql.Timestamp timestamp = new java.sql.Timestamp(time);
-			jsonGame.put("datetime", timestamp.toString());
+			jsonGame.put("datetime", timestamp.toString());  //currently the datetime stuff is screwing up, DB not getting the game
 			
 			jsonGame.put("creator", packPerson(game.getCreator()) );
 			

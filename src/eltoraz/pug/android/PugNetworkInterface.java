@@ -102,6 +102,52 @@ public class PugNetworkInterface {
 	}
 	
 	
+	public ArrayList<Game> getGamesInLatLonArea(Integer lat, Integer lon) {
+		
+		ArrayList<Game> Games  = new ArrayList<Game>();
+		
+		String temp = new String();
+		Game game = new Game();
+		
+		try{
+			HttpClient httpclient= new DefaultHttpClient();
+		    
+			String page = new String();
+			
+			page = "http://pug.myrpi.org/";
+			page = page + "getarea.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString();
+			
+            HttpGet httpget= new HttpGet (page);
+            
+            HttpResponse response = httpclient.execute(httpget);
+            HttpEntity entity = response.getEntity();
+            temp = EntityUtils.toString(entity);
+            JSONObject obj=new JSONObject(temp);
+            
+            
+            for(int i=1; i<=obj.length(); i++)
+            {
+            	Integer j = i;
+            	String idstring = new String(j.toString());
+            	//get the json referred to by id i
+            	JSONObject gameJson = obj.getJSONObject(idstring);
+            	
+            	//unpack the game json into a Game
+            	game = jsonInterface.unpackGame(gameJson);
+            	
+            	//Add the game to the ArrayList
+            	Games.add(game);
+            	
+            }
+            
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public int sendGame(Game game) {
 		
 		try{
