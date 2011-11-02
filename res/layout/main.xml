@@ -10,15 +10,14 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:clickable="true"
-        android:apiKey="YOUR KEY HERE"
+        android:apiKey= "YOUR KEY HERE"
     />
     <RelativeLayout android:layout_height="wrap_content" android:id="@+id/relativeLayout1" android:layout_width="match_parent" android:layout_alignParentTop="true">
         <QuickContactBadge android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/quickContactBadge1" android:layout_alignParentLeft="false" android:src="@drawable/icon" android:layout_alignParentRight="true" android:layout_alignParentBottom="false" android:layout_alignParentTop="true"></QuickContactBadge>
     </RelativeLayout>
     <RelativeLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/relativeLayout2" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true" android:layout_alignParentRight="true">
         <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginBottom="78dp" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:text="Search" android:id="@+id/searchButton"></Button>
-        <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_centerHorizontal="true" android:layout_alignParentBottom="true" android:layout_alignParentTop="false" android:text="Create Game" android:id="@+id/createButton"></Button>
-        <Button android:layout_height="wrap_content" android:layout_marginLeft="66dp" android:layout_width="wrap_content" android:layout_marginBottom="44dp" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" android:text="Settings" android:id="@+id/settingsButton"></Button>
+        <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_centerHorizontal="true" android:layout_alignParentBottom="true" android:layout_alignParentTop="false" android:text="Create" android:id="@+id/createButton" android:layout_alignParentRight="true"></Button>
     </RelativeLayout>
     <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_alignParentLeft="true" android:text="List" android:id="@+id/listGamesButton"></Button>
 
