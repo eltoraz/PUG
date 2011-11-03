@@ -18,9 +18,9 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".CreateGameActivity"
-				  android:label="Create a Game" />
-	  <activity android:name=".SearchGameActivity"
-				  android:label="Search for a Game" />
+				  android:label="@string/create_label" />
+		<activity android:name=".SearchGameActivity"
+				  android:label="@string/search_label" />
 
 	</application>
 </manifest>

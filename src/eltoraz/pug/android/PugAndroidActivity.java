@@ -47,6 +47,10 @@ public class PugAndroidActivity extends MapActivity {
 		
 		mapView = (MapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);
+		
+		// TODO: display games on map
+		// @reference http://stackoverflow.com/questions/2349095/google-map-dialog-info-window-not-appearing-on-touch
+		// @reference http://mobiforge.com/developing/story/using-google-maps-android
 	}
 
 	@Override
