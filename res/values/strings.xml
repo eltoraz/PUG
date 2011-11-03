@@ -18,4 +18,6 @@
     	<item>Football</item>
     </string-array>
     <string name="create">Create Game</string>
+    <string name="create_label">Create a Game</string>
+    <string name="search_label">Search for Games</string>
 </resources>
