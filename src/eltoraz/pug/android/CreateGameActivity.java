@@ -36,7 +36,6 @@ public class CreateGameActivity extends Activity {
 	private Button createGameButton;
 	private Spinner sportSelectSpinner;
 	private EditText locationEditText;
-	private Button findLocationButton;
 	private Button datePickButton;
 	private Button timePickButton;
 	private EditText maxPlayersEditText;
@@ -87,7 +86,6 @@ public class CreateGameActivity extends Activity {
 		createGameButton = (Button) findViewById(R.id.createButton);
 		sportSelectSpinner = (Spinner) findViewById(R.id.sportSelectSpinner);
 		locationEditText = (EditText) findViewById(R.id.locationEditText);
-		findLocationButton = (Button) findViewById(R.id.findLocationButton);
 		datePickButton = (Button) findViewById(R.id.datePickButton);
 		timePickButton = (Button) findViewById(R.id.timePickButton);
 		maxPlayersEditText = (EditText) findViewById(R.id.maxPlayersEditText);
@@ -111,14 +109,6 @@ public class CreateGameActivity extends Activity {
 					return true;
 				}
 				return false;
-			}
-		});
-		
-		// FIND LOCATION BUTTON
-		findLocationButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO: bring up a map centered on either specified or GPS location
 			}
 		});
 		
@@ -189,11 +179,11 @@ public class CreateGameActivity extends Activity {
 					Toast.makeText(context, msg, Toast.LENGTH_SHORT);
 
 					return;
-
 				}
 				else
 					loc = new Location();
 				
+				// TODO: send game to server, implement ProgressDialog while transferring data
 				// create the game using reflection
 				// To avoid exceptions, make sure the spinner only has sports that correspond to a -Game class
 				//   in the eltoraz.pug package, and the corresponding class has a constructor taking one Person as an arg.
@@ -218,13 +208,18 @@ public class CreateGameActivity extends Activity {
 	
 	@Override
 	protected Dialog onCreateDialog(int id) {
+		Dialog dialog;
 		switch (id) {
 		case DATE_DIALOG_ID:
-			return new DatePickerDialog(this, dateSetListener, mYear, mMonth, mDay);
+			dialog = new DatePickerDialog(this, dateSetListener, mYear, mMonth, mDay);
+			break;
 		case TIME_DIALOG_ID:
-			return new TimePickerDialog(this, timeSetListener, mHour, mMinute, false);
+			dialog = new TimePickerDialog(this, timeSetListener, mHour, mMinute, false);
+			break;
+		default:
+			dialog = null;
 		}
-		return null;
+		return dialog;
 	}
 	
 	private void updateDate() {

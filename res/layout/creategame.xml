@@ -25,10 +25,8 @@
 		    <EditText android:id="@+id/locationEditText" android:layout_height="wrap_content" android:layout_width="match_parent"
 		        	  android:inputType="textPostalAddress" android:layout_below="@+id/locationTextView" android:layout_alignParentLeft="true">
 		        <requestFocus></requestFocus></EditText>
-		    <Button   android:id="@+id/findLocationButton" android:layout_height="wrap_content" android:layout_width="match_parent"
-		        	  android:text="@string/findLocation" android:layout_below="@+id/locationEditText" android:layout_alignParentLeft="true"></Button>
 		    <TextView android:id="@+id/dateTextView" android:layout_height="wrap_content" android:layout_width="wrap_content"
-		        	  android:text="@string/date" android:layout_below="@+id/findLocationButton" android:layout_alignParentLeft="true"></TextView>
+		        	  android:text="@string/date" android:layout_below="@+id/locationEditText" android:layout_alignParentLeft="true"></TextView>
 		    <Button   android:id="@+id/datePickButton" android:layout_height="wrap_content" android:layout_width="match_parent"
 					  android:layout_below="@+id/dateTextView" android:layout_alignParentLeft="true"></Button>
 		    <TextView android:id="@+id/timeTextView" android:layout_height="wrap_content" android:layout_width="wrap_content"
