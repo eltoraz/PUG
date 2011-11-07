@@ -64,6 +64,22 @@ public class Location {
 	}
 	
 	/**
+	 * Create a new <code>Location</code> object from the data in the JSON object
+	 * @author Brian Orecchio
+	 * @param json <code>JSONObject</code> to be parsed
+	 */
+	public Location(JSONObject json) {
+		try {
+			latitude = json.getInt("lat");
+			longitude = json.getInt("lon");
+			address = json.getString("name");
+		}
+		catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * Return a <code>GeoPoint</code> representation of this <code>Location</code>
 	 * @return a <code>GeoPoint</code> matching the latitude and longitude of this location
 	 */
@@ -73,6 +89,7 @@ public class Location {
 	
 	/**
 	 * Return a JSON object representation of this <code>Location</code>
+	 * @author Brian Orecchio
 	 * @return a <code>JSONObject</code> encapsulating this location
 	 */
 	public JSONObject JSON() {
@@ -81,9 +98,9 @@ public class Location {
 		try {
 			locJson = new JSONObject();
 			
-			locJson.put("name", address);
 			locJson.put("lat", latitude);
 			locJson.put("lon", longitude);
+			locJson.put("name", address);
 		}
 		catch (JSONException e) {		// will never throw this exception in practice
 			e.printStackTrace();

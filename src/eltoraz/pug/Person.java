@@ -57,7 +57,27 @@ public class Person implements Serializable {
 	}
 	
 	/**
+	 * Create a new <code>Person</code> object from the data retrieved in the JSON object
+	 * @author Brian Orecchio
+	 * @param json <code>JSONObject</code> to be parsed
+	 */
+	public Person(JSONObject json) {
+		try {
+			// TODO: make some of these getOpt (e.g., don't always need age)
+			id = json.getInt("id");
+			name = json.getString("name");
+			age = json.getInt("age");
+			gender = Gender.valueOf(json.getString("gender"));
+			favoriteSport = Game.Sport.valueOf(json.getString("favorite").toUpperCase());
+		}
+		catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * Return a JSON object representation of this <code>Person</code>
+	 * @author Brian Orecchio
 	 * @return a <code>JSONObject</code> encapsulating this <code>Person</code>
 	 */
 	public JSONObject JSON() {
