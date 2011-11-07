@@ -1,5 +1,8 @@
 package eltoraz.pug;
 
+import com.google.android.maps.GeoPoint;
+
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.GregorianCalendar;
 
@@ -12,7 +15,12 @@ import org.json.JSONException;
  * @author Bill Jameson
  * @version 0.1
  */
-public abstract class Game {
+public abstract class Game implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public enum SportType {
 		BASKETBALL, BASEBALL, FOOTBALL, SOCCER;
 		
@@ -164,5 +172,13 @@ public abstract class Game {
 		}
 		
 		return gameJson;
+	}
+	
+	/**
+	 * Return a <code>GeoPoint</code> corresponding to the <code>Location</code> of this <code>Game</code>
+	 * @return a <code>GeoPoint</code> matching the latitude and longitude of the location of this game
+	 */
+	public GeoPoint GeoPoint() {
+		return location.GeoPoint();
 	}
 }
