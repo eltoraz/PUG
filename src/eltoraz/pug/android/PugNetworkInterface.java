@@ -32,6 +32,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import java.io.InputStream;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 import org.json.JSONTokener;
@@ -43,119 +44,175 @@ import org.json.JSONTokener;
  */
 public class PugNetworkInterface {
 
-	protected JsonObjectInterface jsonInterface;
-	
-	public PugNetworkInterface() {
-		jsonInterface = new JsonObjectInterface();
-	}
+	protected JsonObjectInterface jsonInterface;  //this will be phased out
+	protected HttpClient httpclient;
 	
 	/**
-	 * The function <code>getAllGames</code> gets all the games in the database and returns as <code>ArrayList<Game></code>
+	 * Default Constructor
 	 * @author Brian Orecchio
 	 * @version 0.1
 	 */
-	public ArrayList<Game> getAllGames() {
+	public PugNetworkInterface() {
+		jsonInterface = new JsonObjectInterface();
+		httpclient= new DefaultHttpClient();
+	}
+	
+	/**
+	 * The function <code>getGames</code> gets all the games in the database and returns as <code>ArrayList<Game></code>
+	 * @author Brian Orecchio
+	 * @version 0.1
+	 */
+	public ArrayList<Game> getGames() {
 		
 		ArrayList<Game> Games  = new ArrayList<Game>();
 		
-		String temp = new String();
-		String returnstring = new String();
-		Game game = new Game();
-		
 		 try {
-	            HttpClient httpclient= new DefaultHttpClient();
+	            
 	       
-	            HttpGet httpget= new HttpGet ("http://pug.myrpi.org/getall.php");
-	            
-	            HttpResponse response = httpclient.execute(httpget);
-	            HttpEntity entity = response.getEntity();
-	            temp = EntityUtils.toString(entity);
-	            JSONObject obj=new JSONObject(temp);
-	            
-	            returnstring = temp; //debugging
-	            
-	            for(int i=1; i<=obj.length(); i++)
-	            {
-	            	Integer j = i;
-	            	String idstring = new String(j.toString());
-	            	//get the json referred to by id i
-	            	JSONObject gameJson = obj.getJSONObject(idstring);
-	            	
-	            	//unpack the game json into a Game
-	            	game = jsonInterface.unpackGame(gameJson);
-	            	
-	            	//Add the game to the ArrayList
-	            	Games.add(game);
-	            	
-	            }
+			 String page = new String();
+				
+			 page = "http://pug.myrpi.org/";
+			 page = page + "getfilter.php";
+			
+			 Games = getGamesFromServer(page);
 	            
 		 }
 		 catch(Exception e) {
 			 e.printStackTrace();
 		 }
-		
-		
-		//return game.getCreator().getName();
-		//return returnstring;
+		 
 		return Games;
 		
 	}
 	
-	
-	public ArrayList<Game> getGamesInLatLonArea(Integer lat, Integer lon) {
+	/**
+	 * The function <code>getGames(Integer lat, Integer lon)</code> gets all the games around a location in a 5 mile radius and returns as <code>ArrayList<Game></code>
+	 * @author Brian Orecchio
+	 * @version 0.1
+	 */
+	public ArrayList<Game> getGames(Integer lat, Integer lon) {
 		
 		ArrayList<Game> Games  = new ArrayList<Game>();
 		
-		String temp = new String();
-		Game game = new Game();
-		
 		try{
-			HttpClient httpclient= new DefaultHttpClient();
-		    
+			    
 			String page = new String();
 			
 			page = "http://pug.myrpi.org/";
-			page = page + "getarea.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString();
+			page = page + "getfilter.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&dist=5";
 			
-            HttpGet httpget= new HttpGet (page);
+			Games = getGamesFromServer(page);
             
-            HttpResponse response = httpclient.execute(httpget);
-            HttpEntity entity = response.getEntity();
-            temp = EntityUtils.toString(entity);
-            JSONObject obj=new JSONObject(temp);
-            
-            
-            for(int i=1; i<=obj.length(); i++)
-            {
-            	Integer j = i;
-            	String idstring = new String(j.toString());
-            	//get the json referred to by id i
-            	JSONObject gameJson = obj.getJSONObject(idstring);
-            	
-            	//unpack the game json into a Game
-            	game = jsonInterface.unpackGame(gameJson);
-            	
-            	//Add the game to the ArrayList
-            	Games.add(game);
-            	
-            }
-            
-			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+		return Games;
+	}
+	
+	/**
+	 * The function <code>getGames(Integer lat, Integer lon, int dist)</code> gets all the games around a location in a specified radius and returns as <code>ArrayList<Game></code>
+	 * @author Brian Orecchio
+	 * @version 0.1
+	 */
+	public ArrayList<Game> getGames(Integer lat, Integer lon, Integer dist) {
+		
+		ArrayList<Game> Games  = new ArrayList<Game>();
+		
+		try{
+			    
+			String page = new String();
+			
+			page = "http://pug.myrpi.org/";
+			page = page + "getarea.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&dist=" + dist.toString();
+			
+			Games = getGamesFromServer(page);
+            
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return Games;
+	}
+	
+	
+	
+	/**
+	 * The function <code>retrieveGamesFromServer</code> carries out the http request to get all the games in the database from the filter php page with the specified arguments in 'page' and returns as <code>ArrayList<Game></code>
+	 * @author Brian Orecchio
+	 * @version 0.1
+	 */
+	private ArrayList<Game> getGamesFromServer(String page) {
+		
+		ArrayList<Game> Games  = new ArrayList<Game>();
+
+		try{			
+			
+            HttpGet httpget= new HttpGet (page);
+            HttpResponse response = httpclient.execute(httpget);
+            HttpEntity entity = response.getEntity();
+            String temp = new String();
+            temp = EntityUtils.toString(entity);
+            JSONArray jsonArray=new JSONArray(temp);
+            
+            Games = parseGameJSONArray(jsonArray);	
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return Games;
+	}
+	
+	/**
+	 * The function <code>parseGameJSONArray</code> parses the JSON array and returns the Games as an <code>ArrayList<Game></code>
+	 * @author Brian Orecchio
+	 * @version 0.1
+	 */
+	private ArrayList<Game> parseGameJSONArray( JSONArray jsonArray )
+	{
+		Game game = new Game();
+		ArrayList<Game> Games  = new ArrayList<Game>();
+		try{
+		
+			for(int i=0; i<=jsonArray.length(); i++)
+			{
+	         	//Integer j = i;
+	         	//String idstring = new String(j.toString());
+	         	//get the json referred to by id i
+	         	JSONObject gameJson = jsonArray.getJSONObject(i);
+	         	
+	         	//unpack the game json into a Game
+	         	//game = jsonInterface.unpackGame(gameJson);
+	         	game = new Game();
+	         	game.buildGameFromJSON(gameJson);
+	         	
+	         	//Add the game to the ArrayList
+	         	Games.add(game);
+         	
+			}
+		 
+			return Games;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 	
+	/**
+	 * The function <code>sendGame</code> takes a <code>Game</code> object as a parameter and sends it to the database
+	 * @author Brian Orecchio
+	 * @version 0.1
+	 */
 	public int sendGame(Game game) {
 		
 		try{
 			//pack the Game into a JSONObject
-			JSONObject jsonGame = jsonInterface.packGame(game);
+			//JSONObject jsonGame = jsonInterface.packGame(game);  //this will change to what is below
+			JSONObject jsonGame = game.JSON();
 			
 			//send the JSONObject to the server for processing using some HTTPClient call or something
-			HttpClient httpclient= new DefaultHttpClient();
             HttpResponse response;
             HttpPost httppost= new HttpPost ("http://pug.myrpi.org/creategame.php");
             StringEntity se=new StringEntity (jsonGame.toString());
