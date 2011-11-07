@@ -50,22 +50,22 @@ public class ProfileActivity extends Activity {
 		editTextGender=(EditText) findViewById(R.id.editTextGender);
 		editTextFavoriteSport=(EditText) findViewById(R.id.editTextFavoriteSport);
 		
-		editTextName.setText("Name: " + name);
+		editTextName.setText(name);
 		editTextName.setFocusable(false);
 		editTextName.setFocusableInTouchMode(false);
 		editTextName.setClickable(false);
 		
-		editTextAge.setText("Age: " + age);
+		editTextAge.setText(age);
 		editTextAge.setFocusable(false);
 		editTextAge.setFocusableInTouchMode(false);
 		editTextAge.setClickable(false);
 		
-		editTextGender.setText("Gender: " + gender);
+		editTextGender.setText(gender);
 		editTextGender.setFocusable(false);
 		editTextGender.setFocusableInTouchMode(false);
 		editTextGender.setClickable(false);
 		
-		editTextFavoriteSport.setText("Favorite Sport: " + favoriteSport);
+		editTextFavoriteSport.setText(favoriteSport);
 		editTextFavoriteSport.setFocusable(false);
 		editTextFavoriteSport.setFocusableInTouchMode(false);
 		editTextFavoriteSport.setClickable(false);
