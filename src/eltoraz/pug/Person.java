@@ -2,6 +2,9 @@ package eltoraz.pug;
 
 import java.io.Serializable;
 
+import org.json.JSONObject;
+import org.json.JSONException;
+
 /**
  * The <code>Person</code> class represents a person, not necessarily a user of the PUG service.
  * @author Bill Jameson
@@ -51,6 +54,29 @@ public class Person implements Serializable {
 	public Person(Person p) {
 		name = new String(p.name);
 		id = p.id;
+	}
+	
+	/**
+	 * Return a JSON object representation of this <code>Person</code>
+	 * @return a <code>JSONObject</code> encapsulating this <code>Person</code>
+	 */
+	public JSONObject JSON() {
+		JSONObject personJson = null;
+		
+		try {
+			personJson = new JSONObject();
+			
+			personJson.put("id", id);
+			personJson.put("name", name);
+			personJson.put("age", age);
+			personJson.put("gender", gender.toString());
+			personJson.put("favorite", favoriteSport.toString());
+		}
+		catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return personJson;
 	}
 	
 	/* ***** SET METHODS ***** */

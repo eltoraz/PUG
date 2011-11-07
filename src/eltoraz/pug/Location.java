@@ -2,6 +2,9 @@ package eltoraz.pug;
 
 import com.google.android.maps.GeoPoint;
 
+import org.json.JSONObject;
+import org.json.JSONException;
+
 /**
  * The <code>Location</code> class represents a physical location. It is defined by its latitude and
  * longitude. This class exists to avoid having dependencies on the Android SDK in the server component of PUG.
@@ -66,6 +69,27 @@ public class Location {
 	 */
 	public GeoPoint GeoPoint() {
 		return new GeoPoint(latitude, longitude);
+	}
+	
+	/**
+	 * Return a JSON object representation of this <code>Location</code>
+	 * @return a <code>JSONObject</code> encapsulating this location
+	 */
+	public JSONObject JSON() {
+		JSONObject locJson = null;
+		
+		try {
+			locJson = new JSONObject();
+			
+			locJson.put("name", address);
+			locJson.put("lat", latitude);
+			locJson.put("lon", longitude);
+		}
+		catch (JSONException e) {		// will never throw this exception in practice
+			e.printStackTrace();
+		}
+		
+		return locJson;
 	}
 	
 	/* ***** SET METHODS ***** */

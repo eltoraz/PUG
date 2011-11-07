@@ -2,6 +2,9 @@ package eltoraz.pug;
 
 import java.util.GregorianCalendar;
 
+import org.json.JSONObject;
+import org.json.JSONException;
+
 /**
  * The <code>Game</code> class represents a generic game. It's meant to be extended by subclasses to
  * correspond to specific sports/games.
@@ -11,6 +14,12 @@ import java.util.GregorianCalendar;
 public class Game {
 	public enum Sport {
 		BASKETBALL, BASEBALL, FOOTBALL;
+		
+		@Override
+		public String toString() {
+			String s = super.toString();
+			return s.substring(0, 1) + s.substring(1).toLowerCase();
+		}
 	}
 	
 	protected Location location;
@@ -18,6 +27,7 @@ public class Game {
 	protected Person owner, creator;
 	protected boolean privateGame;
 	protected int maxPlayers;
+	protected String description;
 	protected Sport gameType;
 	
 	// TODO: add fields for additional rules, privacy options
@@ -104,6 +114,30 @@ public class Game {
 		owner = new Person(g.owner);
 		privateGame = g.privateGame;
 		maxPlayers = g.maxPlayers;
+	}
+	
+	/**
+	 * Return a JSON object representation of this <code>Game</code>
+	 * @return a <code>JSONObject</code> encapsulation of this <code>Game</code> 
+	 */
+	public JSONObject JSON() {
+		JSONObject gameJson = null;
+		
+		try {
+			gameJson = new JSONObject();
+			
+			gameJson.put("sport", gameType.toString());
+			gameJson.put("descr", description);
+			gameJson.put("datetime", dateTime.getTimeInMillis());
+			gameJson.put("creator", creator.JSON());
+			gameJson.put("owner", owner.JSON());
+			gameJson.put("location", location.JSON());
+		}
+		catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return gameJson;
 	}
 	
 	/* ***** SET METHODS ***** */
