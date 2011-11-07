@@ -165,7 +165,7 @@ public class PugNetworkInterface {
 		ArrayList<Game> Games  = new ArrayList<Game>();
 		try{
 		
-			for(int i=0; i<=jsonArray.length(); i++)
+			for(int i=0; i<jsonArray.length(); i++)
 			{
 	         	//Integer j = i;
 	         	//String idstring = new String(j.toString());
