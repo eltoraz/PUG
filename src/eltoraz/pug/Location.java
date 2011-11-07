@@ -1,5 +1,7 @@
 package eltoraz.pug;
 
+import com.google.android.maps.GeoPoint;
+
 /**
  * The <code>Location</code> class represents a physical location. It is defined by its latitude and
  * longitude. This class exists to avoid having dependencies on the Android SDK in the server component of PUG.
@@ -56,6 +58,14 @@ public class Location {
 		latitude = loc.latitude;
 		longitude = loc.longitude;
 		address = loc.address;
+	}
+	
+	/**
+	 * Return a <code>GeoPoint</code> representation of this <code>Location</code>
+	 * @return a <code>GeoPoint</code> matching the latitude and longitude of this location
+	 */
+	public GeoPoint GeoPoint() {
+		return new GeoPoint(latitude, longitude);
 	}
 	
 	/* ***** SET METHODS ***** */

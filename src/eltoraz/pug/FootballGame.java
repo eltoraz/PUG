@@ -13,6 +13,7 @@ public class FootballGame extends Game {
 	 */
 	public FootballGame() {
 		super();
+		gameType = Sport.FOOTBALL;
 	}
 	
 	/**
@@ -21,6 +22,7 @@ public class FootballGame extends Game {
 	 */
 	public FootballGame(Person p) {
 		super(p);
+		gameType = Sport.FOOTBALL;
 	}
 	
 	/**
@@ -31,6 +33,7 @@ public class FootballGame extends Game {
 	 */
 	public FootballGame(Location loc, GregorianCalendar cal, Person p) {
 		super(loc, cal, p);
+		gameType = Sport.FOOTBALL;
 	}
 	
 	/**
@@ -42,6 +45,7 @@ public class FootballGame extends Game {
 	 */
 	public FootballGame(Location loc, GregorianCalendar cal, Person p, boolean privacy) {
 		super(loc, cal, p, privacy);
+		gameType = Sport.FOOTBALL;
 	}
 	
 	/**
@@ -50,5 +54,6 @@ public class FootballGame extends Game {
 	 */
 	public FootballGame(Game g) {
 		super(g);
+		gameType = Sport.FOOTBALL;
 	}
 }

@@ -9,11 +9,16 @@ import java.util.GregorianCalendar;
  * @version 0.1
  */
 public class Game {
+	public enum Sport {
+		BASKETBALL, BASEBALL, FOOTBALL;
+	}
+	
 	protected Location location;
 	protected GregorianCalendar dateTime;
 	protected Person owner, creator;
 	protected boolean privateGame;
 	protected int maxPlayers;
+	protected Sport gameType;
 	
 	// TODO: add fields for additional rules, privacy options
 	// TODO: remove useless constructors

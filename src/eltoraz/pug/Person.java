@@ -8,12 +8,19 @@ import java.io.Serializable;
  * @version 0.1
  */
 public class Person implements Serializable {
+	public enum Gender {
+		MALE, FEMALE;
+	}
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	protected String name;
 	protected int id;
+	protected int age;
+	protected Gender gender;
+	protected Game.Sport favoriteSport;
 	
 	// TODO: persistent value to keep a tally of the number of Persons created for use in assigning IDs
 	
