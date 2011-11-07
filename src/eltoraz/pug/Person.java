@@ -35,16 +35,25 @@ public class Person implements Serializable {
 	public Person() {
 		name = "";
 		id = -1;
+		age = -1;
+		gender = Gender.MALE;
+		favoriteSport = Game.SportType.BASEBALL;
 	}
 	
 	/**
 	 * Create a new <code>Person</code> object with specified name and ID number
 	 * @param s <code>String</code>, the name of the <code>Person</code>
 	 * @param n <code>int</code>, the person's ID number
+	 * @param a <code>int</code>, the person's age
+	 * @param g <code>enum Gender</code>, the person's gender
+	 * @param fav <code>enum Game.SportType</code>, the person's favorite sport
 	 */
-	public Person(String s, int n) {
+	public Person(String s, int n, int a, Gender g, Game.SportType fav) {
 		name = s;
 		id = n;
+		age = a;
+		gender = g;
+		favoriteSport = fav;
 	}
 	
 	/**
@@ -54,6 +63,9 @@ public class Person implements Serializable {
 	public Person(Person p) {
 		name = new String(p.name);
 		id = p.id;
+		age = p.age;
+		gender = p.gender;
+		favoriteSport = p.favoriteSport;
 	}
 	
 	/**

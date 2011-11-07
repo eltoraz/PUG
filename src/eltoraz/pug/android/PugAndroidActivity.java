@@ -24,7 +24,7 @@ public class PugAndroidActivity extends MapActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		user = new Person("Test User", -1);
+		user = new Person("Robert White", 1, 22, Person.Gender.MALE, Game.SportType.BASEBALL);
 		
 		// define functionality for the buttons
 		createGameButton = (Button) findViewById(R.id.createButton);

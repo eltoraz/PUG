@@ -81,7 +81,7 @@ public class CreateGameActivity extends Activity {
 		if (extras != null)
 			user = (Person) extras.get("user");
 		else					// This should theoretically never be called
-			user = new Person("Test User", -1);
+			user = new Person("Robert White", 1, 22, Person.Gender.MALE, Game.SportType.BASEBALL);
 		
 		/* ***** CAPTURE VIEW ELEMENTS ***** */
 		createGameButton = (Button) findViewById(R.id.createButton);
@@ -147,7 +147,7 @@ public class CreateGameActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// Get all the parameters to create a new game
-				Game.SportType sport = Game.SportType.valueOf(sportSelectSpinner.getSelectedItem().toString());
+				Game.SportType sport = Game.SportType.valueOf(sportSelectSpinner.getSelectedItem().toString().toUpperCase());
 				int maxPlayers = Integer.parseInt(maxPlayersEditText.getText().toString());
 				boolean privacy = visibilityToggleButton.isChecked();
 				String addr = locationEditText.getText().toString();
@@ -187,6 +187,7 @@ public class CreateGameActivity extends Activity {
 				
 				// TODO: send game to server, implement ProgressDialog while transferring data
 				game = Game.buildGame(sport, descr, dtMillis, user, user, loc, maxPlayers, privacy);
+				PugNetworkInterface.sendGame(game);
 			}
 		});
 	}
