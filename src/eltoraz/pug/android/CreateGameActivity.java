@@ -147,7 +147,7 @@ public class CreateGameActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// Get all the parameters to create a new game
-				String sport = sportSelectSpinner.getSelectedItem().toString();
+				Game.SportType sport = Game.SportType.valueOf(sportSelectSpinner.getSelectedItem().toString());
 				int maxPlayers = Integer.parseInt(maxPlayersEditText.getText().toString());
 				boolean privacy = visibilityToggleButton.isChecked();
 				String addr = locationEditText.getText().toString();
@@ -155,6 +155,8 @@ public class CreateGameActivity extends Activity {
 				List<Address> locations = null;
 				Location loc = null;
 				GregorianCalendar dt = new GregorianCalendar(mYear, mMonth, mDay, mHour, mMinute);
+				long dtMillis = dt.getTimeInMillis();
+				String descr = descriptionEditText.getText().toString();
 				
 				// Note: There's a known issue with Android emulator > API level 8 where this will always throw an
 				//   IOException. It should work on an actual device.
@@ -175,35 +177,16 @@ public class CreateGameActivity extends Activity {
 					int lon = (int) (locations.get(0).getLongitude() * 1000000);
 					loc = new Location(lat, lon, addr);
 				}
-				else if (locations.size() == 0) {
+				else {
 					Context context = getApplicationContext();
 					CharSequence msg = "Invalid address, try another one.";
 					Toast.makeText(context, msg, Toast.LENGTH_SHORT);
 
 					return;
 				}
-				else
-					loc = new Location();
 				
 				// TODO: send game to server, implement ProgressDialog while transferring data
-				// create the game using reflection
-				// To avoid exceptions, make sure the spinner only has sports that correspond to a -Game class
-				//   in the eltoraz.pug package, and the corresponding class has a constructor taking one Person as an arg.
-				try {
-					String gameType = "eltoraz.pug." + sport + "Game";
-					Class<?> cl = Class.forName(gameType);
-					java.lang.reflect.Constructor<?> constructor = cl.getConstructor(new Class[] {Person.class});
-					Object newGameType = constructor.newInstance(new Object[] {user});
-					game = (Game) newGameType;
-					
-					game.setDateTime(dt);
-					game.setLocation(loc);
-					game.setPrivate(privacy);
-					game.setMaxPlayers(maxPlayers);
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
+				game = Game.buildGame(sport, descr, dtMillis, user, user, loc, maxPlayers, privacy);
 			}
 		});
 	}

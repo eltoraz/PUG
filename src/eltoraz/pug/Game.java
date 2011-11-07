@@ -119,20 +119,23 @@ public abstract class Game {
 		maxPlayers = g.maxPlayers;
 	}
 	
-	public static final Game buildGameFromJSON(JSONObject json) {
+	/* ***** GAME BUILDERS ***** */
+	
+	/**
+	 * Build a new <code>Game</code> from the components specified
+	 * @param type <code>enum Game.SportType</code> corresponding to the <code>Game</code> type (and thus subclass)
+	 * @param descr <code>String</code> representing the <code>Game</code>'s description
+	 * @param dt <code>long</code> encoding the number of milliseconds since the Epoch, uniquely identifying a date and time
+	 * @param create <code>Person</code> who initially created the <code>Game</code>
+	 * @param own <code>Person</code> who is the current owner of the <code>Game</code>
+	 * @param max <code>int</code> equal to the maximum allowed number of players for the <code>Game</code>
+	 * @param priv <code>boolean</code> describing the privacy status of the <code>Game</code>
+	 */
+	public static Game buildGame(SportType type, String descr, long dt, Person create,
+								 Person own, Location loc, int max, boolean priv) {
 		Game newGame = null;
 		
 		try {
-			// get the data about the game from the JSON
-			SportType type = SportType.valueOf(json.getString("sport").toUpperCase());
-			String descr = json.getString("descr");
-			long dt = json.getLong("datetime");
-			Person create = new Person(json.getJSONObject("creator"));
-			Person own = new Person(json.getJSONObject("owner"));
-			Location loc = new Location(json.getJSONObject("location"));
-			int max = json.getInt("playercount");
-			boolean priv = json.getBoolean("private");
-			
 			// use reflection to create the game
 			String className = "eltoraz.pug." + type.toString() + "Game";
 			Class<?> cl = Class.forName(className);
@@ -150,9 +153,6 @@ public abstract class Game {
 			newGame.location = loc;
 			newGame.maxPlayers = max;
 			newGame.privateGame = priv;
-		}
-		catch (JSONException e) {
-			e.printStackTrace();
 		}
 		catch (ClassNotFoundException e) {
 			// thrown if the subclass doesn't exist
@@ -176,6 +176,34 @@ public abstract class Game {
 			// thrown if trying to instantiate an abstract class
 			// the naming convention above is based on the GameType enum, all of which will correspond
 			//    to subclasses of Game, so this exception will never be thrown
+			e.printStackTrace();
+		}
+		
+		return newGame;
+	}
+	
+	/**
+	 * Build an instance of the correct <code>Game</code> subclass from the JSON object passed in
+	 * @param json <code>JSONObject</code> to be parsed
+	 * @return an instance of a subclass of <code>Game</code>
+	 */
+	public static Game buildGameFromJSON(JSONObject json) {
+		Game newGame = null;
+		
+		try {
+			// get the data about the game from the JSON
+			SportType type = SportType.valueOf(json.getString("sport").toUpperCase());
+			String descr = json.getString("descr");
+			long dt = json.getLong("datetime");
+			Person create = new Person(json.getJSONObject("creator"));
+			Person own = new Person(json.getJSONObject("owner"));
+			Location loc = new Location(json.getJSONObject("location"));
+			int max = json.getInt("playercount");
+			boolean priv = json.getBoolean("private");
+			
+			newGame = buildGame(type, descr, dt, create, own, loc, max, priv);
+		}
+		catch (JSONException e) {
 			e.printStackTrace();
 		}
 		
