@@ -1,5 +1,7 @@
 package eltoraz.pug;
 
+import java.io.Serializable;
+
 import com.google.android.maps.GeoPoint;
 
 import org.json.JSONObject;
@@ -11,7 +13,11 @@ import org.json.JSONException;
  * @author Bill Jameson
  * @version 0.1
  */
-public class Location {
+public class Location implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// latitude and longitude are specified in microdegrees (degrees * 1E6) to match Google Maps API 
 	protected int latitude;
 	protected int longitude;
