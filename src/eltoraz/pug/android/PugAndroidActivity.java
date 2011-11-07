@@ -15,7 +15,7 @@ public class PugAndroidActivity extends MapActivity {
 	// private LinearLayout linearLayout;
 	private MapView mapView;
 	private Person user;
-	
+	private QuickContactBadge quickContactBadge1;
 	private Button createGameButton;
 	private Button searchButton;
 	/** Called when the activity is first created. */
@@ -40,6 +40,15 @@ public class PugAndroidActivity extends MapActivity {
 		searchButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), SearchGameActivity.class);
+				intent.putExtra("user", user);
+				startActivity(intent);
+			}
+		});
+		
+		quickContactBadge1 = (QuickContactBadge) findViewById(R.id.quickContactBadge1);
+		quickContactBadge1.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(v.getContext(), ProfileActivity.class);
 				intent.putExtra("user", user);
 				startActivity(intent);
 			}

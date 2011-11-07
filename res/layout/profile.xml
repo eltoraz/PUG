@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/profilelayout"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    <QuickContactBadge android:layout_width="wrap_content" android:id="@+id/quickContactBadge2" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" android:layout_alignParentBottom="false" android:layout_alignParentRight="true" android:src="@drawable/profile1"></QuickContactBadge>
+    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:weightSum="1" android:layout_below="@+id/quickContactBadge2">
+        <TextView android:layout_width="wrap_content" android:id="@+id/textViewName" android:text="Name:" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content"></TextView>
+        <TextView android:layout_width="wrap_content" android:id="@+id/textViewAge" android:text="Age" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content"></TextView>
+        <TextView android:layout_width="wrap_content" android:id="@+id/textViewGender" android:text="Gender" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content"></TextView>
+        <TextView android:layout_width="wrap_content" android:id="@+id/textViewFavoriteSport" android:text="Favorite Sport:" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content"></TextView>
+    </LinearLayout>
+</RelativeLayout>

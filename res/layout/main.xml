@@ -4,14 +4,13 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-
     <com.google.android.maps.MapView android:id="@+id/mapview"
                                      android:layout_width="match_parent"
                                      android:layout_height="match_parent"
                                      android:clickable="true"
                                      android:apiKey="YOUR KEY HERE" />
     <RelativeLayout android:layout_height="wrap_content" android:id="@+id/relativeLayout1" android:layout_width="match_parent" android:layout_alignParentTop="true">
-        <QuickContactBadge android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/quickContactBadge1" android:layout_alignParentLeft="false" android:src="@drawable/icon" android:layout_alignParentRight="true" android:layout_alignParentBottom="false" android:layout_alignParentTop="true"></QuickContactBadge>
+        <QuickContactBadge android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/quickContactBadge1" android:layout_alignParentLeft="false" android:layout_alignParentRight="true" android:layout_alignParentBottom="false" android:layout_alignParentTop="true" android:src="@drawable/icon"></QuickContactBadge>
     </RelativeLayout>
     <RelativeLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/relativeLayout2" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true" android:layout_alignParentRight="true">
         <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginBottom="78dp" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:text="Search" android:id="@+id/searchButton"></Button>
