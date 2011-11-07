@@ -91,7 +91,7 @@ public class PugNetworkInterface {
 			String page = new String();
 			
 			page = "http://pug.myrpi.org/";
-			page = page + "getarea.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&dist=" + dist.toString();
+			page = page + "getfilter.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&dist=" + dist.toString();
 			
 			Games = getGamesFromServer(page);
             
@@ -115,7 +115,7 @@ public class PugNetworkInterface {
 			String page = new String();
 			
 			page = "http://pug.myrpi.org/";
-			page = page + "getarea.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&sport=" + sport;
+			page = page + "getfilter.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&sport=" + sport;
 			
 			Games = getGamesFromServer(page);
             
