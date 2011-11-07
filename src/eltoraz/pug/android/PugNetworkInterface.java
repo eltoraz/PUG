@@ -2,40 +2,22 @@ package eltoraz.pug.android;
 
 import eltoraz.pug.*;
 
-//import java.lang.reflect.*;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Vector;
 import java.lang.String;
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.*;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import java.io.InputStream;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
-import org.json.JSONTokener;
 
 /**
  * The class <code>PugNetworkInterface</code> provides functions to get data from the database
@@ -43,17 +25,6 @@ import org.json.JSONTokener;
  * @version 0.1
  */
 public class PugNetworkInterface {
-	
-	protected HttpClient httpclient;
-	
-	/**
-	 * Default Constructor
-	 * @author Brian Orecchio
-	 * @version 0.1
-	 */
-	public PugNetworkInterface() {
-		httpclient= new DefaultHttpClient();
-	}
 	
 	//NOTE: These getGames functions have a bunch of duplicated code, in the future I will add a way to do this filtering in a single get games 
 	//function by just passing in a map from the filter key to the filter parameter
@@ -63,13 +34,10 @@ public class PugNetworkInterface {
 	 * @author Brian Orecchio
 	 * @version 0.1
 	 */
-	public ArrayList<Game> getGames() {
-		
+	public static ArrayList<Game> getGames() {
 		ArrayList<Game> Games  = new ArrayList<Game>();
 		
-		 try {
-	            
-	       
+		try {
 			 String page = new String();
 				
 			 page = "http://pug.myrpi.org/";
@@ -91,8 +59,7 @@ public class PugNetworkInterface {
 	 * @author Brian Orecchio
 	 * @version 0.1
 	 */
-	public ArrayList<Game> getGames(Integer lat, Integer lon) {
-		
+	public static ArrayList<Game> getGames(Integer lat, Integer lon) {
 		ArrayList<Game> Games  = new ArrayList<Game>();
 		
 		try{
@@ -116,8 +83,7 @@ public class PugNetworkInterface {
 	 * @author Brian Orecchio
 	 * @version 0.1
 	 */
-	public ArrayList<Game> getGames(Integer lat, Integer lon, Integer dist) {
-		
+	public static ArrayList<Game> getGames(Integer lat, Integer lon, Integer dist) {
 		ArrayList<Game> Games  = new ArrayList<Game>();
 		
 		try{
@@ -141,8 +107,7 @@ public class PugNetworkInterface {
 	 * @author Brian Orecchio
 	 * @version 0.1
 	 */
-	public ArrayList<Game> getGames(Integer lat, Integer lon, String sport) {
-		
+	public static ArrayList<Game> getGames(Integer lat, Integer lon, String sport) {
 		ArrayList<Game> Games  = new ArrayList<Game>();
 		
 		try{
@@ -168,7 +133,8 @@ public class PugNetworkInterface {
 	 * @author Brian Orecchio
 	 * @version 0.1
 	 */
-	private ArrayList<Game> getGamesFromServer(String page) {
+	private static ArrayList<Game> getGamesFromServer(String page) {
+		HttpClient httpclient = new DefaultHttpClient();
 		
 		ArrayList<Game> Games  = new ArrayList<Game>();
 
@@ -194,8 +160,7 @@ public class PugNetworkInterface {
 	 * @author Brian Orecchio
 	 * @version 0.1
 	 */
-	private ArrayList<Game> parseGameJSONArray( JSONArray jsonArray )
-	{
+	private static ArrayList<Game> parseGameJSONArray( JSONArray jsonArray ) {
 		Game game;
 		ArrayList<Game> Games  = new ArrayList<Game>();
 		try{
@@ -231,7 +196,8 @@ public class PugNetworkInterface {
 	 * @author Brian Orecchio
 	 * @version 0.1
 	 */
-	public int sendGame(Game game) {
+	public static int sendGame(Game game) {
+		HttpClient httpclient = new DefaultHttpClient();
 		
 		try{
 			//pack the Game into a JSONObject
@@ -256,6 +222,4 @@ public class PugNetworkInterface {
 		}
 		return 0;
 	}
-	
-	
 }
