@@ -14,7 +14,7 @@ import org.json.JSONException;
  */
 public abstract class Game {
 	public enum SportType {
-		BASKETBALL, BASEBALL, FOOTBALL;
+		BASKETBALL, BASEBALL, FOOTBALL, SOCCER;
 		
 		@Override
 		public String toString() {

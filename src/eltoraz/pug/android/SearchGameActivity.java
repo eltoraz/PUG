@@ -7,13 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+
 public class SearchGameActivity extends Activity {
 	private Person user;
+	
+	private EditText locationEditText;
 	private Button searchSubmitButton;
-	private EditText LongitudeText;
-	private EditText LatitudeText;
-	private TextView LatitudeView;
-	private TextView LongitudeView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -34,9 +33,5 @@ public class SearchGameActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-	}
-	
-	public CharSequence get_lat() {
-		return LatitudeView.getText();
 	}
 }
