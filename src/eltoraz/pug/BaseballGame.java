@@ -13,7 +13,7 @@ public class BaseballGame extends Game {
 	 */
 	public BaseballGame() {
 		super();
-		gameType = Sport.BASEBALL;
+		gameType = SportType.BASEBALL;
 	}
 	
 	/**
@@ -22,7 +22,7 @@ public class BaseballGame extends Game {
 	 */
 	public BaseballGame(Person p) {
 		super(p);
-		gameType = Sport.BASEBALL;
+		gameType = SportType.BASEBALL;
 	}
 	
 	/**
@@ -33,7 +33,7 @@ public class BaseballGame extends Game {
 	 */
 	public BaseballGame(Location loc, GregorianCalendar cal, Person p) {
 		super(loc, cal, p);
-		gameType = Sport.BASEBALL;
+		gameType = SportType.BASEBALL;
 	}
 	
 	/**
@@ -45,7 +45,7 @@ public class BaseballGame extends Game {
 	 */
 	public BaseballGame(Location loc, GregorianCalendar cal, Person p, boolean privacy) {
 		super(loc, cal, p, privacy);
-		gameType = Sport.BASEBALL;
+		gameType = SportType.BASEBALL;
 	}
 	
 	/**
@@ -54,6 +54,6 @@ public class BaseballGame extends Game {
 	 */
 	public BaseballGame(Game g) {
 		super(g);
-		gameType = Sport.BASEBALL;
+		gameType = SportType.BASEBALL;
 	}
 }

@@ -20,4 +20,6 @@
     <string name="create">Create Game</string>
     <string name="create_label">Create a Game</string>
     <string name="search_label">Search for Games</string>
+    <string name="description">Description</string>
+    <string name="enter_description">Enter a short description for your new game here</string>
 </resources>

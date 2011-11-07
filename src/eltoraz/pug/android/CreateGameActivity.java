@@ -40,6 +40,7 @@ public class CreateGameActivity extends Activity {
 	private Button timePickButton;
 	private EditText maxPlayersEditText;
 	private ToggleButton visibilityToggleButton;
+	private EditText descriptionEditText;
 	
 	private int mHour, mMinute;
 	private int mYear, mMonth, mDay;
@@ -90,6 +91,7 @@ public class CreateGameActivity extends Activity {
 		timePickButton = (Button) findViewById(R.id.timePickButton);
 		maxPlayersEditText = (EditText) findViewById(R.id.maxPlayersEditText);
 		visibilityToggleButton = (ToggleButton) findViewById(R.id.visibilityToggleButton);
+		descriptionEditText = (EditText) findViewById(R.id.descriptionEditText);
 		
 		/* ***** DEFINE	UI ELEMENT FUNCTIONALITY ***** */
 		

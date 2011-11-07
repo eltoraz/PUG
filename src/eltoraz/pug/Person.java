@@ -23,7 +23,7 @@ public class Person implements Serializable {
 	protected int id;
 	protected int age;
 	protected Gender gender;
-	protected Game.Sport favoriteSport;
+	protected Game.SportType favoriteSport;
 	
 	// TODO: persistent value to keep a tally of the number of Persons created for use in assigning IDs
 	
@@ -68,7 +68,7 @@ public class Person implements Serializable {
 			name = json.getString("name");
 			age = json.getInt("age");
 			gender = Gender.valueOf(json.getString("gender"));
-			favoriteSport = Game.Sport.valueOf(json.getString("favorite").toUpperCase());
+			favoriteSport = Game.SportType.valueOf(json.getString("favorite").toUpperCase());
 		}
 		catch (JSONException e) {
 			e.printStackTrace();

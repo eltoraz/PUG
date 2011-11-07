@@ -41,6 +41,11 @@
 		        	  android:layout_below="@+id/maxPlayersEditText" android:layout_alignParentLeft="true" android:text="@string/visibility"></TextView>
 		    <ToggleButton android:id="@+id/visibilityToggleButton" android:layout_height="wrap_content" android:layout_width="wrap_content"
 		        		  android:layout_below="@+id/visibilityTextView" android:layout_alignParentLeft="true" android:textOff="@string/pub" android:textOn="@string/priv"></ToggleButton>
+		    <TextView android:id="@+id/descriptionTextView" android:layout_height="wrap_content" android:layout_width="wrap_content"
+		        	  android:layout_below="@+id/visibilityToggleButton" android:layout_alignParentLeft="true" android:text="@string/description"></TextView>
+		    <EditText android:id="@+id/descriptionEditText" android:layout_height="wrap_content" android:layout_width="match_parent"
+		        	  android:inputType="textMultiLine" android:layout_below="@+id/descriptionTextView" android:layout_alignParentLeft="true" android:text="@string/enter_description" />
+
 		</RelativeLayout>
 	</ScrollView>
 </LinearLayout>
