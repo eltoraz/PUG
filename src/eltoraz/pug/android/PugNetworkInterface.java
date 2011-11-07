@@ -57,6 +57,9 @@ public class PugNetworkInterface {
 		httpclient= new DefaultHttpClient();
 	}
 	
+	//NOTE: These getGames functions have a bunch of duplicated code, in the future I will add a way to do this filtering in a single get games 
+	//function by just passing in a map from the filter key to the filter parameter
+	
 	/**
 	 * The function <code>getGames</code> gets all the games in the database and returns as <code>ArrayList<Game></code>
 	 * @author Brian Orecchio
@@ -125,6 +128,31 @@ public class PugNetworkInterface {
 			
 			page = "http://pug.myrpi.org/";
 			page = page + "getarea.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&dist=" + dist.toString();
+			
+			Games = getGamesFromServer(page);
+            
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return Games;
+	}
+	
+	/**
+	 * The function <code>getGames(String sport)</code> gets all the games around a location of a certain sport and returns as <code>ArrayList<Game></code>
+	 * @author Brian Orecchio
+	 * @version 0.1
+	 */
+	public ArrayList<Game> getGames(Integer lat, Integer lon, String sport) {
+		
+		ArrayList<Game> Games  = new ArrayList<Game>();
+		
+		try{
+			    
+			String page = new String();
+			
+			page = "http://pug.myrpi.org/";
+			page = page + "getarea.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&sport=" + sport;
 			
 			Games = getGamesFromServer(page);
             
