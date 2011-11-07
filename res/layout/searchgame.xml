@@ -24,6 +24,22 @@
         <requestFocus >
         </requestFocus>
     </EditText>
+    
+    <TextView 
+        android:id="@+id/radiusTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/locationEditText2"
+        android:layout_alignParentLeft="true"
+        android:text="@string/radius"/>
+    
+    <EditText
+        android:id="@+id/radiusEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/radiusTextView"
+        android:inputType="number" />
 
     <Button
         android:id="@+id/searchSubmitButton"
