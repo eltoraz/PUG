@@ -170,7 +170,7 @@ public class PugNetworkInterface {
 	 */
 	private ArrayList<Game> parseGameJSONArray( JSONArray jsonArray )
 	{
-		Game game = new Game();
+		Game game;
 		ArrayList<Game> Games  = new ArrayList<Game>();
 		try{
 		
@@ -183,8 +183,8 @@ public class PugNetworkInterface {
 	         	
 	         	//unpack the game json into a Game
 	         	//game = jsonInterface.unpackGame(gameJson);
-	         	game = new Game();
-	         	game.buildGameFromJSON(gameJson);
+	         	
+	         	game = Game.buildGameFromJSON(gameJson);
 	         	
 	         	//Add the game to the ArrayList
 	         	Games.add(game);
