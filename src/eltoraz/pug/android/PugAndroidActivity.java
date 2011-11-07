@@ -29,6 +29,7 @@ public class PugAndroidActivity extends MapActivity {
 	private ArrayList<Game> games = new ArrayList<Game>();
 	
 	static final int SEARCH_REQUEST = 0;
+	static final int PROFILE_REQUEST = 0;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -63,7 +64,7 @@ public class PugAndroidActivity extends MapActivity {
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), ProfileActivity.class);
 				intent.putExtra("user", user);
-				startActivity(intent);
+				startActivityForResult(intent, PROFILE_REQUEST);
 			}
 		});
 		
@@ -74,7 +75,6 @@ public class PugAndroidActivity extends MapActivity {
 		drawable = this.getResources().getDrawable(R.drawable.androidmarker);
 		itemizedOverlay = new PugItemizedOverlay(drawable);
 		
-		// TODO: display games on map
 		// @reference http://stackoverflow.com/questions/2349095/google-map-dialog-info-window-not-appearing-on-touch
 		// @reference http://mobiforge.com/developing/story/using-google-maps-android
 	}
@@ -103,6 +103,12 @@ public class PugAndroidActivity extends MapActivity {
 				Bundle extras = data.getExtras();
 				games = (ArrayList<Game>) extras.get("games");
 				plotGames(games);
+			}
+		}
+		if (resultCode == Activity.RESULT_OK && requestCode == PROFILE_REQUEST) {
+			if (data.hasExtra("user")) {
+				Bundle extras = data.getExtras();
+				user = (Person) extras.get("user");
 			}
 		}
 	}

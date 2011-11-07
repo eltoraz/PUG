@@ -1,18 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/profilelayout"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-    <QuickContactBadge android:layout_width="wrap_content" android:id="@+id/quickContactBadge2" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" android:layout_alignParentBottom="false" android:layout_alignParentRight="true" android:src="@drawable/profile1"></QuickContactBadge>
-    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:weightSum="1" android:layout_below="@+id/quickContactBadge2">
-        <EditText android:layout_height="wrap_content" android:id="@+id/editTextName" android:inputType="textPersonName" android:layout_width="match_parent"  ></EditText>
-        <EditText android:id="@+id/editTextAge"  android:layout_height="wrap_content" android:inputType="number" android:layout_width="match_parent">
-            <requestFocus></requestFocus>
-        </EditText>
-        <EditText android:id="@+id/editTextGender"  android:layout_width="match_parent" android:layout_height="wrap_content"></EditText>
-        <EditText android:id="@+id/editTextFavoriteSport"  android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textPersonName"></EditText>
-        <Button android:text="Edit Profile" android:id="@+id/buttonEdit" android:layout_marginTop="53dp" android:layout_marginLeft="22dp" android:layout_height="wrap_content" android:layout_width="282dp"></Button>
-        <Button android:text="Save Changes" android:id="@+id/buttonSaveChanges" android:layout_height="wrap_content" android:layout_width="match_parent"></Button>
-    </LinearLayout>
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <QuickContactBadge
+        android:id="@+id/quickContactBadge2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dip"
+        android:src="@drawable/profile1" >
+    </QuickContactBadge>
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/quickContactBadge2"
+        android:inputType="textPersonName" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editTextName"
+        android:inputType="number" >
+
+        <requestFocus >
+        </requestFocus>
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editTextAge" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextFavoriteSport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editTextGender"
+        android:inputType="textPersonName" >
+    </EditText>
+
+    <Button
+        android:id="@+id/buttonEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="53dp"
+        android:layout_above="@+id/buttonSaveChanges"
+        android:text="Edit Profile" >
+    </Button>
+
+    <Button
+        android:id="@+id/buttonSaveChanges"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+		android:layout_alignParentBottom="true"
+        android:text="Save Changes" >
+    </Button>
+
 </RelativeLayout>

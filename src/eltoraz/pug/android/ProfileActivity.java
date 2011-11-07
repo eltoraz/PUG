@@ -1,10 +1,7 @@
 package eltoraz.pug.android;
 
 import eltoraz.pug.Game;
-import java.util.*;
-import eltoraz.pug.Location;
 import eltoraz.pug.Person;
-import eltoraz.pug.Game.SportType;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,23 +10,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
-import java.util.GregorianCalendar;
-public class ProfileActivity extends Activity{
+public class ProfileActivity extends Activity {
 	private static final String TAG= ProfileActivity.class.getSimpleName();
+	
 	private Person user;
+	
 	private EditText editTextName;
 	private Button buttonEdit;
 	private Button buttonSaveChanges;
 	private EditText editTextAge;
 	private EditText editTextGender;
 	private EditText editTextFavoriteSport;
-	private String Name="Robert White";
-	private String Age="22";
-	private String Gender="Male";
-	private String FavoriteSport="Basketball";
 	
-	
-	
+	private String name;
+	private String age;
+	private String gender;
+	private String favoriteSport;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +38,10 @@ public class ProfileActivity extends Activity{
 		else					// This should theoretically never be called
 			user = new Person("Robert White", 1, 22, Person.Gender.MALE, Game.SportType.BASEBALL);
 		
+		name = user.getName();
+		age = String.valueOf(user.getAge());
+		gender = user.getGender().toString();
+		favoriteSport = user.getFavSport().toString();
 		
 		buttonEdit=(Button) findViewById(R.id.buttonEdit);
 		buttonSaveChanges=(Button) findViewById(R.id.buttonSaveChanges);
@@ -50,22 +50,22 @@ public class ProfileActivity extends Activity{
 		editTextGender=(EditText) findViewById(R.id.editTextGender);
 		editTextFavoriteSport=(EditText) findViewById(R.id.editTextFavoriteSport);
 		
-		editTextName.setText("Name: " + Name);
+		editTextName.setText("Name: " + name);
 		editTextName.setFocusable(false);
 		editTextName.setFocusableInTouchMode(false);
 		editTextName.setClickable(false);
 		
-		editTextAge.setText("Age: " + Age);
+		editTextAge.setText("Age: " + age);
 		editTextAge.setFocusable(false);
 		editTextAge.setFocusableInTouchMode(false);
 		editTextAge.setClickable(false);
 		
-		editTextGender.setText("Gender: " + Gender);
+		editTextGender.setText("Gender: " + gender);
 		editTextGender.setFocusable(false);
 		editTextGender.setFocusableInTouchMode(false);
 		editTextGender.setClickable(false);
 		
-		editTextFavoriteSport.setText("Favorite Sport: " + FavoriteSport);
+		editTextFavoriteSport.setText("Favorite Sport: " + favoriteSport);
 		editTextFavoriteSport.setFocusable(false);
 		editTextFavoriteSport.setFocusableInTouchMode(false);
 		editTextFavoriteSport.setClickable(false);
@@ -95,7 +95,6 @@ public class ProfileActivity extends Activity{
 
 				Toast toast = Toast.makeText(context, text, duration);
 				toast.show();
-			
 			}
 		});
 		
@@ -105,18 +104,22 @@ public class ProfileActivity extends Activity{
 				editTextName.setFocusable(false);
 				editTextName.setFocusableInTouchMode(false);
 				editTextName.setClickable(false);
+				user.setName(editTextName.getText().toString());
 				
 				editTextAge.setFocusable(false);
 				editTextAge.setFocusableInTouchMode(false);
 				editTextAge.setClickable(false);
+				user.setAge(Integer.parseInt(editTextAge.getText().toString()));
 				
 				editTextGender.setFocusable(false);
 				editTextGender.setFocusableInTouchMode(false);
 				editTextGender.setClickable(false);
+				user.setGender(gender);
 				
 				editTextFavoriteSport.setFocusable(false);
 				editTextFavoriteSport.setFocusableInTouchMode(false);
 				editTextFavoriteSport.setClickable(false);
+				user.setFavSport(favoriteSport);
 				
 				Context context = getApplicationContext();
 				CharSequence text = "Saved Changes!";
@@ -125,6 +128,11 @@ public class ProfileActivity extends Activity{
 				Toast toast = Toast.makeText(context, text, duration);
 				toast.show();
 				
+				Intent data = new Intent();
+				data.putExtra("user", user);
+				setResult(RESULT_OK, data);
+				
+				finish();
 			}
 		});
 		
@@ -145,8 +153,5 @@ public class ProfileActivity extends Activity{
 
 		
 
-	}
-	
+	}	
 }
-
-

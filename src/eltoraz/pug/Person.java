@@ -115,7 +115,7 @@ public class Person implements Serializable {
 	
 	/**
 	 * Set the <code>Person</code>'s name
-	 * @return a <code>String</code> containing the <code>Person</code>'s name
+	 * @param a_name <code>String</code> containing the <code>Person</code>'s name
 	 */
 	public void setName(String a_name) {
 		name = a_name;
@@ -123,10 +123,50 @@ public class Person implements Serializable {
 	
 	/**
 	 * Set the <code>Person</code>'s ID number
-	 * @return a <code>int</code> containing the <code>Person</code>'s ID number
+	 * @param <code>int</code> containing the <code>Person</code>'s ID number
 	 */
 	public void setId(int i) {
 		id = i;
+	}
+	
+	/**
+	 * Set the <code>Person</code>'s age
+	 * @param i <code>int</code> containing the <code>Person</code>'s age
+	 */
+	public void setAge(int i) {
+		age = i;
+	}
+	
+	/**
+	 * Set the <code>Person</code>'s gender
+	 * @param g <code>enum Gender</code> corresponding to the <code>Person</code>'s gender
+	 */
+	public void setGender(Gender g) {
+		gender = g;
+	}
+	
+	/**
+	 * Set the <code>Person</code>'s gender
+	 * @param s <code>String</code> containing the <code>Person</code>'s gender
+	 */
+	public void setGender(String s) {
+		gender = Gender.valueOf(s.toUpperCase());
+	}
+	
+	/**
+	 * Set the <code>Person</code>'s favorite sport
+	 * @param s <code>enum Game.SportType</code> corresponding to the <code>Person</code>'s favorite sport
+	 */
+	public void setFavSport(Game.SportType s) {
+		favoriteSport = s;
+	}
+	
+	/**
+	 * Set the <code>Person</code>'s favorite sport
+	 * @param s <code>String</code> containing to the <code>Person</code>'s favorite sport
+	 */
+	public void setFavSport(String s) {
+		favoriteSport = Game.SportType.valueOf(s.toUpperCase());
 	}
 	
 	/* ***** GET METHODS ***** */
@@ -141,9 +181,33 @@ public class Person implements Serializable {
 	
 	/**
 	 * Get the <code>Person</code>'s ID number
-	 * @return a <code>int</code> containing the <code>Person</code>'s ID number
+	 * @return an <code>int</code> containing the <code>Person</code>'s ID number
 	 */
 	public int getId() {
 		return id;
+	}
+	
+	/**
+	 * Get the <code>Person</code>'s age
+	 * @return an <code>int</code> containing the <code>Person</code>'s age
+	 */
+	public int getAge() {
+		return age;
+	}
+	
+	/**
+	 * Get the <code>Person</code>'s gender
+	 * @return an <code>enum Gender</code> corresponding to the <code>Person</code>'s gender
+	 */
+	public Gender getGender() {
+		return gender;
+	}
+	
+	/**
+	 * Get the <code>Person</code>'s favorite sport
+	 * @return an <code>enum Game.SportType</code> corresponding to the <code>Person</code>'s favorite sport
+	 */
+	public Game.SportType getFavSport() {
+		return favoriteSport;
 	}
 }
