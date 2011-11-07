@@ -43,8 +43,7 @@ import org.json.JSONTokener;
  * @version 0.1
  */
 public class PugNetworkInterface {
-
-	protected JsonObjectInterface jsonInterface;  //this will be phased out
+	
 	protected HttpClient httpclient;
 	
 	/**
@@ -53,7 +52,6 @@ public class PugNetworkInterface {
 	 * @version 0.1
 	 */
 	public PugNetworkInterface() {
-		jsonInterface = new JsonObjectInterface();
 		httpclient= new DefaultHttpClient();
 	}
 	
