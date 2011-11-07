@@ -185,7 +185,7 @@ public class CreateGameActivity extends Activity {
 					return;
 				}
 				
-				// TODO: send game to server, implement ProgressDialog while transferring data
+				// TODO: send game to server, implement ProgressDialog while transferring data, quit activity
 				game = Game.buildGame(sport, descr, dtMillis, user, user, loc, maxPlayers, privacy);
 				PugNetworkInterface.sendGame(game);
 			}

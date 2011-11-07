@@ -1,5 +1,6 @@
 package eltoraz.pug.android;
 
+import eltoraz.pug.Game;
 import eltoraz.pug.Person;
 import android.app.Activity;
 import android.content.Intent;
@@ -33,7 +34,7 @@ public class ProfileActivity extends Activity{
 		if (extras != null)
 			user = (Person) extras.get("user");
 		else					// This should theoretically never be called
-			user = new Person("Test User", -1);
+			user = new Person("Robert White", 1, 22, Person.Gender.MALE, Game.SportType.BASEBALL);
 	}
 	
 }
