@@ -6,6 +6,12 @@ gen
 proguard.cfg
 *.properties
 
+# Backup files created by some apps
+*~
+
+# UML
+uml
+
 # Github suggested files #
 # Compiled source #
 ###################

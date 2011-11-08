@@ -7,6 +7,11 @@ package eltoraz.pug;
  */
 public class SoccerGame extends Game {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Create a new <code>SoccerGame</code> with null location and owner at the current date/time.
 	 */
 	public SoccerGame() {

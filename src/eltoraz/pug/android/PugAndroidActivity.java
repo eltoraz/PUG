@@ -22,9 +22,9 @@ public class PugAndroidActivity extends MapActivity {
 	private Button createGameButton;
 	private Button searchButton;
 	
-	List<Overlay> mapOverlays;
-	Drawable drawable;
-	PugItemizedOverlay itemizedOverlay;
+	private List<Overlay> mapOverlays;
+	private Drawable drawable;
+	private PugItemizedOverlay itemizedOverlay;
 	
 	private ArrayList<Game> games = new ArrayList<Game>();
 	
