@@ -19,6 +19,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 
+import android.content.Context;
+import android.telephony.TelephonyManager;
+
+
+
 /**
  * The class <code>PugNetworkInterface</code> provides functions to get data from the database
  * @author Brian Orecchio
@@ -222,4 +227,48 @@ public class PugNetworkInterface {
 		}
 		return 0;
 	}
+
+
+
+	/**
+	 * The function <code>getProfile</code> takes a <code>String/code> object which is the unique phone id string that is generated via the TelephoneyManager class and it returns
+	 * a Person class which holds your profile data
+	 * @author Brian Orecchio
+	 * @version 0.1
+	 */
+	public static Person getUser(String phoneId) {
+		HttpClient httpclient = new DefaultHttpClient();
+
+		try{
+			
+			//put this code in the activity where you want to return your user information
+			/*TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+			String phoneId = telephonyManager.getDeviceId();
+			Person p = PugNetworkInterface.getUser(phoneId);
+			*/
+			
+			String page = "http://pug.myrpi.org/getuser.php";
+			page = page + "?phone=" + phoneId;
+			
+			HttpGet httpget= new HttpGet (page);
+			HttpResponse response = httpclient.execute(httpget);
+			HttpEntity entity = response.getEntity();
+			String temp = new String();
+			temp = EntityUtils.toString(entity);
+			JSONObject jsonObject=new JSONObject(temp);
+
+			Person p = new Person(jsonObject);
+			
+            
+			return p;
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
+
 }
