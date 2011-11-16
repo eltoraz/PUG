@@ -193,4 +193,37 @@ public abstract class Game implements Serializable {
 	public String getDescription() {
 		return description;
 	}
+	
+	/**
+	 * Retrieve the <code>Game</code>'s location
+	 * @return a <code>Location</code> containing the <code>Game</code>'s location
+	 */
+	public Location getLocation() {
+		return location;
+	}
+	
+	/**
+	 * Retrieve the <code>Game</code>'s type
+	 * @return a <code>SportType</code> containing the <code>Game</code>'s type
+	 */
+	public SportType getGameType() {
+		return gameType;
+	}
+	
+	/**
+	 * Retrieve the <code>Game</code>'s creator
+	 * @return a <code>Person</code> containing the <code>Game</code>'s creator
+	 */
+	public Person getCreator() {
+		return creator;
+	}
+	
+	/**
+	 * Retrieve the <code>Game</code>'s date and time
+	 * @return a <code>GregorianCalendar</code> containing the <code>Game</code>'s date and time
+	 */
+	public GregorianCalendar getDate() {
+		return dateTime;
+	}
+	
 }
