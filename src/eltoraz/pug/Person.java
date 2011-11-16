@@ -111,6 +111,24 @@ public class Person implements Serializable {
 		return personJson;
 	}
 	
+	/**
+	 * Return a JSON object with a minimalistic representation of this <code>Person</code>
+	 * @return a <code>JSONObject</code> containing the <code>Person</code>'s unique ID
+	 */
+	public JSONObject JSONMin() {
+		JSONObject personJson = null;
+		
+		try {
+			personJson = new JSONObject();
+			personJson.put("id", id);
+		}
+		catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return personJson;
+	}
+	
 	/* ***** SET METHODS ***** */
 	
 	/**

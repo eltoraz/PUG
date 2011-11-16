@@ -31,6 +31,9 @@ public abstract class Game implements Serializable {
 		}
 	}
 	
+	// TODO: figure out how to implement the ID's (assigned server-side, but how to propagate to app?)
+	//		 - maybe have the server return the id to the push game function
+	protected int id;
 	protected Location location;
 	protected GregorianCalendar dateTime;
 	protected Person owner, creator;
@@ -40,7 +43,6 @@ public abstract class Game implements Serializable {
 	protected SportType gameType;
 	
 	// TODO: add fields for additional rules, privacy options
-	// TODO: remove useless constructors
 	// TODO: change the e.printStackTrace()'s to do something more useful instead
 	
 	/* ***** CONSTRUCTOR ***** */
@@ -124,7 +126,7 @@ public abstract class Game implements Serializable {
 	 * @param json <code>JSONObject</code> to be parsed
 	 * @return an instance of a subclass of <code>Game</code>
 	 */
-	public static Game buildGameFromJSON(JSONObject json) {
+	public static Game buildGame(JSONObject json) {
 		Game newGame = null;
 		
 		try {
@@ -181,6 +183,13 @@ public abstract class Game implements Serializable {
 	public GeoPoint GeoPoint() {
 		return location.GeoPoint();
 	}
+	
+	/* ***** GET METHODS ***** */
+	
+	/**
+	 * Retrieve the <code>Game</code>'s description
+	 * @return a <code>String</code> containing the <code>Game</code>'s description
+	 */
 	public String getDescription() {
 		return description;
 	}

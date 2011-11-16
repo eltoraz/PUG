@@ -180,7 +180,7 @@ public class PugNetworkInterface {
 	         	//unpack the game json into a Game
 	         	//game = jsonInterface.unpackGame(gameJson);
 	         	
-	         	game = Game.buildGameFromJSON(gameJson);
+	         	game = Game.buildGame(gameJson);
 	         	
 	         	//Add the game to the ArrayList
 	         	Games.add(game);
