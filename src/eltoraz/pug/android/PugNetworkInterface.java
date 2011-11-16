@@ -230,6 +230,7 @@ public class PugNetworkInterface {
 
 
 
+
 	/**
 	 * The function <code>getProfile</code> takes a <code>String/code> object which is the unique phone id string that is generated via the TelephoneyManager class and it returns
 	 * a Person class which holds your profile data
@@ -270,5 +271,6 @@ public class PugNetworkInterface {
 		
 		return null;
 	}
+
 
 }

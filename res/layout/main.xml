@@ -15,7 +15,7 @@
     <RelativeLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/relativeLayout2" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true" android:layout_alignParentRight="true">
         <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginBottom="78dp" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:text="Search" android:id="@+id/searchButton"></Button>
         <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_centerHorizontal="true" android:layout_alignParentBottom="true" android:layout_alignParentTop="false" android:text="Create" android:id="@+id/createButton" android:layout_alignParentRight="true"></Button>
+        <Button android:id="@+id/listGamesButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="List" android:layout_alignParentLeft="true" android:layout_alignParentTop="true"></Button>
     </RelativeLayout>
-    <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentTop="true" android:layout_alignParentLeft="true" android:text="List" android:id="@+id/listGamesButton"></Button>
 
 </RelativeLayout>

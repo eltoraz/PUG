@@ -181,4 +181,7 @@ public abstract class Game implements Serializable {
 	public GeoPoint GeoPoint() {
 		return location.GeoPoint();
 	}
+	public String getDescription() {
+		return description;
+	}
 }

@@ -6,6 +6,7 @@
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 	<uses-sdk android:minSdkVersion="10" />
 
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
@@ -23,5 +24,7 @@
 				  android:label="@string/search_label" />
 	        <activity android:name=".ProfileActivity"
 				  android:label="Users Profile" />
+			<activity android:name=".ListGameActivity"
+				  android:label="Lists Games" />
 	</application>
 </manifest>
