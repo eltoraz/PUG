@@ -142,7 +142,7 @@ public class PugAndroidActivity extends MapActivity {
 			
 			String sport = g.getGameType().toString();   //get the sport type to display
 			String title = sport + " AT " + g.getLocation().getAddress();  //set the title of the over lay
-			String descr = g.getDescription();   //set the overlay description
+			String descr = g.getDate().getTime().toLocaleString() + ":  " + g.getDescription();   //set the overlay time and description
 			
 			MapController mc = mapView.getController();
 			mc.animateTo(p);
