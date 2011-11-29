@@ -36,7 +36,7 @@ public class PugAndroidActivity extends MapActivity {
 	
 	private List<Overlay> mapOverlays;
 	private Drawable drawable;
-	private PugItemizedOverlay itemizedOverlay;
+	private PugBalloonItemizedOverlay itemizedOverlay;
 	
 	private ArrayList<Game> games = new ArrayList<Game>();
 	
@@ -96,7 +96,7 @@ public class PugAndroidActivity extends MapActivity {
 		
 		mapOverlays = mapView.getOverlays();
 		drawable = this.getResources().getDrawable(R.drawable.androidmarker);
-		itemizedOverlay = new PugItemizedOverlay(drawable);
+		itemizedOverlay = new PugBalloonItemizedOverlay(drawable,mapView);
 		
 		// @reference http://stackoverflow.com/questions/2349095/google-map-dialog-info-window-not-appearing-on-touch
 		// @reference http://mobiforge.com/developing/story/using-google-maps-android
@@ -139,7 +139,15 @@ public class PugAndroidActivity extends MapActivity {
 	private void plotGames(ArrayList<Game> games) {
 		for (Game g : games) {
 			GeoPoint p = g.GeoPoint();
-			OverlayItem overlayItem = new OverlayItem(p, "", "");
+			
+			String sport = g.getGameType().toString();   //get the sport type to display
+			String title = sport + " AT " + g.getLocation().getAddress();  //set the title of the over lay
+			String descr = g.getDescription();   //set the overlay description
+			
+			MapController mc = mapView.getController();
+			mc.animateTo(p);
+			mc.setZoom(16);
+			OverlayItem overlayItem = new OverlayItem(p,title,descr);
 			itemizedOverlay.addOverlay(overlayItem);
 			mapOverlays.add(itemizedOverlay);
 		}

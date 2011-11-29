@@ -114,4 +114,12 @@ public class Location implements Serializable {
 		
 		return locJson;
 	}
+	
+	/**
+	 * Gets the <code>String</code> that is the address/name of the Location
+	 * @return a <code>String</code> 
+	 */
+	public String getAddress() {
+		return address;
+	}
 }
