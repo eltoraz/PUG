@@ -18,14 +18,13 @@ import android.widget.*;
  * For best results, store a list of Games in the <code>Intent</code> used to start this <code>Activity</code>.
  * @author Kevin Frame
  * @author Bill Jameson
- * @version 0.8
+ * @version 0.9
  * @reference http://developer.android.com/resources/tutorials/views/hello-listview.html
  */
 public class ListGameActivity extends ListActivity {
 	private Person user;
 	private ArrayList<Game> games;
 	private ArrayList<String> gameText;
-	//private TextView textListGames;
 
 	/**
 	 * The <code>onCreate</code> method is called when this <code>Activity</code> is first
@@ -36,11 +35,8 @@ public class ListGameActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.list);
 
-		//textListGames = (TextView) findViewById(R.id.textListGames);
-
-		// Note: the main activity should pass a list of games in the Intent.
+		// Note: the main activity should pass a list of games in the Intent along with the user.
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			user = (Person) extras.get("user");
@@ -63,7 +59,6 @@ public class ListGameActivity extends ListActivity {
 			game += g.getGameType().toString();
 			game += "\n";
 			game += g.getDescription();
-			game += "\n\n";
 			gameText.add(game);
 		}
 		
@@ -81,31 +76,5 @@ public class ListGameActivity extends ListActivity {
 				Toast.makeText(getApplicationContext(), "Joined Game!", Toast.LENGTH_LONG).show();
 			}
 		});
-
-		// For debugging.
-		// Log.d("WOW","1");
-
-		// if(games != null) {
-		// textListGames.setText(games.get(0).getDescription());
-		// Log.d("WOW",games.get(0).getDescription());
-		// }
-
-		// Add each game to the list.
-		/*
-		textListGames.setText("");
-		for (int i = 0; i < games.size(); i++) {
-			textListGames.append(games.get(i).getDate().getTime().toLocaleString());
-			textListGames.append("\n");
-			textListGames.append(games.get(i).getCreator().getName());
-			textListGames.append("\n");
-			textListGames.append(games.get(i).getLocation().getAddress());
-			textListGames.append("\n");
-			textListGames.append(games.get(i).getGameType().toString());
-			textListGames.append("\n");
-			textListGames.append(games.get(i).getDescription().toString());
-			textListGames.append("\n");
-			textListGames.append("\n");
-		}
-		*/
 	}
 }
