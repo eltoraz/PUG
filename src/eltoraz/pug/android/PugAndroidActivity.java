@@ -171,7 +171,7 @@ public class PugAndroidActivity extends MapActivity {
 			MapController mc = mapView.getController();
 			mc.animateTo(p);
 			mc.setZoom(16);
-			OverlayItem overlayItem = new OverlayItem(p,title,descr);
+			PugOverlayItem overlayItem = new PugOverlayItem(p,title,descr,g,user);
 			//itemizedOverlay.addOverlay(overlayItem);
 
 			Drawable drawable = findSportIcon(g.getGameType());

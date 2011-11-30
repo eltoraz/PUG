@@ -194,5 +194,28 @@ public class PugNetworkInterface {
 		return p;
 	}
 
+	/**
+	 * send a user id and game id to server signifying that the user has joined the game
+	 * 
+	 * @return
+	 */
+	public static void joinGame( int userid, int gameid ) {
+		HttpClient httpClient = new DefaultHttpClient();
+
+		try {
+			String page = "http://pug.myrpi.org/joingame.php";
+			page += "?user=" + userid;
+			page += "&game=" + gameid;
+
+			HttpGet httpGet= new HttpGet (page);
+			HttpResponse response = httpClient.execute(httpGet);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return;
+	}
+	
 
 }

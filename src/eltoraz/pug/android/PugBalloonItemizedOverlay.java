@@ -14,9 +14,9 @@ import com.google.android.maps.OverlayItem;
  * @author Brian Orecchio
  * @version 0.1
  */
-public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
+public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<PugOverlayItem> {
 
-	private ArrayList<OverlayItem> m_overlays = new ArrayList<OverlayItem>();
+	private ArrayList<PugOverlayItem> m_overlays = new ArrayList<PugOverlayItem>();
 	private Context c;
 	
 	/**
@@ -36,7 +36,7 @@ public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<OverlayIte
 	 * @return Overlay at index i
 	 */
 	@Override
-	protected OverlayItem createItem(int i) {
+	protected PugOverlayItem createItem(int i) {
 		return m_overlays.get(i);
 	}
 
@@ -50,8 +50,12 @@ public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<OverlayIte
 		return m_overlays.size();
 	}
 	
-	
-	public void addOverlay(OverlayItem overlay) {
+	/**
+	 * Adds overlay to list
+	 * 
+	 * @param overlay
+	 */
+	public void addOverlay(PugOverlayItem overlay) {
 	    m_overlays.add(overlay);
 	    populate();
 	}
@@ -64,11 +68,13 @@ public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<OverlayIte
 	 * @return true 
 	 */
 	@Override
-	protected boolean onBalloonTap(int index, OverlayItem item) {
+	protected boolean onBalloonTap(int index, PugOverlayItem item) {
 		
 		//display the info
-		Toast.makeText(c, "onBalloonTap for overlay index " + index,
+		Toast.makeText(c, "onBalloonTap for overlay index " + index + " " + item.getGame().getId() + " " + item.getUser().getId(),
 				Toast.LENGTH_LONG).show();
+		
+		PugNetworkInterface.joinGame(item.getUser().getId(), item.getGame().getId());
 		
 		return true;
 	}
