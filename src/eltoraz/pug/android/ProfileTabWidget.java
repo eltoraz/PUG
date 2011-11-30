@@ -46,7 +46,7 @@ public class ProfileTabWidget extends TabActivity {
 	    tabHost.addTab(spec);
 
 	    // Do the same for the joined games tap
-	    intent = new Intent().setClass(this, ListGameActivity.class);
+	    intent = new Intent().setClass(this, ProfileJoinedGamesActivity.class);
 	    ArrayList<Game> games = PugNetworkInterface.getJoinedGames(user.getId());
 	    intent.putExtra("games", games);
 	    spec = tabHost.newTabSpec("Games Joined").setIndicator("Games Joined",
