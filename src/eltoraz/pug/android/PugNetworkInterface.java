@@ -115,11 +115,10 @@ public class PugNetworkInterface {
 	 */
 	private static ArrayList<Game> parseGameJSONArray(JSONArray jsonArray) {
 		Game game;
-		ArrayList<Game> games = null;
+		ArrayList<Game> games = new ArrayList<Game>();
 		
 		try {
 			for(int i = 0; i < jsonArray.length(); i++) {
-				games = new ArrayList<Game>();
 				
 				// Get the JSON object at index i
 				JSONObject gameJson = jsonArray.getJSONObject(i);
