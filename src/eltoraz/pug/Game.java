@@ -238,4 +238,12 @@ public abstract class Game implements Serializable {
 	public GregorianCalendar getDate() {
 		return dateTime;
 	}
+	
+	/**
+	 * Retrieve the <code>Game</code>'s id
+	 * @return an int
+	 */
+	public int getId() {
+		return id;
+	}
 }
