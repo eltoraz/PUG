@@ -136,7 +136,7 @@ public class PugAndroidActivity extends MapActivity {
 			if (data.hasExtra("games")) {
 				Bundle extras = data.getExtras();
 				games = (ArrayList<Game>) extras.get("games");
-				if( games != null) {
+				if( !games.isEmpty()) {
 					plotGames(games);
 				}
 				else{

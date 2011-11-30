@@ -70,11 +70,9 @@ public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<PugOverlay
 	@Override
 	protected boolean onBalloonTap(int index, PugOverlayItem item) {
 		
-		//display the info
-		Toast.makeText(c, "onBalloonTap for overlay index " + index + " " + item.getGame().getId() + " " + item.getUser().getId(),
-				Toast.LENGTH_LONG).show();
-		
 		PugNetworkInterface.joinGame(item.getUser().getId(), item.getGame().getId());
+		
+		Toast.makeText(c, "Joined Game!", Toast.LENGTH_LONG).show();
 		
 		return true;
 	}
