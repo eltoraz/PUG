@@ -10,10 +10,9 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 
 /**
- * This class is the custom overlay built on the Open Source <code>BalloonItemizedOverlay</code>
- * @author oreccb
- *
- *
+ * The custom overlay built on the Open Source <code>BalloonItemizedOverlay</code>
+ * @author Brian Orecchio
+ * @version 0.1
  */
 public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<OverlayItem> {
 

@@ -109,9 +109,6 @@ public class PugAndroidActivity extends MapActivity {
 		mapView = (MapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);
 
-		// References used for plotting Games on the map:
-		// @reference http://stackoverflow.com/questions/2349095/google-map-dialog-info-window-not-appearing-on-touch
-		// @reference http://mobiforge.com/developing/story/using-google-maps-android
 		mapOverlays = mapView.getOverlays();
 		drawable = this.getResources().getDrawable(R.drawable.androidmarker);
 		itemizedOverlay = new PugBalloonItemizedOverlay(drawable, mapView);
