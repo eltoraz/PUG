@@ -64,14 +64,9 @@ public class PugAndroidActivity extends MapActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		// TODO: Remove once authentication is finished.
-		//user = new Person();
-		
-		// Capture the UI elements and define their functionality.
-		
 		user = authenticate();
-	
-		//user = new Person("Robert White", 1, 22, Person.Gender.MALE, Game.SportType.BASEBALL);   DONT need to use this anymore
+
+		// Capture the UI elements and define their functionality.
 		
 		// define functionality for the buttons
 		createGameButton = (Button) findViewById(R.id.createButton);

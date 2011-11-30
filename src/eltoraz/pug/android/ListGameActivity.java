@@ -10,55 +10,52 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
+
+// For debugging.
+//import android.util.Log;
 
 public class ListGameActivity extends Activity {
 	private ArrayList<Game> games;
 	private TextView textListGames;
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list);
-		
+
+		textListGames = (TextView) findViewById(R.id.textListGames);
+
 		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
+		if (extras != null)
 			games = (ArrayList<Game>) extras.get("games");
-		}
-		else
-		{
+		else			// This should theoretically never be called
 			games = new ArrayList<Game>();
-			// This should theoretically never be called
-		}
-		
-		
-			
-		textListGames=(TextView) findViewById(R.id.textListGames);
-		//Log.d("WOW","1");
-		
-		//if(games != null) {
-		//textListGames.setText(games.get(0).getDescription());
-		//Log.d("WOW",games.get(0).getDescription());
-		//}
-		
+
+		// For debugging.
+		// Log.d("WOW","1");
+
+		// if(games != null) {
+		// textListGames.setText(games.get(0).getDescription());
+		// Log.d("WOW",games.get(0).getDescription());
+		// }
+
 		textListGames.setText("");
-		for (int i=0;i<games.size();i++)
-		{
-		textListGames.append(games.get(i).getDate().getTime().toLocaleString());
-		textListGames.append("\n");
-		textListGames.append(games.get(i).getCreator().getName());
-		textListGames.append("\n");
-		textListGames.append(games.get(i).getLocation().getAddress());
-		textListGames.append("\n");
-		textListGames.append(games.get(i).getGameType().toString());
-		textListGames.append("\n");
-		textListGames.append(games.get(i).getDescription().toString());
-		textListGames.append("\n");
-		textListGames.append("\n");
-		} 
+		for (int i = 0; i < games.size(); i++) {
+			textListGames.append(games.get(i).getDate().getTime().toLocaleString());
+			textListGames.append("\n");
+			textListGames.append(games.get(i).getCreator().getName());
+			textListGames.append("\n");
+			textListGames.append(games.get(i).getLocation().getAddress());
+			textListGames.append("\n");
+			textListGames.append(games.get(i).getGameType().toString());
+			textListGames.append("\n");
+			textListGames.append(games.get(i).getDescription().toString());
+			textListGames.append("\n");
+			textListGames.append("\n");
+		}
 	}
-	
+
 }

@@ -52,6 +52,9 @@ public class SearchGameActivity extends Activity {
 				 android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		sportSearchSpinner.setAdapter(adapter);
+		sportSearchSpinner.setFocusable(false);
+		sportSearchSpinner.setFocusableInTouchMode(false);
+		sportSearchSpinner.setClickable(false);
 		
 		// When the user toggles this button, enable/disable the spinner based on what they selected
 		allTypesToggleButton = (ToggleButton) findViewById(R.id.allGamesToggleButton);
