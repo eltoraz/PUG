@@ -65,11 +65,15 @@ public class PugAndroidActivity extends MapActivity {
 		setContentView(R.layout.main);
 		
 		// TODO: Remove once authentication is finished.
-		user = new Person();
+		//user = new Person();
 		
-		authenticate();
-	
 		// Capture the UI elements and define their functionality.
+		
+		user = authenticate();
+	
+		//user = new Person("Robert White", 1, 22, Person.Gender.MALE, Game.SportType.BASEBALL);   DONT need to use this anymore
+		
+		// define functionality for the buttons
 		createGameButton = (Button) findViewById(R.id.createButton);
 		createGameButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -132,7 +136,16 @@ public class PugAndroidActivity extends MapActivity {
 			if (data.hasExtra("games")) {
 				Bundle extras = data.getExtras();
 				games = (ArrayList<Game>) extras.get("games");
-				plotGames(games);
+				if( games != null) {
+					plotGames(games);
+				}
+				else{
+					Context context = getApplicationContext();
+					CharSequence text = "No Games Found";
+					int duration = Toast.LENGTH_SHORT;
+					Toast toast = Toast.makeText(context, text, duration);
+					toast.show();
+				}
 			}
 		}
 		if (resultCode == Activity.RESULT_OK && requestCode == PROFILE_REQUEST) {
@@ -159,21 +172,48 @@ public class PugAndroidActivity extends MapActivity {
 			mc.animateTo(p);
 			mc.setZoom(16);
 			OverlayItem overlayItem = new OverlayItem(p,title,descr);
-			itemizedOverlay.addOverlay(overlayItem);
-			mapOverlays.add(itemizedOverlay);
+			//itemizedOverlay.addOverlay(overlayItem);
+
+			Drawable drawable = findSportIcon(g.getGameType());
+			PugBalloonItemizedOverlay customItemizedOverlay = new PugBalloonItemizedOverlay(drawable,mapView);
+			customItemizedOverlay.addOverlay(overlayItem);
+			
+			mapOverlays.add(customItemizedOverlay);
 		}
+		return;
 	}
+
+	/**
+	 * Find the right sport icon to use when displaying a game on the map
+	 * 
+	 * @param sporttype
+	 * @return
+	 */
+	private Drawable findSportIcon(Game.SportType sporttype)  {
+		
+		Drawable drawable = this.getResources().getDrawable(R.drawable.androidmarker);
+		switch (sporttype.ordinal()) {
+        case 0:  drawable = this.getResources().getDrawable(R.drawable.basketball);    break;
+        case 1:  drawable = this.getResources().getDrawable(R.drawable.baseball);      break;
+        case 2:  drawable = this.getResources().getDrawable(R.drawable.football);      break;
+        case 3:  drawable = this.getResources().getDrawable(R.drawable.soccer);        break;
+        
+        default: break;
+    }
+		
+		return drawable;
+	}
+
 	
 	/**
 	 * Authenticate the user with the server to allow them to keep a persistent profile.
 	 * @return <code>true</code> if the user exists in the server, <code>false</code> otherwise.
 	 */
-	private boolean authenticate() {
-		// TODO: Return the user once authenticated instead of a boolean.
+	private Person authenticate() {
 		TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		String deviceId = tm.getDeviceId();
 		boolean Auth = false;
-		Person p;
+		Person p = new Person();
 
 		String page = new String();
 		
@@ -215,7 +255,6 @@ public class PugAndroidActivity extends MapActivity {
 				Toast toast = Toast.makeText(context, text, duration);
 				toast.show();
 			}
-
 		}
 		catch(Exception e) {
 			// TODO: More descriptive errors.
@@ -227,7 +266,7 @@ public class PugAndroidActivity extends MapActivity {
 			toast.show();
 		}
 		
-		return Auth;
+		 return p;
 	}
 }
 
