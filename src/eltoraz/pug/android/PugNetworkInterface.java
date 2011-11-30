@@ -75,13 +75,25 @@ public class PugNetworkInterface {
 	 * @return <code>ArrayList</code> containing the requested Games
 	 */
 	public static ArrayList<Game> getGames(Integer lat, Integer lon, String sport) {
-		ArrayList<Game> Games  = new ArrayList<Game>();
+		return getGames(lat, lon, 5, sport);
+	}
+	
+	/**
+	 * Get all the Games of the specified sport at the specified location.
+	 * @param lat <code>int</code> Latitude of the game (in microdegrees)
+	 * @param lon <code>int</code> Longitude of the game (in microdegrees)
+	 * @param dist <code>int</code> Maximum distance from the point specified to search (in miles)
+	 * @param sport <code>String</code> Sport to filter results by
+	 * @return <code>ArrayList</code> containing the requested Games
+	 */
+	public static ArrayList<Game> getGames(Integer lat, Integer lon, Integer dist, String sport) {
+		ArrayList<Game> games = new ArrayList<Game>();
 
 		String page = "http://pug.myrpi.org/";
-		page = page + "getfilter.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&sport=" + sport;
-
-		Games = getGamesFromServer(page);
-		return Games;
+		page += "getfilter.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&dist=" + dist.toString() + "&sport=" + sport;
+		
+		games = getGamesFromServer(page);
+		return games;
 	}
 
 	/**

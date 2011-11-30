@@ -33,4 +33,7 @@
         <item >Male</item>
         <item >Female</item>
     </string-array>
+    <string name="allGames">Search for all game types?</string>
+    <string name="selectGame">Select a Game</string>
+    <string name="allGameTypes">All Games</string>
 </resources>

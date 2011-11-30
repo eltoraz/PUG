@@ -40,6 +40,40 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/radiusTextView"
         android:inputType="number" />
+    
+    <TextView
+        android:id="@+id/allGamesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/radiusEditText"
+        android:text="@string/allGames" />
+    
+    <ToggleButton 
+        android:id="@+id/allGamesToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/allGamesTextView"
+        android:textOn="@string/allGameTypes"
+        android:textOff="@string/selectGame"
+        android:checked="true" />
+    
+    <TextView
+        android:id="@+id/sportSearchTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/allGamesToggleButton"
+        android:text="@string/sport" />
+
+    <Spinner
+        android:id="@+id/sportSearchSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/sportSearchTextView" >
+    </Spinner>
 
     <Button
         android:id="@+id/searchSubmitButton"
