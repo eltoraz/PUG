@@ -15,24 +15,46 @@ import android.view.View;
 import android.widget.*;
 
 public class ListGameActivity extends Activity {
-
-	private Person user;
-	private ArrayList<Game> currentGames=PugNetworkInterface.getGames();
+	private ArrayList<Game> games;
 	private TextView textListGames;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list);
 		
 		Bundle extras = getIntent().getExtras();
-		if (extras != null)
-			user = (Person) extras.get("user");
-		else					// This should theoretically never be called
-			user = new Person("Robert White", 1, 22, Person.Gender.MALE, Game.SportType.BASEBALL);
+		if (extras != null) {
+			games = (ArrayList<Game>) extras.get("games");
+		}
+		else
+		{
+			games = new ArrayList<Game>();
+			// This should theoretically never be called
+		}
 		
+		
+			
 		textListGames=(TextView) findViewById(R.id.textListGames);
-		textListGames.setText(currentGames.get(0).getDescription().toString());
+		Log.d("WOW","1");
+	
+		textListGames.setText(games.get(0).getDescription());
+		Log.d("WOW","2");
+		//for (int i=0;i<games.size();i++)
+	//	{
+		//textListGames.append(games.get(i).getDate().getTime().toLocaleString());
+	//	textListGames.setText(games.size());
+		//textListGames.append(games.get(i).getCreator().getName());
+	//	textListGames.append("\n");
+		//textListGames.append(games.get(i).getLocation().getAddress());
+		//textListGames.append("\n");
+	//	textListGames.append(games.get(i).getGameType().toString());
+		//textListGames.append("\n");
+		//textListGames.append(games.get(i).getDescription().toString());
+		//textListGames.append("\n");
+		//textListGames.append("\n");
+	//	} 
 	}
 	
 }
