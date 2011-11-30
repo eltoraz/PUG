@@ -197,6 +197,8 @@ public class PugNetworkInterface {
 	/**
 	 * send a user id and game id to server signifying that the user has joined the game
 	 * 
+	 * @param userid 
+	 * @param gameid
 	 * @return
 	 */
 	public static void joinGame( int userid, int gameid ) {
@@ -214,6 +216,39 @@ public class PugNetworkInterface {
 			e.printStackTrace();
 		}
 
+		return;
+	}
+	
+	/**
+	 * send the <code>Person</code> with updated fields to the server so the user's info can be updated
+	 * @param user
+	 * 
+	 * @return
+	 */
+	public static void editUser( Person user ) {
+		
+		HttpClient httpClient = new DefaultHttpClient();
+
+		try{
+			//pack the Game into a JSONObject
+			JSONObject jsonPerson = user.JSON();
+
+			//send the JSONObject to the server for processing using some HTTPClient call or something
+			HttpResponse response;
+			HttpPost httpPost = new HttpPost ("http://pug.myrpi.org/edituser.php");
+			StringEntity se = new StringEntity (jsonPerson.toString());
+			httpPost.setEntity(se);
+			// For debugging.
+			//System.out.print(se);
+			httpPost.setHeader("Accept", "application/json");
+			httpPost.setHeader("Content-type", "application/json");
+
+			response=httpClient.execute(httpPost);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		return;
 	}
 	

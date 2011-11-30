@@ -148,6 +148,8 @@ public class ProfileActivity extends Activity {
 				favoriteSportSpinner.setClickable(false);
 				user.setFavSport(SportType.valueOf(favoriteSportSpinner.getSelectedItem().toString().toUpperCase()));
 				
+				PugNetworkInterface.editUser(user);
+				
 				Context context = getApplicationContext();
 				CharSequence text = "Saved Changes!";
 				int duration = Toast.LENGTH_SHORT;
