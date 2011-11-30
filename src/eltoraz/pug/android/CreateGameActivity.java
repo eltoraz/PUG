@@ -195,7 +195,7 @@ public class CreateGameActivity extends Activity {
 				
 				// TODO: (Optional) Display a progress spinner while sending data, until a reply is received from server
 				// Build a game and send it to the server.
-				game = Game.buildGame(sport, descr, dtMillis, user, user, loc, maxPlayers, privacy);
+				game = Game.buildGame(sport, descr, dtMillis, user, user, loc, maxPlayers, privacy, -1);
 				PugNetworkInterface.sendGame(game);
 				
 				Context context = getApplicationContext();

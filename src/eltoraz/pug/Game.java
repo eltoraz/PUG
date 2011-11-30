@@ -46,6 +46,7 @@ public abstract class Game implements Serializable {
 	protected int maxPlayers;
 	protected String description;
 	protected SportType gameType;
+	protected int id;
 	
 	// TODO: change the e.printStackTrace()'s to do something more useful instead
 	
@@ -61,6 +62,7 @@ public abstract class Game implements Serializable {
 		owner = creator = new Person();
 		privateGame = false;
 		maxPlayers = 4;
+		id = -1;
 	}
 	
 	/* ***** GAME BUILDERS ***** */
@@ -78,7 +80,7 @@ public abstract class Game implements Serializable {
 	 * @return <code>Game</code> A subclass of <code>Game</code> of the type defined by <code>type</code>.
 	 */
 	public static Game buildGame(SportType type, String descr, long dt, Person create,
-								 Person own, Location loc, int max, boolean priv) {
+								 Person own, Location loc, int max, boolean priv, int id) {
 		Game newGame = null;
 		
 		try {
@@ -98,6 +100,7 @@ public abstract class Game implements Serializable {
 			newGame.location = loc;
 			newGame.maxPlayers = max;
 			newGame.privateGame = priv;
+			newGame.id = id;
 		}
 		catch (ClassNotFoundException e) {
 			// Thrown if the subclass doesn't exist
@@ -148,8 +151,9 @@ public abstract class Game implements Serializable {
 			Location loc = new Location(json.getJSONObject("location"));
 			int max = json.getInt("playercount");
 			boolean priv = json.getBoolean("private");
+			int id = json.getInt("id");
 			
-			newGame = buildGame(type, descr, dt, create, own, loc, max, priv);
+			newGame = buildGame(type, descr, dt, create, own, loc, max, priv, id);
 		}
 		catch (JSONException e) {
 			e.printStackTrace();
