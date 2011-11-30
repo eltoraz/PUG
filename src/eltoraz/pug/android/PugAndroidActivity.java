@@ -10,7 +10,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import eltoraz.pug.*;
@@ -20,16 +19,27 @@ import com.google.android.maps.*;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import android.content.*;
 import android.graphics.drawable.Drawable;
 
+// Logger imports
+//import android.util.Log;
+
+/**
+ * The main <code>Activity</code> for the PickUpGames app. This class displays
+ *  a map as the app's home screen, providing buttons to access other screens.
+ * @author Kevin Frame
+ * @author Bill Jameson
+ * @author Brian Orecchio
+ * @version 0.9
+ */
 public class PugAndroidActivity extends MapActivity {
+	/* ***** UI ELEMENTS ***** */
 	private MapView mapView;
 	private Person user;
-	private QuickContactBadge quickContactBadge1;
+	private QuickContactBadge profileBadge;
 	private Button createGameButton;
 	private Button searchButton;
 	private Button listGamesButton;
@@ -40,21 +50,26 @@ public class PugAndroidActivity extends MapActivity {
 	
 	private ArrayList<Game> games = new ArrayList<Game>();
 	
+	/* ***** ACTIVITY RESULT CODES ***** */
 	static final int SEARCH_REQUEST = 0;
-	static final int PROFILE_REQUEST = 0;
+	static final int PROFILE_REQUEST = 1;
 	
-	/** Called when the activity is first created. */
+	/**
+	 * The <code>onCreate</code> method is called when this <code>Activity</code> is first
+	 *  created. It captures the UI elements and sets default functionality.
+	 * @param savedInstanceState <code>Bundle</code>
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		// test user! remove when login is implemented
-		user = new Person("Robert White", 1, 22, Person.Gender.MALE, Game.SportType.BASEBALL);
+		// TODO: Remove once authentication is finished.
+		user = new Person();
 		
-		Authenticate();
+		authenticate();
 	
-		// define functionality for the buttons
+		// Capture the UI elements and define their functionality.
 		createGameButton = (Button) findViewById(R.id.createButton);
 		createGameButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -82,8 +97,8 @@ public class PugAndroidActivity extends MapActivity {
 			}
 		});
 		
-		quickContactBadge1 = (QuickContactBadge) findViewById(R.id.quickContactBadge1);
-		quickContactBadge1.setOnClickListener(new View.OnClickListener() {
+		profileBadge = (QuickContactBadge) findViewById(R.id.quickContactBadge1);
+		profileBadge.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), ProfileActivity.class);
 				intent.putExtra("user", user);
@@ -93,13 +108,13 @@ public class PugAndroidActivity extends MapActivity {
 		
 		mapView = (MapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);
-		
-		mapOverlays = mapView.getOverlays();
-		drawable = this.getResources().getDrawable(R.drawable.androidmarker);
-		itemizedOverlay = new PugBalloonItemizedOverlay(drawable,mapView);
-		
+
+		// References used for plotting Games on the map:
 		// @reference http://stackoverflow.com/questions/2349095/google-map-dialog-info-window-not-appearing-on-touch
 		// @reference http://mobiforge.com/developing/story/using-google-maps-android
+		mapOverlays = mapView.getOverlays();
+		drawable = this.getResources().getDrawable(R.drawable.androidmarker);
+		itemizedOverlay = new PugBalloonItemizedOverlay(drawable, mapView);
 	}
 
 	@Override
@@ -107,17 +122,12 @@ public class PugAndroidActivity extends MapActivity {
 		return false;
 	}
 	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		Context context = getApplicationContext();
-		CharSequence text = "Hello toast!";
-		int duration = Toast.LENGTH_SHORT;
-	
-		//Toast toast = Toast.makeText(context, text, duration);
-		//toast.show();
-	}
-	
+	/**
+	 * Callback used to retrieve objects returned from Activities.
+	 * @param requestCode <code>int</code> Unique ID for the Activity returning the result.
+	 * @param resultCode <code>int</code> Status indicator for the termination of the Activity.
+	 * @param data <code>Intent</code> Container with the returned data.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -136,6 +146,10 @@ public class PugAndroidActivity extends MapActivity {
 		}
 	}
 	
+	/**
+	 * Plot a list of Games on the map.
+	 * @param games <code>ArrayList</code> containing the Games to plot.
+	 */
 	private void plotGames(ArrayList<Game> games) {
 		for (Game g : games) {
 			GeoPoint p = g.GeoPoint();
@@ -152,64 +166,71 @@ public class PugAndroidActivity extends MapActivity {
 			mapOverlays.add(itemizedOverlay);
 		}
 	}
-	public  boolean Authenticate() {
-		TelephonyManager tm=(TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-		String deviceid=tm.getDeviceId();
-		boolean Auth=false;
-		Person p;
 	
+	/**
+	 * Authenticate the user with the server to allow them to keep a persistent profile.
+	 * @return <code>true</code> if the user exists in the server, <code>false</code> otherwise.
+	 */
+	private boolean authenticate() {
+		// TODO: Return the user once authenticated instead of a boolean.
+		TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+		String deviceId = tm.getDeviceId();
+		boolean Auth = false;
+		Person p;
+
 		String page = new String();
-		try
-		{
-		HttpClient httpclient = new DefaultHttpClient();
-		 page = "http://pug.myrpi.org/";
-		 page = page + "checkuser.php?phone="+deviceid ;
-		 
-		 HttpGet httpget= new HttpGet (page);
-		 HttpResponse response = httpclient.execute(httpget);
-		 
-		 HttpEntity entity = response.getEntity();
-         String temp = new String();
-         temp = EntityUtils.toString(entity);
-         JSONObject jsonOb=new JSONObject(temp);
-       
-         
-        Auth= jsonOb.getBoolean("exists");
-         
-        if (Auth) {
-			 	Context context=getApplicationContext();
+		
+		try {
+			HttpClient httpclient = new DefaultHttpClient();
+			page = "http://pug.myrpi.org/";
+			page = page + "checkuser.php?phone=" + deviceId;
+
+			HttpGet httpget = new HttpGet (page);
+			HttpResponse response = httpclient.execute(httpget);
+
+			HttpEntity entity = response.getEntity();
+			String temp = new String();
+			temp = EntityUtils.toString(entity);
+			JSONObject jsonOb = new JSONObject(temp);
+
+			Auth = jsonOb.getBoolean("exists");
+
+			if (Auth) {
+				Context context = getApplicationContext();
 				CharSequence text = "Welcome!";
 				int duration = Toast.LENGTH_SHORT;
 				Toast toast = Toast.makeText(context, text, duration);
 				toast.show();
-				
-				p=PugNetworkInterface.getUser(deviceid);
-				
-				Context context1=getApplicationContext();
+
+				p = PugNetworkInterface.getUser(deviceId);
+
+				Context context1 = getApplicationContext();
 				CharSequence text1 = p.getName().toString();
 				int duration1 = Toast.LENGTH_SHORT;
 				Toast toast1 = Toast.makeText(context1, text1, duration1);
 				toast1.show();
-	        }
-        
-        else {
-	        	Context context=getApplicationContext();
+			}
+
+			else {
+				Context context = getApplicationContext();
 				CharSequence text = "Authentication Failed!";
 				int duration = Toast.LENGTH_SHORT;
 				Toast toast = Toast.makeText(context, text, duration);
 				toast.show();
-	        }
-        
-		}
-		 catch(Exception e) {
-				e.printStackTrace();
-				Context context=getApplicationContext();
-				CharSequence text = "Whoops!";
-				int duration = Toast.LENGTH_SHORT;
-				Toast toast = Toast.makeText(context, text, duration);
-				toast.show();
 			}
-		 return Auth;
+
+		}
+		catch(Exception e) {
+			// TODO: More descriptive errors.
+			e.printStackTrace();
+			Context context = getApplicationContext();
+			CharSequence text = "Whoops!";
+			int duration = Toast.LENGTH_SHORT;
+			Toast toast = Toast.makeText(context, text, duration);
+			toast.show();
+		}
+		
+		return Auth;
 	}
 }
 

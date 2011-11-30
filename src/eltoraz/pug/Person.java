@@ -6,36 +6,47 @@ import org.json.JSONObject;
 import org.json.JSONException;
 
 /**
- * The <code>Person</code> class represents a person, not necessarily a user of the PUG service.
+ * The <code>Person</code> class represents a user of the PickUpGames application platform.
  * @author Bill Jameson
- * @version 0.1
+ * @version 0.9
  */
 public class Person implements Serializable {
+	/**
+	 * Simple Enumeration for gender.
+	 * @author Bill Jameson
+	 * @version 1.0
+	 */
 	public enum Gender {
 		MALE, FEMALE;
+		
+		@Override
+		public String toString() {
+			String s = super.toString();
+			return s.substring(0, 1) + s.substring(1).toLowerCase();
+		}
 	}
 	
 	/**
-	 * 
+	 * Eclipse-generated default <code>Serializable</code> ID.
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	/* ***** PERSON PROPERTIES ***** */
 	protected String name;
 	protected int id;
 	protected int age;
 	protected Gender gender;
 	protected Game.SportType favoriteSport;
 	
-	// TODO: persistent value to keep a tally of the number of Persons created for use in assigning IDs
-	
 	/* ***** CONSTRUCTORS ***** */
 	
 	/**
-	 * Create a new <code>Person</code> with default values.
+	 * Create a new <code>Person</code> with default/dummy values.
 	 */
 	public Person() {
-		name = "";
-		id = -1;
-		age = -1;
+		name = "Robert White";
+		id = 1;
+		age = 22;
 		gender = Gender.MALE;
 		favoriteSport = Game.SportType.BASEBALL;
 	}
@@ -54,18 +65,6 @@ public class Person implements Serializable {
 		age = a;
 		gender = g;
 		favoriteSport = fav;
-	}
-	
-	/**
-	 * Create a new <code>Person</code> object as a copy of the specified one
-	 * @param p <code>Person</code> object whose fields to copy in this one's creation
-	 */
-	public Person(Person p) {
-		name = new String(p.name);
-		id = p.id;
-		age = p.age;
-		gender = p.gender;
-		favoriteSport = p.favoriteSport;
 	}
 	
 	/**

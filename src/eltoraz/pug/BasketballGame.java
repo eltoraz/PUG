@@ -3,11 +3,11 @@ package eltoraz.pug;
 /**
  * The <code>BasketballGame</code> extends <code>Game</code> to add specific functionality.
  * @author Bill Jameson
- * @version 0.1
+ * @version 1.0
  */
 public class BasketballGame extends Game {
 	/**
-	 * 
+	 * Eclipse-generated default <code>Serializable</code> ID.
 	 */
 	private static final long serialVersionUID = 1L;
 

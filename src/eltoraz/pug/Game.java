@@ -13,16 +13,23 @@ import org.json.JSONException;
  * The <code>Game</code> class represents a generic game. It's meant to be extended by subclasses to
  * correspond to specific sports/games.
  * @author Bill Jameson
- * @version 0.1
+ * @version 0.9
  */
 public abstract class Game implements Serializable {
 	/**
-	 * 
+	 * Eclipse-generated default <code>Serializable</code> ID.
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Enumeration for supported types of <code>Game</code>s. These correspond to implemented subclasses
+	 *  to streamline building the correct subclass.
+	 * @author Bill Jameson
+	 * @version 1.0
+	 */
 	public enum SportType {
 		BASKETBALL, BASEBALL, FOOTBALL, SOCCER;
+		// TODO: Add type for generic games.
 		
 		@Override
 		public String toString() {
@@ -31,9 +38,7 @@ public abstract class Game implements Serializable {
 		}
 	}
 	
-	// TODO: figure out how to implement the ID's (assigned server-side, but how to propagate to app?)
-	//		 - maybe have the server return the id to the push game function
-	protected int id;
+	/* ***** GAME PROPERTIES ***** */
 	protected Location location;
 	protected GregorianCalendar dateTime;
 	protected Person owner, creator;
@@ -42,33 +47,35 @@ public abstract class Game implements Serializable {
 	protected String description;
 	protected SportType gameType;
 	
-	// TODO: add fields for additional rules, privacy options
 	// TODO: change the e.printStackTrace()'s to do something more useful instead
 	
 	/* ***** CONSTRUCTOR ***** */
 	
 	/**
 	 * Create a new <code>Game</code> with null location and owner at the current date/time.
+	 * Since the <code>Game<code> class is abstract, it will never be instantiated itself. This exists for its subclasses.
 	 */
 	public Game() {
 		location = new Location();
 		dateTime = new GregorianCalendar();
 		owner = creator = new Person();
 		privateGame = false;
-		maxPlayers = 2;
+		maxPlayers = 4;
 	}
 	
 	/* ***** GAME BUILDERS ***** */
 	
 	/**
-	 * Build a new <code>Game</code> from the components specified
+	 * Build a new <code>Game</code> from the parameters specified.
 	 * @param type <code>enum Game.SportType</code> corresponding to the <code>Game</code> type (and thus subclass)
 	 * @param descr <code>String</code> representing the <code>Game</code>'s description
 	 * @param dt <code>long</code> encoding the number of milliseconds since the Epoch, uniquely identifying a date and time
 	 * @param create <code>Person</code> who initially created the <code>Game</code>
 	 * @param own <code>Person</code> who is the current owner of the <code>Game</code>
+	 * @param loc <code>Location</code> at which the <code>Game</code> is occurring
 	 * @param max <code>int</code> equal to the maximum allowed number of players for the <code>Game</code>
 	 * @param priv <code>boolean</code> describing the privacy status of the <code>Game</code>
+	 * @return <code>Game</code> A subclass of <code>Game</code> of the type defined by <code>type</code>.
 	 */
 	public static Game buildGame(SportType type, String descr, long dt, Person create,
 								 Person own, Location loc, int max, boolean priv) {
@@ -83,7 +90,6 @@ public abstract class Game implements Serializable {
 			newGame = (Game) newGameType;
 			
 			// set the properties of the game
-			newGame.gameType = type;
 			newGame.description = descr;
 			newGame.dateTime = new GregorianCalendar();
 			newGame.dateTime.setTimeInMillis(dt);
@@ -94,27 +100,30 @@ public abstract class Game implements Serializable {
 			newGame.privateGame = priv;
 		}
 		catch (ClassNotFoundException e) {
-			// thrown if the subclass doesn't exist
+			// Thrown if the subclass doesn't exist
+			// This will only happen if the members of the GameType enum don't exactly match the
+			//  defined subclasses.
 			e.printStackTrace();
 		}
 		catch (NoSuchMethodException e) {
-			// in this case, thrown if the target subclass doesn't define its default constructor
+			// In this case, thrown if the target subclass doesn't define its default constructor
 			e.printStackTrace();
 		}
 		catch (InvocationTargetException e) {
-			// thrown if the target constructor throws an exception
-			// note: none of the Game subclass constructors throw an exception
+			// Thrown if the target constructor throws an exception
+			// Note: none of the Game subclass constructors throw an exception, so this is only
+			//  here to keep the compiler happy.
 			e.printStackTrace();
 		}
 		catch (IllegalAccessException e) {
-			// thrown when the target constructor is inaccessible
-			// this should theoretically never happen here
+			// Thrown when the target constructor is inaccessible
+			// This should theoretically never happen here.
 			e.printStackTrace();
 		}
 		catch (InstantiationException e) {
-			// thrown if trying to instantiate an abstract class
-			// the naming convention above is based on the GameType enum, all of which will correspond
-			//    to subclasses of Game, so this exception will never be thrown
+			// Thrown if trying to instantiate an abstract class
+			// The naming convention used is based on the GameType enum, all of which will correspond
+			//    to non-abstract subclasses of Game.
 			e.printStackTrace();
 		}
 		
@@ -130,7 +139,7 @@ public abstract class Game implements Serializable {
 		Game newGame = null;
 		
 		try {
-			// get the data about the game from the JSON
+			// Parse the JSON for the Game fields.
 			SportType type = SportType.valueOf(json.getString("sport").toUpperCase());
 			String descr = json.getString("descr");
 			long dt = json.getLong("datetime");
@@ -225,5 +234,4 @@ public abstract class Game implements Serializable {
 	public GregorianCalendar getDate() {
 		return dateTime;
 	}
-	
 }

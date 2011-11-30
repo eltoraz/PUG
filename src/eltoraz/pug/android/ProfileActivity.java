@@ -1,32 +1,48 @@
 package eltoraz.pug.android;
 
-import eltoraz.pug.Game;
+import eltoraz.pug.Game.SportType;
 import eltoraz.pug.Person;
+import eltoraz.pug.Person.Gender;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
+// Logger imports
+//import android.util.Log;
+
+/**
+ * This <code>Activity</code> allows the user to view and modify his/her
+ *  profile information.
+ * @author Kevin Frame
+ * @version 0.9
+ */
 public class ProfileActivity extends Activity {
-	private static final String TAG= ProfileActivity.class.getSimpleName();
+	// For debugging.
+	//private static final String TAG= ProfileActivity.class.getSimpleName();
 	
 	private Person user;
 	
-	private EditText editTextName;
-	private Button buttonEdit;
-	private Button buttonSaveChanges;
-	private EditText editTextAge;
-	private EditText editTextGender;
-	private EditText editTextFavoriteSport;
+	/* ***** UI ELEMENTS ***** */
+	// TODO: Make gender and favorite sport spinners
+	private EditText nameEditText;
+	private EditText ageEditText;
+	private Spinner genderSpinner;
+	private Spinner favoriteSportSpinner;
+	private Button editButton;
+	private Button saveButton;
 	
 	private String name;
 	private String age;
-	private String gender;
-	private String favoriteSport;
 	
+	/**
+	 * The <code>onCreate</code> method is called when this <code>Activity</code> is first
+	 *  created. It captures the UI elements and sets default functionality.
+	 * @param savedInstanceState <code>Bundle</code>
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,91 +51,102 @@ public class ProfileActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null)
 			user = (Person) extras.get("user");
-		else					// This should theoretically never be called
-			user = new Person("Robert White", 1, 22, Person.Gender.MALE, Game.SportType.BASEBALL);
+		else {
+			// This else block is here to satisfy the compiler, since the intent will always have the user
+			user = new Person();
+		}
 		
 		name = user.getName();
 		age = String.valueOf(user.getAge());
-		gender = user.getGender().toString();
-		favoriteSport = user.getFavSport().toString();
 		
-		buttonEdit=(Button) findViewById(R.id.buttonEdit);
-		buttonSaveChanges=(Button) findViewById(R.id.buttonSaveChanges);
-		editTextName=(EditText) findViewById(R.id.editTextName);
-		editTextAge=(EditText) findViewById(R.id.editTextAge);
-		editTextGender=(EditText) findViewById(R.id.editTextGender);
-		editTextFavoriteSport=(EditText) findViewById(R.id.editTextFavoriteSport);
+		/* ***** CAPTURE UI ELEMENTS ***** */
+		nameEditText = (EditText) findViewById(R.id.editTextName);
+		ageEditText = (EditText) findViewById(R.id.editTextAge);
+		genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
+		favoriteSportSpinner = (Spinner) findViewById(R.id.favoriteSportSpinner);
+		editButton = (Button) findViewById(R.id.buttonEdit);
+		saveButton = (Button) findViewById(R.id.buttonSaveChanges);
 		
-		editTextName.setText(name);
-		editTextName.setFocusable(false);
-		editTextName.setFocusableInTouchMode(false);
-		editTextName.setClickable(false);
+		nameEditText.setText(name);
+		nameEditText.setFocusable(false);
+		nameEditText.setFocusableInTouchMode(false);
+		nameEditText.setClickable(false);
 		
-		editTextAge.setText(age);
-		editTextAge.setFocusable(false);
-		editTextAge.setFocusableInTouchMode(false);
-		editTextAge.setClickable(false);
+		ageEditText.setText(age);
+		ageEditText.setFocusable(false);
+		ageEditText.setFocusableInTouchMode(false);
+		ageEditText.setClickable(false);
 		
-		editTextGender.setText(gender);
-		editTextGender.setFocusable(false);
-		editTextGender.setFocusableInTouchMode(false);
-		editTextGender.setClickable(false);
+		ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this, R.array.gender_array,
+				 android.R.layout.simple_spinner_item);
+		genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		genderSpinner.setAdapter(genderAdapter);
+		genderSpinner.setSelection(genderAdapter.getPosition(user.getGender().toString()));
+		genderSpinner.setFocusable(false);
+		genderSpinner.setFocusableInTouchMode(false);
+		genderSpinner.setClickable(false);
 		
-		editTextFavoriteSport.setText(favoriteSport);
-		editTextFavoriteSport.setFocusable(false);
-		editTextFavoriteSport.setFocusableInTouchMode(false);
-		editTextFavoriteSport.setClickable(false);
+		ArrayAdapter<CharSequence> favoriteSportAdapter = ArrayAdapter.createFromResource(this, R.array.sports_array,
+				 android.R.layout.simple_spinner_item);
+		favoriteSportAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		favoriteSportSpinner.setAdapter(favoriteSportAdapter);
+		favoriteSportSpinner.setSelection(favoriteSportAdapter.getPosition(user.getFavSport().toString()));
+		favoriteSportSpinner.setFocusable(false);
+		favoriteSportSpinner.setFocusableInTouchMode(false);
+		favoriteSportSpinner.setClickable(false);
 		
-		buttonEdit.setOnClickListener(new View.OnClickListener() {
+		editButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				editTextName.setClickable(true);
-				editTextName.setFocusable(true);
-				editTextName.setFocusableInTouchMode(true);
+				nameEditText.setClickable(true);
+				nameEditText.setFocusable(true);
+				nameEditText.setFocusableInTouchMode(true);
 				
-				editTextAge.setFocusable(true);
-				editTextAge.setFocusableInTouchMode(true);
-				editTextAge.setClickable(true);
+				ageEditText.setFocusable(true);
+				ageEditText.setFocusableInTouchMode(true);
+				ageEditText.setClickable(true);
 				
-				editTextGender.setFocusable(true);
-				editTextGender.setFocusableInTouchMode(true);
-				editTextGender.setClickable(true);
+				genderSpinner.setFocusable(true);
+				genderSpinner.setFocusableInTouchMode(true);
+				genderSpinner.setClickable(true);
 				
-				editTextFavoriteSport.setFocusable(true);
-				editTextFavoriteSport.setFocusableInTouchMode(true);
-				editTextFavoriteSport.setClickable(true);
+				favoriteSportSpinner.setFocusable(true);
+				favoriteSportSpinner.setFocusableInTouchMode(true);
+				favoriteSportSpinner.setClickable(true);
 				
+				/* For debugging.
 				Context context = getApplicationContext();
 				CharSequence text = "Edit Mode!";
 				int duration = Toast.LENGTH_SHORT;
 
 				Toast toast = Toast.makeText(context, text, duration);
 				toast.show();
+				*/
 			}
 		});
 		
-		buttonSaveChanges.setOnClickListener(new View.OnClickListener() {
+		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				editTextName.setFocusable(false);
-				editTextName.setFocusableInTouchMode(false);
-				editTextName.setClickable(false);
-				user.setName(editTextName.getText().toString());
+				nameEditText.setFocusable(false);
+				nameEditText.setFocusableInTouchMode(false);
+				nameEditText.setClickable(false);
+				user.setName(nameEditText.getText().toString());
 				
-				editTextAge.setFocusable(false);
-				editTextAge.setFocusableInTouchMode(false);
-				editTextAge.setClickable(false);
-				user.setAge(Integer.parseInt(editTextAge.getText().toString()));
+				ageEditText.setFocusable(false);
+				ageEditText.setFocusableInTouchMode(false);
+				ageEditText.setClickable(false);
+				user.setAge(Integer.parseInt(ageEditText.getText().toString()));
 				
-				editTextGender.setFocusable(false);
-				editTextGender.setFocusableInTouchMode(false);
-				editTextGender.setClickable(false);
-				user.setGender(gender);
+				genderSpinner.setFocusable(false);
+				genderSpinner.setFocusableInTouchMode(false);
+				genderSpinner.setClickable(false);
+				user.setGender(Gender.valueOf(genderSpinner.getSelectedItem().toString().toUpperCase()));
 				
-				editTextFavoriteSport.setFocusable(false);
-				editTextFavoriteSport.setFocusableInTouchMode(false);
-				editTextFavoriteSport.setClickable(false);
-				user.setFavSport(favoriteSport);
+				favoriteSportSpinner.setFocusable(false);
+				favoriteSportSpinner.setFocusableInTouchMode(false);
+				favoriteSportSpinner.setClickable(false);
+				user.setFavSport(SportType.valueOf(favoriteSportSpinner.getSelectedItem().toString().toUpperCase()));
 				
 				Context context = getApplicationContext();
 				CharSequence text = "Saved Changes!";
@@ -136,7 +163,8 @@ public class ProfileActivity extends Activity {
 			}
 		});
 		
-		/*Log.d(TAG, "1");
+		/* For debugging.
+		Log.d(TAG, "1");
 		GregorianCalendar A= new GregorianCalendar();
 		Log.d(TAG, "2");
 		Location l= new Location(74,76);
@@ -150,8 +178,5 @@ public class ProfileActivity extends Activity {
 		ArrayList<Game> ListOfGames=PugNetworkInterface.getGames();
 		Log.d(TAG, "6");
 		*/
-
-		
-
 	}	
 }

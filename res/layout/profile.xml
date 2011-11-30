@@ -73,37 +73,37 @@
                 android:layout_below="@+id/editTextAge"
                 android:text="@string/gender" />
 
-            <EditText
-                android:id="@+id/editTextGender"
+            <Spinner
+                android:id="@+id/genderSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/genderTextView" >
-            </EditText>
+            </Spinner>
 
             <TextView
                 android:id="@+id/favSportTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@+id/editTextGender"
+                android:layout_below="@+id/genderSpinner"
                 android:text="@string/favSport" />
 
-            <EditText
-                android:id="@+id/editTextFavoriteSport"
+            <Spinner
+                android:id="@+id/favoriteSportSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/favSportTextView"
                 android:inputType="textPersonName" >
-            </EditText>
+            </Spinner>
 
             <Button
                 android:id="@+id/buttonEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editTextFavoriteSport"
                 android:layout_alignParentLeft="true"
+                android:layout_below="@+id/favoriteSportSpinner"
                 android:text="Edit Profile" >
             </Button>
 

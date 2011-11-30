@@ -11,16 +11,28 @@ import org.json.JSONException;
  * The <code>Location</code> class represents a physical location. It is defined by its latitude and
  * longitude. This class exists to avoid having dependencies on the Android SDK in the server component of PUG.
  * @author Bill Jameson
- * @version 0.1
+ * @version 1.0
  */
 public class Location implements Serializable {
 	/**
-	 * 
+	 * Eclipse-generated default <code>Serializable</code> ID.
 	 */
 	private static final long serialVersionUID = 1L;
-	// latitude and longitude are specified in microdegrees (degrees * 1E6) to match Google Maps API 
+	
+	/**
+	 *  Latitude is specified in microdegrees (degrees * 1E6) for easier transition to
+	 *   the <code>GeoPoint</code> class provided by the Google Maps API.
+	 */
 	protected int latitude;
+	/**
+	 *  Longitude is specified in microdegrees (degrees * 1E6) for easier transition to
+	 *   the <code>GeoPoint</code> class provided by the Google Maps API.
+	 */
 	protected int longitude;
+	/**
+	 * User-entered or reverse-Geocoder-provided, human-readable representation of the geographic location
+	 *  specified by the <code>Location</code>'s latitude and longitude.
+	 */
 	protected String address;
 	
 	/* ***** CONSTRUCTORS ***** */
@@ -35,38 +47,15 @@ public class Location implements Serializable {
 	}
 	
 	/**
-	 * Create a new <code>Location</code> object with the specified latitude and longitude
-	 * @param lat <code>int</code>, -80 <= lat <= 80 to correspond to GeoPoint Google Maps API class
-	 * @param lon <code>int</code>, -180 <= lon <= 180 to correspond to GeoPoint Google Maps API class
-	 */
-	public Location(int lat, int lon) {
-		// TODO: error checking to ensure values are in range (maybe better to do this at input time)
-		latitude = lat;
-		longitude = lon;
-		address = "";
-	}
-	
-	/**
 	 * Create a new <code>Location</code> object with the specified latitude, longitude, and address description
 	 * @param lat <code>int</code>, -80 <= lat <= 80 to correspond to GeoPoint Google Maps API class
 	 * @param lon <code>int</code>, -180 <= lon <= 180 to correspond to GeoPoint Google Maps API class
 	 * @param s <code>String</code> providing a description of the address
 	 */
 	public Location(int lat, int lon, String s) {
-		// TODO: error checking to ensure values are in range (maybe better to do this at input time)
 		latitude = lat;
 		longitude = lon;
 		address = s;
-	}
-	
-	/**
-	 * Create a new <code>Location</code> object as a copy of the specified one
-	 * @param loc <code>Location</code> object to be cloned to create this one
-	 */
-	public Location(Location loc) {
-		latitude = loc.latitude;
-		longitude = loc.longitude;
-		address = loc.address;
 	}
 	
 	/**
@@ -94,7 +83,7 @@ public class Location implements Serializable {
 	}
 	
 	/**
-	 * Return a JSON object representation of this <code>Location</code>
+	 * Return a JSON representation of this <code>Location</code>.
 	 * @author Brian Orecchio
 	 * @return a <code>JSONObject</code> encapsulating this location
 	 */
@@ -116,7 +105,7 @@ public class Location implements Serializable {
 	}
 	
 	/**
-	 * Gets the <code>String</code> that is the address/name of the Location
+	 * Get the human-readable form of this <code>Location</code>.
 	 * @return a <code>String</code> 
 	 */
 	public String getAddress() {

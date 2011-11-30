@@ -21,18 +21,16 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.*;
 
-// TODO: Javadoc comments
-
 /**
  * An <code>Activity</code> for game creation based on user specifications
  * @author Bill Jameson
- * @version 0.1
+ * @version 0.9
  */
 public class CreateGameActivity extends Activity {
 	private Person user;
 	private Game game;
 	
-	// UI ELEMENTS
+	/* ***** UI ELEMENTS ***** */
 	private Button createGameButton;
 	private Spinner sportSelectSpinner;
 	private EditText locationEditText;
@@ -72,6 +70,11 @@ public class CreateGameActivity extends Activity {
 				}
 			};
 	
+	/**
+	 * The <code>onCreate</code> method is called when this <code>Activity</code> is first
+	 *  created. It captures the UI elements and sets default functionality.
+	 * @param savedInstanceState <code>Bundle</code>
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -80,8 +83,10 @@ public class CreateGameActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null)
 			user = (Person) extras.get("user");
-		else					// This should theoretically never be called
-			user = new Person("Robert White", 1, 22, Person.Gender.MALE, Game.SportType.BASEBALL);
+		else {
+			// This else block is here to satisfy the compiler, since the intent will always have the user
+			user = new Person();
+		}
 		
 		/* ***** CAPTURE VIEW ELEMENTS ***** */
 		createGameButton = (Button) findViewById(R.id.createButton);
@@ -107,7 +112,6 @@ public class CreateGameActivity extends Activity {
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
 					(keyCode == KeyEvent.KEYCODE_ENTER)) {
-					// TODO: once findLocationButton is implemented, have Enter on this text field be equiv. to pressing it
 					return true;
 				}
 				return false;
@@ -139,8 +143,8 @@ public class CreateGameActivity extends Activity {
 		});
 		
 		// MAX PLAYERS TEXT FIELD
-		maxPlayersEditText.setText("2");
-		// maybe some input validation here
+		// TODO: input validation
+		maxPlayersEditText.setText("4");
 		
 		// CREATE GAME BUTTON
 		createGameButton.setOnClickListener(new View.OnClickListener() {
@@ -158,9 +162,11 @@ public class CreateGameActivity extends Activity {
 				long dtMillis = dt.getTimeInMillis();
 				String descr = descriptionEditText.getText().toString();
 				
-				// Note: There's a known issue with Android emulator > API level 8 where this will always throw an
-				//   IOException. It should work on an actual device.
-				// @reference http://code.google.com/p/android/issues/detail?id=8816
+				/* Note: There's a known issue with Android emulator > API level 8 where this will always throw an
+				 *   IOException. Tested and working on an actual device.
+				 * @reference http://code.google.com/p/android/issues/detail?id=8816
+				 * TODO: use Mock Location Objects when the app detects that it's running on the emulator 
+				 */
 				try {
 					locations = geocoder.getFromLocationName(addr, 1);
 				}
@@ -172,12 +178,14 @@ public class CreateGameActivity extends Activity {
 					e.printStackTrace();
 				}
 				
+				// Use the first address returned by the geocoder.
 				if (locations != null && locations.size()>0) {
 					int lat = (int) (locations.get(0).getLatitude() * 1000000);
 					int lon = (int) (locations.get(0).getLongitude() * 1000000);
 					loc = new Location(lat, lon, addr);
 				}
 				else {
+					// TODO: Make sure this is the only cause of a 0-length/null return from the geocoder
 					Context context = getApplicationContext();
 					CharSequence msg = "Invalid address, try another one.";
 					Toast.makeText(context, msg, Toast.LENGTH_SHORT);
@@ -185,7 +193,8 @@ public class CreateGameActivity extends Activity {
 					return;
 				}
 				
-				// TODO: send game to server, implement ProgressDialog while transferring data, quit activity
+				// TODO: (Optional) Display a progress spinner while sending data, until a reply is received from server
+				// Build a game and send it to the server.
 				game = Game.buildGame(sport, descr, dtMillis, user, user, loc, maxPlayers, privacy);
 				PugNetworkInterface.sendGame(game);
 				
@@ -199,6 +208,10 @@ public class CreateGameActivity extends Activity {
 		});
 	}
 	
+	/**
+	 * Dialog creation callback. The <code>int</code> passed in specifies which dialog to display.
+	 * @param id <code>int</code> The unique identifier of the dialog to be drawn.
+	 */
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		Dialog dialog;
@@ -215,6 +228,9 @@ public class CreateGameActivity extends Activity {
 		return dialog;
 	}
 	
+	/**
+	 * Update the date shown on the button with the date selected by the user.
+	 */
 	private void updateDate() {
 		CharSequence text = new StringBuilder().append(mMonth+1).append("/")
 											   .append(mDay).append("/")
@@ -222,13 +238,23 @@ public class CreateGameActivity extends Activity {
 		datePickButton.setText(text);
 	}
 	
-	// time displayed in 24-hour format, maybe have an option for AM/PM display later
+	/**
+	 * Update the time shown on the button with the time selected by the user.
+	 * Time is displayed in 24-hour format.
+	 */
 	private void updateTime() {
+		// TODO: (Optional) Have an option for AM/PM display later.
 		CharSequence text = new StringBuilder().append(pad(mHour)).append(":")
 											   .append(mMinute);
 		timePickButton.setText(text);
 	}
 	
+	/**
+	 * Pad the <code>int</code> with a 0 for consistent display of numerals in
+	 *  the time.
+	 * @param c <code>int</code> Hour or minute value to pad.
+	 * @return <code>String</code> The padded hour or minute.
+	 */
 	private static String pad(int c) {
 		if (c >= 10)
 			return String.valueOf(c);

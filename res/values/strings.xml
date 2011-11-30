@@ -29,4 +29,8 @@
     <string name="age">Age</string>
     <string name="gender">Gender</string>
     <string name="favSport">Favorite Sport</string>
+    <string-array name="gender_array">
+        <item >Male</item>
+        <item >Female</item>
+    </string-array>
 </resources>

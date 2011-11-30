@@ -5,7 +5,6 @@ import eltoraz.pug.*;
 import java.lang.String;
 import java.util.ArrayList;
 
-
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -17,259 +16,182 @@ import org.apache.http.HttpResponse;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONException;
-
-import android.content.Context;
-import android.telephony.TelephonyManager;
-
-
 
 /**
- * The class <code>PugNetworkInterface</code> provides functions to get data from the database
+ * The <code>PugNetworkInterface</code> class provides methods to interact with the server.
  * @author Brian Orecchio
- * @version 0.1
+ * @version 0.8
  */
 public class PugNetworkInterface {
-	
-	//NOTE: These getGames functions have a bunch of duplicated code, in the future I will add a way to do this filtering in a single get games 
-	//function by just passing in a map from the filter key to the filter parameter
-	
+	// NOTE: These getGames functions have a bunch of duplicated code, in the future I will add a way to do this filtering in a single get games 
+	//  function by just passing in a map from the filter key to the filter parameter.
+
 	/**
-	 * The function <code>getGames</code> gets all the games in the database and returns as <code>ArrayList<Game></code>
-	 * @author Brian Orecchio
-	 * @version 0.1
+	 * Get all the Games from the server.
+	 * @return <code>ArrayList</code> containing all the Games the server has in its database
 	 */
 	public static ArrayList<Game> getGames() {
-		ArrayList<Game> Games  = new ArrayList<Game>();
-		
-		try {
-			 String page = new String();
-				
-			 page = "http://pug.myrpi.org/";
-			 page = page + "getfilter.php";
-			
-			 Games = getGamesFromServer(page);
-	            
-		 }
-		 catch(Exception e) {
-			 e.printStackTrace();
-		 }
-		 
-		return Games;
-		
+		ArrayList<Game> games = new ArrayList<Game>();
+
+		String page = "http://pug.myrpi.org/";
+		page += "getfilter.php";
+
+		games = getGamesFromServer(page);
+		return games;
 	}
-	
+
 	/**
-	 * The function <code>getGames(Integer lat, Integer lon)</code> gets all the games around a location in a 5 mile radius and returns as <code>ArrayList<Game></code>
-	 * @author Brian Orecchio
-	 * @version 0.1
+	 * Get all Games within a five-mile radius of the specified location from the server.
+	 * @param lat <code>int</code> Latitude of the game (in microdegrees)
+	 * @param lon <code>int</code> Longitude of the game (in microdegrees)
+	 * @return <code>ArrayList</code> containing the requested Games
 	 */
 	public static ArrayList<Game> getGames(Integer lat, Integer lon) {
-		ArrayList<Game> Games  = new ArrayList<Game>();
-		
-		try{
-			    
-			String page = new String();
-			
-			page = "http://pug.myrpi.org/";
-			page = page + "getfilter.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&dist=5";
-			
-			Games = getGamesFromServer(page);
-            
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		return Games;
+		return getGames(lat, lon, 5);
 	}
-	
+
 	/**
-	 * The function <code>getGames(Integer lat, Integer lon, int dist)</code> gets all the games around a location in a specified radius and returns as <code>ArrayList<Game></code>
-	 * @author Brian Orecchio
-	 * @version 0.1
+	 * Get all Games in a location within a specified radius.
+	 * @param lat <code>int</code> Latitude of the game (in microdegrees)
+	 * @param lon <code>int</code> Longitude of the game (in microdegrees)
+	 * @param dist <code>int</code> Maximum distance from the point specified to search (in miles)
+	 * @return <code>ArrayList</code> containing the requested Games
 	 */
 	public static ArrayList<Game> getGames(Integer lat, Integer lon, Integer dist) {
-		ArrayList<Game> Games  = new ArrayList<Game>();
-		
-		try{
-			    
-			String page = new String();
-			
-			page = "http://pug.myrpi.org/";
-			page = page + "getfilter.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&dist=" + dist.toString();
-			
-			Games = getGamesFromServer(page);
-            
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		return Games;
+		ArrayList<Game> games = new ArrayList<Game>();
+
+		String page = "http://pug.myrpi.org/";
+		page += "getfilter.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&dist=" + dist.toString();
+
+		games = getGamesFromServer(page);
+		return games;
 	}
-	
+
 	/**
-	 * The function <code>getGames(String sport)</code> gets all the games around a location of a certain sport and returns as <code>ArrayList<Game></code>
-	 * @author Brian Orecchio
-	 * @version 0.1
+	 * Get all the Games of the specified sport at the specified location.
+	 * @param lat <code>int</code> Latitude of the game (in microdegrees)
+	 * @param lon <code>int</code> Longitude of the game (in microdegrees)
+	 * @param sport <code>String</code> Sport to filter results by
+	 * @return <code>ArrayList</code> containing the requested Games
 	 */
 	public static ArrayList<Game> getGames(Integer lat, Integer lon, String sport) {
 		ArrayList<Game> Games  = new ArrayList<Game>();
-		
-		try{
-			    
-			String page = new String();
-			
-			page = "http://pug.myrpi.org/";
-			page = page + "getfilter.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&sport=" + sport;
-			
-			Games = getGamesFromServer(page);
-            
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
+
+		String page = "http://pug.myrpi.org/";
+		page = page + "getfilter.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&sport=" + sport;
+
+		Games = getGamesFromServer(page);
 		return Games;
 	}
-	
-	
-	
+
 	/**
-	 * The function <code>retrieveGamesFromServer</code> carries out the http request to get all the games in the database from the filter php page with the specified arguments in 'page' and returns as <code>ArrayList<Game></code>
-	 * @author Brian Orecchio
-	 * @version 0.1
+	 * Carry out the HTTP request to get all the Games in the server from the filter PHP page with
+	 *  the specified parameters
+	 * @param page <code>String</code> URL of the PHP filter page, with all arguments specified
+	 * @return <code>ArrayList</code> containing the requested Games
 	 */
 	private static ArrayList<Game> getGamesFromServer(String page) {
-		HttpClient httpclient = new DefaultHttpClient();
-		
-		ArrayList<Game> Games  = new ArrayList<Game>();
+		HttpClient httpClient = new DefaultHttpClient();
+		ArrayList<Game> Games = new ArrayList<Game>();
 
-		try{			
-			
-            HttpGet httpget= new HttpGet (page);
-            HttpResponse response = httpclient.execute(httpget);
-            HttpEntity entity = response.getEntity();
-            String temp = new String();
-            temp = EntityUtils.toString(entity);
-            JSONArray jsonArray=new JSONArray(temp);
-            
-            Games = parseGameJSONArray(jsonArray);	
+		try {			
+			HttpGet httpGet = new HttpGet (page);
+			HttpResponse response = httpClient.execute(httpGet);
+			HttpEntity entity = response.getEntity();
+			JSONArray jsonArray = new JSONArray(EntityUtils.toString(entity));
+
+			Games = parseGameJSONArray(jsonArray);	
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 		return Games;
 	}
-	
+
 	/**
-	 * The function <code>parseGameJSONArray</code> parses the JSON array and returns the Games as an <code>ArrayList<Game></code>
-	 * @author Brian Orecchio
-	 * @version 0.1
+	 * Parse the given JSON array for the contained Games
+	 * @param jsonArray <code>JSONArray</code> containing containing the Games
+	 * @return <code>ArrayList</code> containing the decoded Games
 	 */
-	private static ArrayList<Game> parseGameJSONArray( JSONArray jsonArray ) {
+	private static ArrayList<Game> parseGameJSONArray(JSONArray jsonArray) {
 		Game game;
-		ArrayList<Game> Games  = new ArrayList<Game>();
-		try{
+		ArrayList<Game> games = null;
 		
-			for(int i=0; i<jsonArray.length(); i++)
-			{
-	         	//Integer j = i;
-	         	//String idstring = new String(j.toString());
-	         	//get the json referred to by id i
-	         	JSONObject gameJson = jsonArray.getJSONObject(i);
-	         	
-	         	//unpack the game json into a Game
-	         	//game = jsonInterface.unpackGame(gameJson);
-	         	
-	         	game = Game.buildGame(gameJson);
-	         	
-	         	//Add the game to the ArrayList
-	         	Games.add(game);
-         	
+		try {
+			for(int i = 0; i < jsonArray.length(); i++) {
+				games = new ArrayList<Game>();
+				
+				// Get the JSON object at index i
+				JSONObject gameJson = jsonArray.getJSONObject(i);
+				game = Game.buildGame(gameJson);
+
+				// Add the game to the list
+				games.add(game);
 			}
-		 
-			return Games;
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		return null;
+
+		return games;
 	}
-	
+
 	/**
-	 * The function <code>sendGame</code> takes a <code>Game</code> object as a parameter and sends it to the database
-	 * @author Brian Orecchio
-	 * @version 0.1
+	 * Send the specified <code>Game</code> object to the server to add to the database
+	 * @param game <code>Game</code> to send to the server
+	 * @return <code>int</code> status of the request
 	 */
 	public static int sendGame(Game game) {
-		HttpClient httpclient = new DefaultHttpClient();
-		
+		HttpClient httpClient = new DefaultHttpClient();
+
 		try{
 			//pack the Game into a JSONObject
-			//JSONObject jsonGame = jsonInterface.packGame(game);  //this will change to what is below
 			JSONObject jsonGame = game.JSON();
-			
-			//send the JSONObject to the server for processing using some HTTPClient call or something
-            HttpResponse response;
-            HttpPost httppost= new HttpPost ("http://pug.myrpi.org/creategame.php");
-            StringEntity se=new StringEntity (jsonGame.toString());
-            httppost.setEntity(se);
-            System.out.print(se);
-            httppost.setHeader("Accept", "application/json");
-            httppost.setHeader("Content-type", "application/json");
 
-            response=httpclient.execute(httppost);
-            
-			
+			//send the JSONObject to the server for processing using some HTTPClient call or something
+			HttpResponse response;
+			HttpPost httpPost = new HttpPost ("http://pug.myrpi.org/creategame.php");
+			StringEntity se = new StringEntity (jsonGame.toString());
+			httpPost.setEntity(se);
+			// For debugging.
+			//System.out.print(se);
+			httpPost.setHeader("Accept", "application/json");
+			httpPost.setHeader("Content-type", "application/json");
+
+			response=httpClient.execute(httpPost);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 		return 0;
 	}
 
-
-
-
 	/**
-	 * The function <code>getProfile</code> takes a <code>String/code> object which is the unique phone id string that is generated via the TelephoneyManager class and it returns
-	 * a Person class which holds your profile data
-	 * @author Brian Orecchio
-	 * @version 0.1
+	 * Get the <code>Person</code> corresponding to the phone's unique phone ID string.
+	 * @param phoneId <code>String</code> The Android device's unique phone ID
+	 * @return <code>Person</code> corresponding to the ID, if in the database
 	 */
 	public static Person getUser(String phoneId) {
-		HttpClient httpclient = new DefaultHttpClient();
+		HttpClient httpClient = new DefaultHttpClient();
+		Person p = null;
 
-		try{
-			
-			//put this code in the activity where you want to return your user information
-			/*TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-			String phoneId = telephonyManager.getDeviceId();
-			Person p = PugNetworkInterface.getUser(phoneId);
-			*/
-			
+		try {
 			String page = "http://pug.myrpi.org/getuser.php";
-			page = page + "?phone=" + phoneId;
-			
-			HttpGet httpget= new HttpGet (page);
-			HttpResponse response = httpclient.execute(httpget);
-			HttpEntity entity = response.getEntity();
-			String temp = new String();
-			temp = EntityUtils.toString(entity);
-			JSONObject jsonObject=new JSONObject(temp);
+			page += "?phone=" + phoneId;
 
-			Person p = new Person(jsonObject);
-			
-            
-			return p;
-			
+			HttpGet httpGet= new HttpGet (page);
+			HttpResponse response = httpClient.execute(httpGet);
+			HttpEntity entity = response.getEntity();
+			JSONObject jsonObject=new JSONObject(EntityUtils.toString(entity));
+
+			p = new Person(jsonObject);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		return null;
+
+		return p;
 	}
 
 

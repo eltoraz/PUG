@@ -1,21 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mainlayout"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <com.google.android.maps.MapView android:id="@+id/mapview"
-                                     android:layout_width="match_parent"
-                                     android:layout_height="match_parent"
-                                     android:clickable="true"
-                                     android:apiKey="YOUR KEY HERE" />
-    <RelativeLayout android:layout_height="wrap_content" android:id="@+id/relativeLayout1" android:layout_width="match_parent" android:layout_alignParentTop="true">
-        <QuickContactBadge android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/quickContactBadge1" android:layout_alignParentLeft="false" android:layout_alignParentRight="true" android:layout_alignParentBottom="false" android:layout_alignParentTop="true" android:src="@drawable/icon"></QuickContactBadge>
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <com.google.android.maps.MapView
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:apiKey="YOUR KEY HERE"
+        android:clickable="true" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" >
+
+        <QuickContactBadge
+            android:id="@+id/quickContactBadge1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/icon" >
+        </QuickContactBadge>
     </RelativeLayout>
-    <RelativeLayout android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/relativeLayout2" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true" android:layout_alignParentRight="true">
-        <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginBottom="78dp" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:text="Search" android:id="@+id/searchButton"></Button>
-        <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_centerHorizontal="true" android:layout_alignParentBottom="true" android:layout_alignParentTop="false" android:text="Create" android:id="@+id/createButton" android:layout_alignParentRight="true"></Button>
-        <Button android:id="@+id/listGamesButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="List" android:layout_alignParentLeft="true" android:layout_alignParentTop="true"></Button>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" >
+
+        <Button
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="78dp"
+            android:text="Search" >
+        </Button>
+
+        <Button
+            android:id="@+id/createButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="false"
+            android:layout_centerHorizontal="true"
+            android:text="Create" >
+        </Button>
+
+        <Button
+            android:id="@+id/listGamesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="List" >
+        </Button>
     </RelativeLayout>
 
 </RelativeLayout>

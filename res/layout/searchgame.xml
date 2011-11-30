@@ -9,30 +9,30 @@
         android:id="@+id/locationTextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:text="@string/location" >
     </TextView>
-    
+
     <EditText
         android:id="@+id/locationEditText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/locationTextView2"
-        android:layout_alignParentLeft="true" >
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/locationTextView2" >
 
         <requestFocus >
         </requestFocus>
     </EditText>
-    
-    <TextView 
+
+    <TextView
         android:id="@+id/radiusTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/locationEditText2"
         android:layout_alignParentLeft="true"
-        android:text="@string/radius"/>
-    
+        android:layout_below="@+id/locationEditText2"
+        android:text="@string/radius" />
+
     <EditText
         android:id="@+id/radiusEditText"
         android:layout_width="match_parent"
@@ -45,8 +45,8 @@
         android:id="@+id/searchSubmitButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:text="@string/search" >
     </Button>
 
