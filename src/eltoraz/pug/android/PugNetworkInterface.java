@@ -251,5 +251,21 @@ public class PugNetworkInterface {
 		return;
 	}
 	
+	/**
+	 * This function returns an <code>ArrayList<Game></code> that holds the games that the user has joined
+	 * 
+	 * @param userId
+	 * @return <code>ArrayList<Game></code>
+	 */
+	public static ArrayList<Game> getJoinedGames(int userId) {
+		ArrayList<Game> Games  = new ArrayList<Game>();
+
+		String page = "http://pug.myrpi.org/";
+		page = page + "getgames.php" + "?user=" + userId;
+
+		Games = getGamesFromServer(page);
+		return Games;
+	}
+	
 
 }
