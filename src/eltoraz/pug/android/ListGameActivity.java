@@ -37,24 +37,28 @@ public class ListGameActivity extends Activity {
 		
 			
 		textListGames=(TextView) findViewById(R.id.textListGames);
-		Log.d("WOW","1");
-	
-		textListGames.setText(games.get(0).getDescription());
-		Log.d("WOW","2");
-		//for (int i=0;i<games.size();i++)
-	//	{
-		//textListGames.append(games.get(i).getDate().getTime().toLocaleString());
-	//	textListGames.setText(games.size());
-		//textListGames.append(games.get(i).getCreator().getName());
-	//	textListGames.append("\n");
-		//textListGames.append(games.get(i).getLocation().getAddress());
-		//textListGames.append("\n");
-	//	textListGames.append(games.get(i).getGameType().toString());
-		//textListGames.append("\n");
-		//textListGames.append(games.get(i).getDescription().toString());
-		//textListGames.append("\n");
-		//textListGames.append("\n");
-	//	} 
+		//Log.d("WOW","1");
+		
+		//if(games != null) {
+		//textListGames.setText(games.get(0).getDescription());
+		//Log.d("WOW",games.get(0).getDescription());
+		//}
+		
+		textListGames.setText("");
+		for (int i=0;i<games.size();i++)
+		{
+		textListGames.append(games.get(i).getDate().getTime().toLocaleString());
+		textListGames.append("\n");
+		textListGames.append(games.get(i).getCreator().getName());
+		textListGames.append("\n");
+		textListGames.append(games.get(i).getLocation().getAddress());
+		textListGames.append("\n");
+		textListGames.append(games.get(i).getGameType().toString());
+		textListGames.append("\n");
+		textListGames.append(games.get(i).getDescription().toString());
+		textListGames.append("\n");
+		textListGames.append("\n");
+		} 
 	}
 	
 }

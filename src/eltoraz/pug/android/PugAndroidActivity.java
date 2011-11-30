@@ -96,7 +96,7 @@ public class PugAndroidActivity extends MapActivity {
 		listGamesButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), ListGameActivity.class);
-				intent.putExtra("user", user);
+				intent.putExtra("games", games);
 				startActivity(intent);
 			}
 		});
