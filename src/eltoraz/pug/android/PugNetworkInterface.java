@@ -197,6 +197,8 @@ public class PugNetworkInterface {
 	/**
 	 * send a user id and game id to server signifying that the user has joined the game
 	 * 
+	 * @param userid 
+	 * @param gameid
 	 * @return
 	 */
 	public static void joinGame( int userid, int gameid ) {
@@ -217,6 +219,12 @@ public class PugNetworkInterface {
 		return;
 	}
 	
+	/**
+	 * send the <code>Person</code> with updated fields to the server so the user's info can be updated
+	 * @param user
+	 * 
+	 * @return
+	 */
 	public static void editUser( Person user ) {
 		
 		HttpClient httpClient = new DefaultHttpClient();
