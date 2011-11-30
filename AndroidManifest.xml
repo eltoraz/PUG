@@ -24,7 +24,11 @@
 				  android:label="@string/search_label" />
 	        <activity android:name=".ProfileActivity"
 				  android:label="Users Profile" />
+			<activity android:name=".ProfileJoinedGamesActivity"
+				  android:label="Users Joined Games" />
 			<activity android:name=".ListGameActivity"
 				  android:label="Lists Games" />
+			<activity android:name=".ProfileTabWidget" android:label="@string/app_name"
+          android:theme="@android:style/Theme.NoTitleBar" />
 	</application>
 </manifest>

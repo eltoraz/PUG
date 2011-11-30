@@ -98,7 +98,7 @@ public class PugAndroidActivity extends MapActivity {
 		profileBadge = (QuickContactBadge) findViewById(R.id.quickContactBadge1);
 		profileBadge.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(v.getContext(), ProfileActivity.class);
+				Intent intent = new Intent(v.getContext(), ProfileTabWidget.class);
 				intent.putExtra("user", user);
 				startActivityForResult(intent, PROFILE_REQUEST);
 			}
