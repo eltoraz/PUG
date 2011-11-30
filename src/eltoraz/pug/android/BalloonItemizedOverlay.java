@@ -37,6 +37,7 @@ import com.google.android.maps.OverlayItem;
  * upon screen-tap of each marker overlay.
  * 
  * @author Jeff Gilfelt
+ * @reference https://github.com/jgilfelt/android-mapviewballoons
  */
 public abstract class BalloonItemizedOverlay<Item extends OverlayItem> extends ItemizedOverlay<Item> {
 

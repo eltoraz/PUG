@@ -17,10 +17,12 @@ import org.apache.http.HttpResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+// TODO: error-checking on the HTTP responses
+
 /**
  * The <code>PugNetworkInterface</code> class provides methods to interact with the server.
  * @author Brian Orecchio
- * @version 0.8
+ * @version 0.9
  */
 public class PugNetworkInterface {
 	// NOTE: These getGames functions have a bunch of duplicated code, in the future I will add a way to do this filtering in a single get games 
@@ -33,8 +35,7 @@ public class PugNetworkInterface {
 	public static ArrayList<Game> getGames() {
 		ArrayList<Game> games = new ArrayList<Game>();
 
-		String page = "http://pug.myrpi.org/";
-		page += "getfilter.php";
+		String page = "http://pug.myrpi.org/getfilter.php";
 
 		games = getGamesFromServer(page);
 		return games;
@@ -60,8 +61,10 @@ public class PugNetworkInterface {
 	public static ArrayList<Game> getGames(Integer lat, Integer lon, Integer dist) {
 		ArrayList<Game> games = new ArrayList<Game>();
 
-		String page = "http://pug.myrpi.org/";
-		page += "getfilter.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&dist=" + dist.toString();
+		String page = "http://pug.myrpi.org/getfilter.php";
+		page += "?lat=" + lat.toString();
+		page += "&lon=" + lon.toString();
+		page += "&dist=" + dist.toString();
 
 		games = getGamesFromServer(page);
 		return games;
@@ -89,8 +92,11 @@ public class PugNetworkInterface {
 	public static ArrayList<Game> getGames(Integer lat, Integer lon, Integer dist, String sport) {
 		ArrayList<Game> games = new ArrayList<Game>();
 
-		String page = "http://pug.myrpi.org/";
-		page += "getfilter.php" + "?lat=" + lat.toString() + "&lon=" + lon.toString() + "&dist=" + dist.toString() + "&sport=" + sport;
+		String page = "http://pug.myrpi.org/getfilter.php";
+		page += "?lat=" + lat.toString();
+		page += "&lon=" + lon.toString();
+		page += "&dist=" + dist.toString();
+		page += "&sport=" + sport;
 		
 		games = getGamesFromServer(page);
 		return games;
@@ -169,7 +175,7 @@ public class PugNetworkInterface {
 			httpPost.setHeader("Accept", "application/json");
 			httpPost.setHeader("Content-type", "application/json");
 
-			response=httpClient.execute(httpPost);
+			response = httpClient.execute(httpPost);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -206,11 +212,9 @@ public class PugNetworkInterface {
 	}
 
 	/**
-	 * send a user id and game id to server signifying that the user has joined the game
-	 * 
-	 * @param userid 
-	 * @param gameid
-	 * @return
+	 * Send a request to the server to add the user to the specified Game.
+	 * @param userid <code>int</code> unique user ID to specify which user is joining 
+	 * @param gameid <code>int</code> unique game ID to specify which game to join
 	 */
 	public static void joinGame( int userid, int gameid ) {
 		HttpClient httpClient = new DefaultHttpClient();
@@ -231,10 +235,8 @@ public class PugNetworkInterface {
 	}
 	
 	/**
-	 * send the <code>Person</code> with updated fields to the server so the user's info can be updated
-	 * @param user
-	 * 
-	 * @return
+	 * Send a request to update the user's profile data on the server.
+	 * @param user <code>Person</code> object containing the user's updated details
 	 */
 	public static void editUser( Person user ) {
 		
@@ -254,7 +256,7 @@ public class PugNetworkInterface {
 			httpPost.setHeader("Accept", "application/json");
 			httpPost.setHeader("Content-type", "application/json");
 
-			response=httpClient.execute(httpPost);
+			response = httpClient.execute(httpPost);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -264,16 +266,15 @@ public class PugNetworkInterface {
 	}
 	
 	/**
-	 * This function returns an <code>ArrayList<Game></code> that holds the games that the user has joined
-	 * 
-	 * @param userId
-	 * @return <code>ArrayList<Game></code>
+	 * Retrieve a list of games the user has joined.
+	 * @param userId <code>int</code> unique user ID
+	 * @return <code>ArrayList\<Game\></code> containing the games in which the user is participating
 	 */
 	public static ArrayList<Game> getJoinedGames(int userId) {
 		ArrayList<Game> Games  = new ArrayList<Game>();
 
-		String page = "http://pug.myrpi.org/";
-		page = page + "getgames.php" + "?user=" + userId;
+		String page = "http://pug.myrpi.org/getgames.php";
+		page += "?user=" + userId;
 
 		Games = getGamesFromServer(page);
 		return Games;

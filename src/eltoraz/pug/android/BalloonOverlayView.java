@@ -41,7 +41,7 @@ import com.google.android.maps.OverlayItem;
  * </p>
  * 
  * @author Jeff Gilfelt
- *
+ * @reference https://github.com/jgilfelt/android-mapviewballoons
  */
 public class BalloonOverlayView<Item extends OverlayItem> extends FrameLayout {
 

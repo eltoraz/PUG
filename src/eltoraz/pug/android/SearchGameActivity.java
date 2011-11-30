@@ -20,7 +20,7 @@ import android.widget.*;
 /**
  * This <code>Activity</code> allows the user to search for Games matching certain parameters.
  * @author Kevin Frame
- * @version 0.5
+ * @version 0.9
  */
 public class SearchGameActivity extends Activity {
 	/* ***** UI ELEMENTS ***** */

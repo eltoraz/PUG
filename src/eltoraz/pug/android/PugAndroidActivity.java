@@ -45,8 +45,6 @@ public class PugAndroidActivity extends MapActivity {
 	private Button listGamesButton;
 	
 	private List<Overlay> mapOverlays;
-	private Drawable drawable;
-	private PugBalloonItemizedOverlay itemizedOverlay;
 	
 	private ArrayList<Game> games = new ArrayList<Game>();
 	
@@ -91,6 +89,7 @@ public class PugAndroidActivity extends MapActivity {
 		listGamesButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), ListGameActivity.class);
+				intent.putExtra("user", user);
 				intent.putExtra("games", games);
 				startActivity(intent);
 			}
@@ -109,8 +108,6 @@ public class PugAndroidActivity extends MapActivity {
 		mapView.setBuiltInZoomControls(true);
 
 		mapOverlays = mapView.getOverlays();
-		drawable = this.getResources().getDrawable(R.drawable.androidmarker);
-		itemizedOverlay = new PugBalloonItemizedOverlay(drawable, mapView);
 	}
 
 	@Override
@@ -179,23 +176,32 @@ public class PugAndroidActivity extends MapActivity {
 	}
 
 	/**
-	 * Find the right sport icon to use when displaying a game on the map
-	 * 
-	 * @param sporttype
-	 * @return
+	 * Select the correct icon to correspond to the sport type.
+	 * @param sporttype <code>enum Game.SportType</code>
+	 * @return <code>Drawable</code> sport icon
 	 */
-	private Drawable findSportIcon(Game.SportType sporttype)  {
-		
-		Drawable drawable = this.getResources().getDrawable(R.drawable.androidmarker);
+	private Drawable findSportIcon(Game.SportType sporttype) {
+
+		Drawable drawable;
 		switch (sporttype.ordinal()) {
-        case 0:  drawable = this.getResources().getDrawable(R.drawable.basketball);    break;
-        case 1:  drawable = this.getResources().getDrawable(R.drawable.baseball);      break;
-        case 2:  drawable = this.getResources().getDrawable(R.drawable.football);      break;
-        case 3:  drawable = this.getResources().getDrawable(R.drawable.soccer);        break;
-        
-        default: break;
-    }
-		
+		case 0:
+			drawable = this.getResources().getDrawable(R.drawable.basketball);
+			break;
+		case 1:
+			drawable = this.getResources().getDrawable(R.drawable.baseball);
+			break;
+		case 2:
+			drawable = this.getResources().getDrawable(R.drawable.football);
+			break;
+		case 3:
+			drawable = this.getResources().getDrawable(R.drawable.soccer);
+			break;
+
+		default:
+			drawable = this.getResources().getDrawable(R.drawable.androidmarker);
+			break;
+		}
+
 		return drawable;
 	}
 

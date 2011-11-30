@@ -6,12 +6,11 @@ import com.google.android.maps.OverlayItem;
 import eltoraz.pug.*;
 
 /**
- * This class allows the passing of a <code>Game</code> and <code>Person</code> (user) into the overlay
- * @author oreccb
- *
+ * A map overlay for displaying a Game at a specific location.
+ * @author Brian Orecchio
+ * @version 1.0
  */
 public class PugOverlayItem extends OverlayItem {
-
 	protected Game game;
 	protected Person user;
 	
@@ -22,7 +21,7 @@ public class PugOverlayItem extends OverlayItem {
 	}
 	
 	/**
-	 * get the game
+	 * Get the game this overlay represents. 
 	 * @return <code>Game</Game>
 	 */
 	public Game getGame() {
@@ -30,11 +29,10 @@ public class PugOverlayItem extends OverlayItem {
 	}
 	
 	/**
-	 * get the user
-	 * @return <code>Person</code> that is the user
+	 * Get the current user.
+	 * @return <code>Person</code>
 	 */
 	public Person getUser() {
 		return user;
-	}
-	
+	}	
 }

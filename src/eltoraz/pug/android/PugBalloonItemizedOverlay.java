@@ -7,15 +7,14 @@ import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 
 import com.google.android.maps.MapView;
-import com.google.android.maps.OverlayItem;
 
 /**
- * The custom overlay built on the Open Source <code>BalloonItemizedOverlay</code>
+ * A custom overlay built on the Open Source <code>BalloonItemizedOverlay</code>.
  * @author Brian Orecchio
- * @version 0.1
+ * @version 0.9
+ * @reference https://github.com/jgilfelt/android-mapviewballoons
  */
 public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<PugOverlayItem> {
-
 	private ArrayList<PugOverlayItem> m_overlays = new ArrayList<PugOverlayItem>();
 	private Context c;
 	
@@ -31,9 +30,8 @@ public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<PugOverlay
 	}
 
 	/**
-	 * gets the Overlay at index i
-	 * 
-	 * @return Overlay at index i
+	 * Retrieve a specific Overlay item.
+	 * @return <code>PugOverlayItem</code> Overlay at index i
 	 */
 	@Override
 	protected PugOverlayItem createItem(int i) {
@@ -41,9 +39,8 @@ public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<PugOverlay
 	}
 
 	/**
-	 * This method returns the size of the Overlay ArrayList
-	 * 
-	 * @return integer - which is the size of the Overlay ArrayList
+	 * Retrieve the number of Overlays.
+	 * @return <code>int</code> the number of Overlays in the list
 	 */
 	@Override
 	public int size() {
@@ -51,9 +48,8 @@ public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<PugOverlay
 	}
 	
 	/**
-	 * Adds overlay to list
-	 * 
-	 * @param overlay
+	 * Add the specified overlay to the list.
+	 * @param overlay <code>PugOverlayItem</code> to be added to the list
 	 */
 	public void addOverlay(PugOverlayItem overlay) {
 	    m_overlays.add(overlay);
@@ -61,20 +57,18 @@ public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<PugOverlay
 	}
 	
 	/**
-	 * This method handles a "tap" on a balloon. 
-	 * 
-	 * @param index - The index of the item whose balloon is tapped.
-	 * @param item - The item whose balloon is tapped.
+	 * Handle taps on a balloon. In this context, join the Game represented by
+	 *  the balloon.
+	 * @param index <code>int</code> index of the item whose balloon is tapped
+	 * @param item <code>PugOverlayItem</code> item whose balloon is tapped
 	 * @return true 
 	 */
 	@Override
 	protected boolean onBalloonTap(int index, PugOverlayItem item) {
-		
 		PugNetworkInterface.joinGame(item.getUser().getId(), item.getGame().getId());
 		
 		Toast.makeText(c, "Joined Game!", Toast.LENGTH_LONG).show();
 		
 		return true;
-	}
-	
+	}	
 }
