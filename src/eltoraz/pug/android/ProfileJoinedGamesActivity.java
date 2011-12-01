@@ -77,6 +77,10 @@ public class ProfileJoinedGamesActivity extends ListActivity {
 					PugNetworkInterface.leaveGame(user.getId(), games.get(gameText.indexOf(g)).getId());
 					Toast.makeText(getApplicationContext(), "Left Game!", Toast.LENGTH_LONG).show();
 				}
+				else {
+					PugNetworkInterface.leaveGame(user.getId(), games.get(gameText.indexOf(g)).getId());
+					Toast.makeText(getApplicationContext(), "Left Game!", Toast.LENGTH_LONG).show();
+				}
 			}
 		});
 	}
