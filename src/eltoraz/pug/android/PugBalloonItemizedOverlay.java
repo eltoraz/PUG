@@ -3,6 +3,7 @@ package eltoraz.pug.android;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 
@@ -58,14 +59,22 @@ public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<PugOverlay
 	
 	/**
 	 * Handle taps on a balloon. In this context, join the Game represented by
-	 *  the balloon.
+	 *  the balloon if the user is not the owner; otherwise, open the game for
+	 *  editing.
 	 * @param index <code>int</code> index of the item whose balloon is tapped
 	 * @param item <code>PugOverlayItem</code> item whose balloon is tapped
 	 * @return true 
 	 */
 	@Override
 	protected boolean onBalloonTap(int index, PugOverlayItem item) {
-		PugNetworkInterface.joinGame(item.getUser().getId(), item.getGame().getId());
+		if (item.getUser().getId() == item.getGame().getOwner().getId()) {
+			Intent intent = new Intent(c.getApplicationContext(), EditGameActivity.class);
+			intent.putExtra("user", item.getUser());
+			intent.putExtra("game", item.getGame());
+			c.startActivity(intent);
+		}
+		else
+			PugNetworkInterface.joinGame(item.getUser().getId(), item.getGame().getId());
 		
 		Toast.makeText(c, "Joined Game!", Toast.LENGTH_LONG).show();
 		

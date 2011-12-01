@@ -36,4 +36,9 @@
     <string name="allGames">Search for all game types?</string>
     <string name="selectGame">Select a Game</string>
     <string name="allGameTypes">All Games</string>
+    <string name="edit">Edit Game</string>
+    <string name="profile_label">User Profile</string>
+    <string name="profile_joinedgames_label">Games You\'ve Joined</string>
+    <string name="list_label">Game List</string>
+    <string name="edit_label">Edit Game</string>
 </resources>

@@ -1,34 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	  package="eltoraz.pug.android"
-	  android:versionCode="1"
-	  android:versionName="1.0">
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-	<uses-sdk android:minSdkVersion="10" />
+    package="eltoraz.pug.android"
+    android:versionCode="1"
+    android:versionName="1.0" >
 
-	<application android:icon="@drawable/icon" android:label="@string/app_name">
-		<uses-library android:name="com.google.android.maps" />
-		<activity android:name=".PugAndroidActivity"
-				  android:label="@string/app_name">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity android:name=".CreateGameActivity"
-				  android:label="@string/create_label" />
-		<activity android:name=".SearchGameActivity"
-				  android:label="@string/search_label" />
-	        <activity android:name=".ProfileActivity"
-				  android:label="Users Profile" />
-			<activity android:name=".ProfileJoinedGamesActivity"
-				  android:label="Users Joined Games" />
-			<activity android:name=".ListGameActivity"
-				  android:label="Lists Games" />
-			<activity android:name=".ProfileTabWidget" android:label="@string/app_name"
-          android:theme="@android:style/Theme.NoTitleBar" />
-	</application>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-sdk android:minSdkVersion="10" />
+
+    <application
+        android:icon="@drawable/icon"
+        android:label="@string/app_name" >
+        <uses-library android:name="com.google.android.maps" />
+
+        <activity
+            android:label="@string/app_name"
+            android:name=".PugAndroidActivity" >
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/create_label"
+            android:name=".CreateGameActivity" />
+        <activity
+            android:label="@string/search_label"
+            android:name=".SearchGameActivity" />
+        <activity
+            android:label="@string/profile_label"
+            android:name=".ProfileActivity" />
+        <activity
+            android:label="@string/profile_joinedgames_label"
+            android:name=".ProfileJoinedGamesActivity" />
+        <activity
+            android:label="@string/list_label"
+            android:name=".ListGameActivity" />
+        <activity
+            android:label="@string/app_name"
+            android:name=".ProfileTabWidget"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:label="@string/edit_label"
+            android:name=".EditGameActivity" />
+    </application>
+
 </manifest>

@@ -6,6 +6,7 @@ import eltoraz.pug.Person;
 import java.util.*;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
@@ -72,8 +73,16 @@ public class ListGameActivity extends ListActivity {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// When clicked, join the Game and show a toast with the TextView text
 				String g = ((TextView) view).getText().toString();
-				PugNetworkInterface.joinGame(user.getId(), games.get(gameText.indexOf(g)).getId());
-				Toast.makeText(getApplicationContext(), "Joined Game!", Toast.LENGTH_LONG).show();
+				if (user.getId() == games.get(gameText.indexOf(g)).getId()) {
+					Intent intent = new Intent(getApplicationContext(), EditGameActivity.class);
+					intent.putExtra("user", user);
+					intent.putExtra("game", games.get(gameText.indexOf(g)));
+					startActivity(intent);
+				}
+				else {
+					PugNetworkInterface.joinGame(user.getId(), games.get(gameText.indexOf(g)).getId());
+					Toast.makeText(getApplicationContext(), "Joined Game!", Toast.LENGTH_LONG).show();
+				}
 			}
 		});
 	}

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dip" >
+
+    <Button
+        android:id="@+id/editButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/edit" >
+    </Button>
+
+    <ScrollView
+        android:id="@+id/editGameScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/sportTextViewEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/sport" >
+            </TextView>
+
+            <Spinner
+                android:id="@+id/sportSelectSpinnerEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/sportTextViewEdit"
+                android:prompt="@string/sport_prompt" >
+            </Spinner>
+
+            <TextView
+                android:id="@+id/locationTextViewEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/sportSelectSpinnerEdit"
+                android:text="@string/location" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/locationEditTextEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/locationTextViewEdit"
+                android:inputType="textPostalAddress" >
+
+                <requestFocus >
+                </requestFocus>
+            </EditText>
+
+            <TextView
+                android:id="@+id/dateTextViewEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/locationEditTextEdit"
+                android:text="@string/date" >
+            </TextView>
+
+            <Button
+                android:id="@+id/datePickButtonEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/dateTextViewEdit" >
+            </Button>
+
+            <TextView
+                android:id="@+id/timeTextViewEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/datePickButtonEdit"
+                android:text="@string/time" >
+            </TextView>
+
+            <Button
+                android:id="@+id/timePickButtonEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/timeTextViewEdit" >
+            </Button>
+
+            <TextView
+                android:id="@+id/maxPlayersTextViewEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/timePickButtonEdit"
+                android:text="@string/maxPlayers" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/maxPlayersEditTextEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/maxPlayersTextViewEdit"
+                android:inputType="number" >
+            </EditText>
+
+            <TextView
+                android:id="@+id/visibilityTextViewEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/maxPlayersEditTextEdit"
+                android:text="@string/visibility" >
+            </TextView>
+
+            <ToggleButton
+                android:id="@+id/visibilityToggleButtonEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/visibilityTextViewEdit"
+                android:textOff="@string/pub"
+                android:textOn="@string/priv" >
+            </ToggleButton>
+
+            <TextView
+                android:id="@+id/descriptionTextViewEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/visibilityToggleButtonEdit"
+                android:text="@string/description" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/descriptionEditTextEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/descriptionTextViewEdit"
+                android:inputType="textMultiLine"
+                android:text="@string/enter_description" />
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

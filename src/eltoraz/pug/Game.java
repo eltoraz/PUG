@@ -232,6 +232,14 @@ public abstract class Game implements Serializable {
 	}
 	
 	/**
+	 * Retrieve the <code>Game</code>'s current owner
+	 * @return <code>Person</code> the Game's current owner
+	 */
+	public Person getOwner() {
+		return owner;
+	}
+	
+	/**
 	 * Retrieve the <code>Game</code>'s date and time
 	 * @return a <code>GregorianCalendar</code> containing the <code>Game</code>'s date and time
 	 */
@@ -241,9 +249,17 @@ public abstract class Game implements Serializable {
 	
 	/**
 	 * Retrieve the <code>Game</code>'s id
-	 * @return an int
+	 * @return <code>int</code> Game's unique ID
 	 */
 	public int getId() {
 		return id;
+	}
+	
+	/**
+	 * Retrieve the <code>Game</code>'s maximum number of players
+	 * @return <code>int</code> Game's maximum number of players
+	 */
+	public int getMaxPlayers() {
+		return maxPlayers;
 	}
 }
