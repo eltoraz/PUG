@@ -214,7 +214,7 @@ public class EditGameActivity extends Activity {
 					// TODO: Make sure this is the only cause of a 0-length/null return from the geocoder
 					Context context = getApplicationContext();
 					CharSequence msg = "Invalid address, try another one.";
-					Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+					Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
 					return;
 				}

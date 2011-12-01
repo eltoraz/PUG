@@ -73,10 +73,11 @@ public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<PugOverlay
 			intent.putExtra("game", item.getGame());
 			c.startActivity(intent);
 		}
-		else
+		else {
 			PugNetworkInterface.joinGame(item.getUser().getId(), item.getGame().getId());
+			Toast.makeText(c, "Joined Game!", Toast.LENGTH_LONG).show();
+		}
 		
-		Toast.makeText(c, "Joined Game!", Toast.LENGTH_LONG).show();
 		
 		return true;
 	}	
