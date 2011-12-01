@@ -181,6 +181,7 @@ public abstract class Game implements Serializable {
 			gameJson.put("location", location.JSON());
 			gameJson.put("playercount", maxPlayers);
 			gameJson.put("private", privateGame);
+			gameJson.put("id", id);
 		}
 		catch (JSONException e) {
 			e.printStackTrace();
