@@ -67,7 +67,7 @@ public class ProfileJoinedGamesActivity extends ListActivity {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// When clicked, bring up a Game editor if the user is the Game's owner
 				String g = ((TextView) view).getText().toString();
-				if (user.getId() == games.get(gameText.indexOf(g)).getId()) {
+				if (user.getId() == games.get(gameText.indexOf(g)).getOwner().getId()) {
 					Intent intent = new Intent(getApplicationContext(), EditGameActivity.class);
 					intent.putExtra("user", user);
 					intent.putExtra("game", games.get(gameText.indexOf(g)));

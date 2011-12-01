@@ -73,7 +73,7 @@ public class ListGameActivity extends ListActivity {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// When clicked, join the Game and show a toast with the TextView text
 				String g = ((TextView) view).getText().toString();
-				if (user.getId() == games.get(gameText.indexOf(g)).getId()) {
+				if (user.getId() == games.get(gameText.indexOf(g)).getOwner().getId()) {
 					Intent intent = new Intent(getApplicationContext(), EditGameActivity.class);
 					intent.putExtra("user", user);
 					intent.putExtra("game", games.get(gameText.indexOf(g)));
