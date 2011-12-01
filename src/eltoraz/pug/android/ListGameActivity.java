@@ -75,7 +75,7 @@ public class ListGameActivity extends ListActivity {
 					startActivityForResult(intent, EDIT_REQUEST);
 				}
 				else {
-					PugNetworkInterface.joinGame(user.getId(), games.get(gameText.indexOf(g)).getId());
+					PugNetworkInterface.leaveGame(user.getId(), games.get(gameText.indexOf(g)).getId());
 					Toast.makeText(getApplicationContext(), "Joined Game!", Toast.LENGTH_LONG).show();
 				}
 			}
