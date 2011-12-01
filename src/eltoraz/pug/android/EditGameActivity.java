@@ -14,6 +14,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import android.widget.ToggleButton;
 public class EditGameActivity extends Activity {
 	private Person user;
 	private Game game;
+	private Game oldGame;
 	
 	/* ***** UI ELEMENTS ***** */
 	private Button editGameButton;
@@ -98,6 +100,8 @@ public class EditGameActivity extends Activity {
 			user = new Person();
 			game = null;
 		}
+		
+		oldGame = game;
 		
 		/* ***** CAPTURE VIEW ELEMENTS ***** */
 		editGameButton = (Button) findViewById(R.id.editButton);
@@ -230,6 +234,13 @@ public class EditGameActivity extends Activity {
 
 				Toast toast = Toast.makeText(context, text, duration);
 				toast.show();
+				
+				Intent data = new Intent();
+				data.putExtra("old_game", oldGame);
+				data.putExtra("game", game);
+				setResult(RESULT_OK, data);
+				
+				finish();
 			}
 		});
 	}

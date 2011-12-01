@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import eltoraz.pug.Game;
 import eltoraz.pug.Person;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,9 @@ public class ProfileJoinedGamesActivity extends ListActivity {
 	private Person user;
 	private ArrayList<Game> games;
 	private ArrayList<String> gameText;
+	private ListView lv;
+	
+	static final int EDIT_REQUEST = 2; 
 
 	/**
 	 * The <code>onCreate</code> method is called when this <code>Activity</code> is first
@@ -43,23 +47,12 @@ public class ProfileJoinedGamesActivity extends ListActivity {
 		}
 		
 		gameText = new ArrayList<String>();
-		for (Game g : games) {
-			String game = "";
-			game += g.getDate().getTime().toLocaleString();
-			game += "\n";
-			game += g.getCreator().getName();
-			game += "\n";
-			game += g.getLocation().getAddress();
-			game += "\n";
-			game += g.getGameType().toString();
-			game += "\n";
-			game += g.getDescription();
-			gameText.add(game);
-		}
+		for (Game g : games)
+			gameText.add(listItem(g));
 		
 		setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, gameText));
 		
-		ListView lv = getListView();
+		lv = getListView();
 		lv.setTextFilterEnabled(true);
 		
 		lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,9 +64,52 @@ public class ProfileJoinedGamesActivity extends ListActivity {
 					Intent intent = new Intent(getApplicationContext(), EditGameActivity.class);
 					intent.putExtra("user", user);
 					intent.putExtra("game", games.get(gameText.indexOf(g)));
-					startActivity(intent);
+					startActivityForResult(intent, EDIT_REQUEST);
 				}
 			}
 		});
+	}
+	
+	/**
+	 * Callback used to retrieve objects returned from Activities.
+	 * Here, update the listing of an edited game.
+	 * @param requestCode <code>int</code> Unique ID for the Activity returning the result.
+	 * @param resultCode <code>int</code> Status indicator for the termination of the Activity.
+	 * @param data <code>Intent</code> Container with the returned data.
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == Activity.RESULT_OK && requestCode == EDIT_REQUEST) {
+			if (data.hasExtra("game")) {
+				Bundle extras = data.getExtras();
+				Game oldGame = (Game) extras.get("old_game");
+				Game game = (Game) extras.get("game");
+				int pos = gameText.indexOf(listItem(oldGame));
+				games.remove(pos);
+				games.add(pos, game);
+				TextView tv = (TextView) lv.getChildAt(pos);
+				tv.setText(listItem(game));
+			}
+		}
+	}
+	
+	/**
+	 * Retrieve a human-readable representation of a Game to be displayed in a list.
+	 * @param g <code>Game</code> to be displayed
+	 * @return <code>String</code> representing the Game
+	 */
+	private String listItem(Game g) {
+		String game = "";
+		game += g.getDate().getTime().toLocaleString();
+		game += "\n";
+		game += g.getCreator().getName();
+		game += "\n";
+		game += g.getLocation().getAddress();
+		game += "\n";
+		game += g.getGameType().toString();
+		game += "\n";
+		game += g.getDescription();
+		
+		return game;
 	}
 }

@@ -78,7 +78,6 @@ public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<PugOverlay
 			Toast.makeText(c, "Joined Game!", Toast.LENGTH_LONG).show();
 		}
 		
-		
 		return true;
 	}	
 }

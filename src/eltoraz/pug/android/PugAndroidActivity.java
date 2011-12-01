@@ -51,6 +51,7 @@ public class PugAndroidActivity extends MapActivity {
 	/* ***** ACTIVITY RESULT CODES ***** */
 	static final int SEARCH_REQUEST = 0;
 	static final int PROFILE_REQUEST = 1;
+	static final int EDIT_REQUEST = 2; 
 	
 	/**
 	 * The <code>onCreate</code> method is called when this <code>Activity</code> is first
@@ -131,7 +132,7 @@ public class PugAndroidActivity extends MapActivity {
 				if( !games.isEmpty()) {
 					plotGames(games);
 				}
-				else{
+				else {
 					Context context = getApplicationContext();
 					CharSequence text = "No Games Found";
 					int duration = Toast.LENGTH_SHORT;
