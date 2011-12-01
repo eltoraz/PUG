@@ -216,7 +216,7 @@ public class PugNetworkInterface {
 	 * @param userid <code>int</code> unique user ID to specify which user is joining 
 	 * @param gameid <code>int</code> unique game ID to specify which game to join
 	 */
-	public static void joinGame( int userid, int gameid ) {
+	public static void joinGame(int userid, int gameid) {
 		HttpClient httpClient = new DefaultHttpClient();
 
 		try {
@@ -235,14 +235,37 @@ public class PugNetworkInterface {
 	}
 	
 	/**
+	 * Send a request to the server to remove the user from the specified Game.
+	 * @param userid <code>int</code> unique user ID to specify which user is joining 
+	 * @param gameid <code>int</code> unique game ID to specify which game to join
+	 */
+	public static void leaveGame(int userid, int gameid) {
+		HttpClient httpClient = new DefaultHttpClient();
+
+		try {
+			String page = "http://pug.myrpi.org/leavegame.php";
+			page += "?user=" + userid;
+			page += "&game=" + gameid;
+
+			HttpGet httpGet= new HttpGet (page);
+			HttpResponse response = httpClient.execute(httpGet);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return;
+	}
+	
+	/**
 	 * Send a request to update the user's profile data on the server.
 	 * @param user <code>Person</code> object containing the user's updated details
 	 */
-	public static void editUser( Person user ) {
+	public static void editUser(Person user) {
 		
 		HttpClient httpClient = new DefaultHttpClient();
 
-		try{
+		try {
 			//pack the Game into a JSONObject
 			JSONObject jsonPerson = user.JSON();
 
@@ -258,7 +281,7 @@ public class PugNetworkInterface {
 
 			response = httpClient.execute(httpPost);
 		}
-		catch(Exception e) {
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -279,6 +302,4 @@ public class PugNetworkInterface {
 		Games = getGamesFromServer(page);
 		return Games;
 	}
-	
-
 }
