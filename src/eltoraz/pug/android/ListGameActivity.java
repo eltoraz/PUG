@@ -80,7 +80,7 @@ public class ListGameActivity extends ListActivity {
 					startActivity(intent);
 				}
 				else {
-					PugNetworkInterface.joinGame(user.getId(), games.get(gameText.indexOf(g)).getId());
+					PugNetworkInterface.leaveGame(user.getId(), games.get(gameText.indexOf(g)).getId());
 					Toast.makeText(getApplicationContext(), "Joined Game!", Toast.LENGTH_LONG).show();
 				}
 			}

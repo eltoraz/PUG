@@ -73,6 +73,10 @@ public class ProfileJoinedGamesActivity extends ListActivity {
 					intent.putExtra("game", games.get(gameText.indexOf(g)));
 					startActivity(intent);
 				}
+				else {
+					PugNetworkInterface.leaveGame(user.getId(), games.get(gameText.indexOf(g)).getId());
+					Toast.makeText(getApplicationContext(), "Left Game!", Toast.LENGTH_LONG).show();
+				}
 			}
 		});
 	}
