@@ -214,61 +214,24 @@ public class PugAndroidActivity extends MapActivity {
 	private Person authenticate() {
 		TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		String deviceId = tm.getDeviceId();
-		boolean Auth = false;
 		Person p = new Person();
 
-		String page = new String();
-		
-		try {
-			HttpClient httpclient = new DefaultHttpClient();
-			page = "http://pug.myrpi.org/";
-			page = page + "checkuser.php?phone=" + deviceId;
+	
+		Context context = getApplicationContext();
+		CharSequence text = "Welcome!";
+		int duration = Toast.LENGTH_SHORT;
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
 
-			HttpGet httpget = new HttpGet (page);
-			HttpResponse response = httpclient.execute(httpget);
+		p = PugNetworkInterface.getUser(deviceId);
 
-			HttpEntity entity = response.getEntity();
-			String temp = new String();
-			temp = EntityUtils.toString(entity);
-			JSONObject jsonOb = new JSONObject(temp);
-
-			Auth = jsonOb.getBoolean("exists");
-
-			if (Auth) {
-				Context context = getApplicationContext();
-				CharSequence text = "Welcome!";
-				int duration = Toast.LENGTH_SHORT;
-				Toast toast = Toast.makeText(context, text, duration);
-				toast.show();
-
-				p = PugNetworkInterface.getUser(deviceId);
-
-				Context context1 = getApplicationContext();
-				CharSequence text1 = p.getName().toString();
-				int duration1 = Toast.LENGTH_SHORT;
-				Toast toast1 = Toast.makeText(context1, text1, duration1);
-				toast1.show();
-			}
-
-			else {
-				Context context = getApplicationContext();
-				CharSequence text = "Authentication Failed!";
-				int duration = Toast.LENGTH_SHORT;
-				Toast toast = Toast.makeText(context, text, duration);
-				toast.show();
-			}
-		}
-		catch(Exception e) {
-			// TODO: More descriptive errors.
-			e.printStackTrace();
-			Context context = getApplicationContext();
-			CharSequence text = "Whoops!";
-			int duration = Toast.LENGTH_SHORT;
-			Toast toast = Toast.makeText(context, text, duration);
-			toast.show();
-		}
-		
-		 return p;
+		Context context1 = getApplicationContext();
+		CharSequence text1 = p.getName().toString();
+		int duration1 = Toast.LENGTH_SHORT;
+		Toast toast1 = Toast.makeText(context1, text1, duration1);
+		toast1.show();
+			
+		return p;
 	}
 }
 
