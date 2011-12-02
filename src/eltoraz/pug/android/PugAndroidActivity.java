@@ -4,14 +4,6 @@ import java.util.ArrayList;
 import android.telephony.*;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
-
 import eltoraz.pug.*;
 
 import com.google.android.maps.*;
