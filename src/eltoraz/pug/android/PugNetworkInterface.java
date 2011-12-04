@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -51,30 +52,38 @@ public class PugNetworkInterface {
 		Location loc = null;
 		
 		/* Note: There's a known issue with Android emulator > API level 8 where this will always throw an
-		 *   IOException. Tested and working on an actual device.
+		 *  IOException. Tested and working on an actual device. Therefore, check to see if running on
+		 *  the emulator and if so, use a default lat/lon (in this case, "Troy, ny 12180") for testing purposes.
 		 * @reference http://code.google.com/p/android/issues/detail?id=8816
-		 * TODO: use Mock Location Objects when the app detects that it's running on the emulator 
 		 */
-		try {
-			locations = geocoder.getFromLocationName(addr, 1);
-		}
-		catch (IOException e) {
-			Log.e("IOException", e.getMessage());
-			CharSequence errmsg = "Error: Network unavailable. IOException: " + e.getMessage();
-			Toast.makeText(context, errmsg, Toast.LENGTH_SHORT).show();
-			e.printStackTrace();
-		}
-		
-		// Use the first address returned by the geocoder.
-		if (locations != null && locations.size()>0) {
-			int lat = (int) (locations.get(0).getLatitude() * 1000000);
-			int lon = (int) (locations.get(0).getLongitude() * 1000000);
-			loc = new Location(lat, lon, addr);
+		if ("google_sdk".equals(Build.PRODUCT)) {
+			loc = new Location(42728411, -73691785, "Troy, ny 12180");
+			CharSequence msg = "Emulator detected during geocode; using default location.";
+			Log.d("PugNetworkInterface.geocode()", msg.toString());
+			Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 		}
 		else {
-			// TODO: Make sure this is the only cause of a 0-length/null return from the geocoder
-			CharSequence msg = "Invalid address, try another one.";
-			Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+			try {
+				locations = geocoder.getFromLocationName(addr, 1);
+			}
+			catch (IOException e) {
+				Log.e("IOException", e.getMessage());
+				CharSequence errmsg = "Error: Network unavailable. IOException: " + e.getMessage();
+				Toast.makeText(context, errmsg, Toast.LENGTH_SHORT).show();
+				e.printStackTrace();
+			}
+			
+			// Use the first address returned by the geocoder.
+			if (locations != null && locations.size()>0) {
+				int lat = (int) (locations.get(0).getLatitude() * 1000000);
+				int lon = (int) (locations.get(0).getLongitude() * 1000000);
+				loc = new Location(lat, lon, addr);
+			}
+			else {
+				// TODO: Make sure this is the only cause of a 0-length/null return from the geocoder
+				CharSequence msg = "Invalid address, try another one.";
+				Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+			}
 		}
 		
 		return loc;
