@@ -2,8 +2,11 @@ package eltoraz.pug.android;
 
 import eltoraz.pug.*;
 
+import java.io.IOException;
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -17,6 +20,12 @@ import org.apache.http.HttpResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
+import android.util.Log;
+import android.widget.Toast;
+
 // TODO: error-checking on the HTTP responses
 
 /**
@@ -27,6 +36,49 @@ import org.json.JSONObject;
 public class PugNetworkInterface {
 	// NOTE: These getGames functions have a bunch of duplicated code, in the future I will add a way to do this filtering in a single get games 
 	//  function by just passing in a map from the filter key to the filter parameter.
+	
+	/**
+	 * Geocode the human-readable address, retrieving its corresponding latitude and longitude from
+	 *  Google's servers.
+	 * @author Bill Jameson
+	 * @param context <code>Context</code> application context
+	 * @param addr <code>String</code> the human-readable address to geocode
+	 * @return <code>Location</code> corresponding to the address
+	 */
+	public static Location geocode(Context context, String addr) {
+		Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+		List<Address> locations = null;
+		Location loc = null;
+		
+		/* Note: There's a known issue with Android emulator > API level 8 where this will always throw an
+		 *   IOException. Tested and working on an actual device.
+		 * @reference http://code.google.com/p/android/issues/detail?id=8816
+		 * TODO: use Mock Location Objects when the app detects that it's running on the emulator 
+		 */
+		try {
+			locations = geocoder.getFromLocationName(addr, 1);
+		}
+		catch (IOException e) {
+			Log.e("IOException", e.getMessage());
+			CharSequence errmsg = "Error: Network unavailable. IOException: " + e.getMessage();
+			Toast.makeText(context, errmsg, Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
+		}
+		
+		// Use the first address returned by the geocoder.
+		if (locations != null && locations.size()>0) {
+			int lat = (int) (locations.get(0).getLatitude() * 1000000);
+			int lon = (int) (locations.get(0).getLongitude() * 1000000);
+			loc = new Location(lat, lon, addr);
+		}
+		else {
+			// TODO: Make sure this is the only cause of a 0-length/null return from the geocoder
+			CharSequence msg = "Invalid address, try another one.";
+			Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+		}
+		
+		return loc;
+	}
 
 	/**
 	 * Get all the Games from the server.

@@ -76,7 +76,7 @@ public class Location implements Serializable {
 	
 	/**
 	 * Return a <code>GeoPoint</code> representation of this <code>Location</code>
-	 * @return a <code>GeoPoint</code> matching the latitude and longitude of this location
+	 * @return <code>GeoPoint</code> matching the latitude and longitude of this location
 	 */
 	public GeoPoint GeoPoint() {
 		return new GeoPoint(latitude, longitude);
@@ -85,7 +85,7 @@ public class Location implements Serializable {
 	/**
 	 * Return a JSON representation of this <code>Location</code>.
 	 * @author Brian Orecchio
-	 * @return a <code>JSONObject</code> encapsulating this location
+	 * @return <code>JSONObject</code> encapsulating this location
 	 */
 	public JSONObject JSON() {
 		JSONObject locJson = null;
@@ -106,9 +106,25 @@ public class Location implements Serializable {
 	
 	/**
 	 * Get the human-readable form of this <code>Location</code>.
-	 * @return a <code>String</code> 
+	 * @return <code>String</code> 
 	 */
 	public String getAddress() {
 		return address;
+	}
+	
+	/**
+	 * Get the latitude of this <code>Location</code>.
+	 * @return <code>int</code> the Location's latitude, in microdegrees (degrees*10^6)
+	 */
+	public int getLat() {
+		return latitude;
+	}
+	
+	/**
+	 * Get the longitude of this <code>Location</code>.
+	 * @return <code>int</code> the Location's longitude, in microdegrees (degrees*10^6)
+	 */
+	public int getLon() {
+		return longitude;
 	}
 }

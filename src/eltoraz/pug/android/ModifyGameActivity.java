@@ -1,10 +1,7 @@
 package eltoraz.pug.android;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Locale;
 
 import eltoraz.pug.Game;
 import eltoraz.pug.Location;
@@ -15,10 +12,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.*;
@@ -169,49 +163,19 @@ public abstract class ModifyGameActivity extends Activity {
 				int maxPlayers = Integer.parseInt(maxPlayersEditText.getText().toString());
 				boolean privacy = visibilityToggleButton.isChecked();
 				String addr = locationEditText.getText().toString();
-				Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-				List<Address> locations = null;
-				Location loc = null;
+				Location loc = PugNetworkInterface.geocode(getApplicationContext(), addr);
 				GregorianCalendar dt = new GregorianCalendar(mYear, mMonth, mDay, mHour, mMinute);
 				long dtMillis = dt.getTimeInMillis();
 				String descr = descriptionEditText.getText().toString();
 				int id = -1;
+				
 				if (game != null)
 					id = game.getId();
 				Person originalCreator = user;
 				if (game != null)
 					originalCreator = game.getCreator();
-				
-				/* Note: There's a known issue with Android emulator > API level 8 where this will always throw an
-				 *   IOException. Tested and working on an actual device.
-				 * @reference http://code.google.com/p/android/issues/detail?id=8816
-				 * TODO: use Mock Location Objects when the app detects that it's running on the emulator 
-				 */
-				try {
-					locations = geocoder.getFromLocationName(addr, 1);
-				}
-				catch (IOException e) {
-					Log.e("IOException", e.getMessage());
-					Context context = getApplicationContext();
-					CharSequence errmsg = "Error: Network unavailable. IOException: " + e.getMessage();
-					Toast.makeText(context, errmsg, Toast.LENGTH_SHORT).show();
-					e.printStackTrace();
-				}
-				
-				// Use the first address returned by the geocoder.
-				if (locations != null && locations.size()>0) {
-					int lat = (int) (locations.get(0).getLatitude() * 1000000);
-					int lon = (int) (locations.get(0).getLongitude() * 1000000);
-					loc = new Location(lat, lon, addr);
-				}
-				else {
-					// TODO: Make sure this is the only cause of a 0-length/null return from the geocoder
-					Context context = getApplicationContext();
-					CharSequence msg = "Invalid address, try another one.";
-					Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-
+				if (loc == null)
 					return;
-				}
 				
 				// TODO: (Optional) Display a progress spinner while sending data, until a reply is received from server
 				// Build a game and send it to the server.
