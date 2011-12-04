@@ -10,11 +10,7 @@ import android.os.Bundle;
  * @author Bill Jameson
  * @version 1.0
  */
-public class EditGameActivity extends ModifyGameActivity {/**
-	 * The <code>onCreate</code> method is called when this <code>Activity</code> is first
-	 *  created. It captures the UI elements and sets default functionality.
-	 * @param savedInstanceState <code>Bundle</code>
-	 */
+public class EditGameActivity extends ModifyGameActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
