@@ -1,6 +1,5 @@
 package eltoraz.pug.android;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import eltoraz.pug.Game;
@@ -21,7 +20,7 @@ import android.widget.*;
  * Abstract class to serve as the base for any classes that involve modifying
  *  a game.
  * @author Bill Jameson
- * @version 0.9
+ * @version 1.0
  */
 public abstract class ModifyGameActivity extends Activity {
 	protected Person user;
@@ -103,8 +102,6 @@ public abstract class ModifyGameActivity extends Activity {
 																			 android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		sportSelectSpinner.setAdapter(adapter);
-		if (game != null)
-			sportSelectSpinner.setSelection(adapter.getPosition(game.getGameType().toString()));
 		
 		// LOCATION TEXT FIELD
 		// TODO: input verification
@@ -117,21 +114,8 @@ public abstract class ModifyGameActivity extends Activity {
 				return false;
 			}
 		});
-		if (game != null)
-			locationEditText.setText(game.getLocation().getAddress());
 		
 		// DATE PICKER BUTTON
-		final Calendar c;
-		if (game != null) {
-			c = game.getDate();
-		}
-		else {
-			c = Calendar.getInstance();
-		}
-		mYear = c.get(Calendar.YEAR);
-		mMonth = c.get(Calendar.MONTH);
-		mDay = c.get(Calendar.DAY_OF_MONTH);
-		updateDate();
 		datePickButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -140,9 +124,6 @@ public abstract class ModifyGameActivity extends Activity {
 		});
 		
 		// TIME PICKER BUTTON
-		mHour = c.get(Calendar.HOUR_OF_DAY);
-		mMinute = c.get(Calendar.MINUTE);
-		updateTime();
 		timePickButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -150,9 +131,9 @@ public abstract class ModifyGameActivity extends Activity {
 			}
 		});
 		
-		// MAX PLAYERS TEXT FIELD
-		// TODO: input validation
-		maxPlayersEditText.setText("4");
+		fillFields(adapter);
+		updateDate();
+		updateTime();
 		
 		// CREATE GAME BUTTON
 		submitButton.setOnClickListener(new View.OnClickListener() {
@@ -218,9 +199,9 @@ public abstract class ModifyGameActivity extends Activity {
 	/**
 	 * Update the date shown on the button with the date selected by the user.
 	 */
-	protected void updateDate() {
-		CharSequence text = new StringBuilder().append(mMonth+1).append("/")
-											   .append(mDay).append("/")
+	private void updateDate() {
+		CharSequence text = new StringBuilder().append(pad(mMonth+1)).append("/")
+											   .append(pad(mDay)).append("/")
 											   .append(mYear);
 		datePickButton.setText(text);
 	}
@@ -229,10 +210,10 @@ public abstract class ModifyGameActivity extends Activity {
 	 * Update the time shown on the button with the time selected by the user.
 	 * Time is displayed in 24-hour format.
 	 */
-	protected void updateTime() {
+	private void updateTime() {
 		// TODO: (Optional) Have an option for AM/PM display later.
 		CharSequence text = new StringBuilder().append(pad(mHour)).append(":")
-											   .append(mMinute);
+											   .append(pad(mMinute));
 		timePickButton.setText(text);
 	}
 	
@@ -242,7 +223,7 @@ public abstract class ModifyGameActivity extends Activity {
 	 * @param c <code>int</code> Hour or minute value to pad.
 	 * @return <code>String</code> The padded hour or minute.
 	 */
-	protected static String pad(int c) {
+	private static String pad(int c) {
 		if (c >= 10)
 			return String.valueOf(c);
 		else
@@ -253,6 +234,11 @@ public abstract class ModifyGameActivity extends Activity {
 	 * Get the required data from the intent that started this <code>Activity</code>.
 	 */
 	protected abstract void getIntentData();
+	/**
+	 * Fill in the Game's fields as needed.
+	 * @param adapter <code>ArrayAdapter</code> corresponding to the sport selection Spinner
+	 */
+	protected abstract void fillFields(ArrayAdapter<CharSequence> adapter);
 	/**
 	 * If necessary, create an intent and store any return values the calling
 	 *  <code>Activity</code> is expecting.

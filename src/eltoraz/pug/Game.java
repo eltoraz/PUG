@@ -240,6 +240,14 @@ public abstract class Game implements Serializable {
 		return owner;
 	}
 	
+	/** 
+	 * Retrieve the <code>Game</code>'s visibility status
+	 * @return <code>boolean</code> whether the Game is publically visible
+	 */
+	public boolean getPrivate() {
+		return privateGame;
+	}
+	
 	/**
 	 * Retrieve the <code>Game</code>'s date and time
 	 * @return a <code>GregorianCalendar</code> containing the <code>Game</code>'s date and time
