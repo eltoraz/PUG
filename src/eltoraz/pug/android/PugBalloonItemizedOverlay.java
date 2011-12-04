@@ -3,7 +3,6 @@ package eltoraz.pug.android;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 
@@ -68,10 +67,7 @@ public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<PugOverlay
 	@Override
 	protected boolean onBalloonTap(int index, PugOverlayItem item) {
 		if (item.getUser().getId() == item.getGame().getOwner().getId()) {
-			Intent intent = new Intent(c.getApplicationContext(), EditGameActivity.class);
-			intent.putExtra("user", item.getUser());
-			intent.putExtra("game", item.getGame());
-			c.startActivity(intent);
+			Toast.makeText(c, "This is one of your games!", Toast.LENGTH_LONG);
 		}
 		else {
 			PugNetworkInterface.joinGame(item.getUser().getId(), item.getGame().getId());
