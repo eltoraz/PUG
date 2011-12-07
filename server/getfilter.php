@@ -1,6 +1,6 @@
 <?php
 
-//Connect to database
+//Database connection
 $con = mysql_connect("localhost","martin3","pickup");
 if (!$con)
   {
@@ -72,6 +72,6 @@ while($row = mysql_fetch_array($result))
 $earr = json_encode($arr);
 echo $earr;
 
-//Close database connection
+//Close DB connection
 mysql_close($con);
 ?>

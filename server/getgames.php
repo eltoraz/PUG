@@ -1,5 +1,5 @@
 <?php
-
+//Database connection
 $con = mysql_connect("localhost","martin3","pickup");
 if (!$con)
   {
@@ -8,12 +8,14 @@ if (!$con)
 
 mysql_select_db("martin3_pug", $con);
 
+//Get inputed user
 $user = $_GET["user"];
 
+//Find all games the user is playing
 $result = mysql_query("Select game from playing where player = ".$user."")
   or die ('Error: '.mysql_error ());
 
-  //Loop through and create JSONObject
+//Loop through and create JSONObject
 $i = 0;
 $arr = array();
 while($row = mysql_fetch_array($result))
@@ -50,5 +52,6 @@ while($row = mysql_fetch_array($result))
 $earr = json_encode($arr);
 echo $earr;
 
+//Close DB connection
 mysql_close($con);
 ?> 
