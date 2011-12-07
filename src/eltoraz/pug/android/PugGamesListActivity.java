@@ -115,7 +115,7 @@ public abstract class PugGamesListActivity extends ListActivity {
 	 * @param g <code>Game</code> to be displayed
 	 * @return <code>String</code> representing the Game
 	 */
-	private String listItem(Game g) {
+	protected String listItem(Game g) {
 		String game = "";
 		if (g.getOwner().getId() == user.getId()) {
 			game += "You are this game's owner!";
