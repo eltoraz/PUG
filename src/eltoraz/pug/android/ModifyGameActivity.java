@@ -19,6 +19,7 @@ import android.widget.*;
 /**
  * Abstract class to serve as the base for any classes that involve modifying
  *  a game.
+ * Uses the Template design pattern outlined in the Gang of Four book.
  * @author Bill Jameson
  * @version 1.0
  */

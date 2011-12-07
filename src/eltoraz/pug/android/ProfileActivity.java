@@ -18,12 +18,9 @@ import android.widget.*;
  * This <code>Activity</code> allows the user to view and modify his/her
  *  profile information.
  * @author Kevin Frame
- * @version 0.9
+ * @version 1.0
  */
 public class ProfileActivity extends Activity {
-	// For debugging.
-	//private static final String TAG= ProfileActivity.class.getSimpleName();
-	
 	private Person user;
 	
 	/* ***** UI ELEMENTS ***** */
@@ -128,25 +125,29 @@ public class ProfileActivity extends Activity {
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				int id = user.getId();
+				
 				nameEditText.setFocusable(false);
 				nameEditText.setFocusableInTouchMode(false);
 				nameEditText.setClickable(false);
-				user.setName(nameEditText.getText().toString());
+				name = nameEditText.getText().toString();
 				
 				ageEditText.setFocusable(false);
 				ageEditText.setFocusableInTouchMode(false);
 				ageEditText.setClickable(false);
-				user.setAge(Integer.parseInt(ageEditText.getText().toString()));
+				age = ageEditText.getText().toString();
 				
 				genderSpinner.setFocusable(false);
 				genderSpinner.setFocusableInTouchMode(false);
 				genderSpinner.setClickable(false);
-				user.setGender(Gender.valueOf(genderSpinner.getSelectedItem().toString().toUpperCase()));
+				Gender gender = Gender.valueOf(genderSpinner.getSelectedItem().toString().toUpperCase());
 				
 				favoriteSportSpinner.setFocusable(false);
 				favoriteSportSpinner.setFocusableInTouchMode(false);
 				favoriteSportSpinner.setClickable(false);
-				user.setFavSport(SportType.valueOf(favoriteSportSpinner.getSelectedItem().toString().toUpperCase()));
+				SportType fav = SportType.valueOf(favoriteSportSpinner.getSelectedItem().toString().toUpperCase());
+				
+				user = new Person(name, id, Integer.parseInt(age), gender, fav);
 				
 				PugNetworkInterface.editUser(user);
 				
@@ -164,21 +165,5 @@ public class ProfileActivity extends Activity {
 				finish();
 			}
 		});
-		
-		/* For debugging.
-		Log.d(TAG, "1");
-		GregorianCalendar A= new GregorianCalendar();
-		Log.d(TAG, "2");
-		Location l= new Location(74,76);
-		Log.d(TAG, "3");
-		Game X= Game.buildGame(Game.SportType.BASKETBALL,"Looking for a solid pickup game with a large crowd",A.getTimeInMillis(),user,user,l,20,false);
-		Log.d(TAG, "4");
-		if (X==null)
-			Log.d(TAG,"NULL Games");
-		PugNetworkInterface.sendGame(X);
-		Log.d(TAG, "5");
-		ArrayList<Game> ListOfGames=PugNetworkInterface.getGames();
-		Log.d(TAG, "6");
-		*/
 	}	
 }

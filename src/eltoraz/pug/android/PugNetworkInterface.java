@@ -32,7 +32,7 @@ import android.widget.Toast;
 /**
  * The <code>PugNetworkInterface</code> class provides methods to interact with the server.
  * @author Brian Orecchio
- * @version 0.9
+ * @version 1.0
  */
 public class PugNetworkInterface {
 	// NOTE: These getGames functions have a bunch of duplicated code, in the future I will add a way to do this filtering in a single get games 

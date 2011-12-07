@@ -13,7 +13,7 @@ import org.json.JSONException;
  * The <code>Game</code> class represents a generic game. It's meant to be extended by subclasses to
  * correspond to specific sports/games.
  * @author Bill Jameson
- * @version 0.9
+ * @version 1.0
  */
 public abstract class Game implements Serializable {
 	/**

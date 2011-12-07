@@ -21,6 +21,7 @@ import android.widget.TextView;
  * Abstract class to serve as the base for any <code>Activity</code> that displays
  *  a list of Games, allowing such Activities to define their own interaction
  *  behavior.
+ * Uses the Template design pattern outlined in the Gang of Four book.
  * @author Kevin Frame
  * @author Bill Jameson
  * @version 1.0

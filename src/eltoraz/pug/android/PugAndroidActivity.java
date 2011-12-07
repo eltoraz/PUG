@@ -25,7 +25,7 @@ import android.graphics.drawable.Drawable;
  * @author Kevin Frame
  * @author Bill Jameson
  * @author Brian Orecchio
- * @version 0.9
+ * @version 1.0
  */
 public class PugAndroidActivity extends MapActivity {
 	/* ***** UI ELEMENTS ***** */

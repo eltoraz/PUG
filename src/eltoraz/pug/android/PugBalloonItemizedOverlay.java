@@ -11,7 +11,7 @@ import com.google.android.maps.MapView;
 /**
  * A custom overlay built on the Open Source <code>BalloonItemizedOverlay</code>.
  * @author Brian Orecchio
- * @version 0.9
+ * @version 1.0
  * @reference https://github.com/jgilfelt/android-mapviewballoons
  */
 public class PugBalloonItemizedOverlay extends BalloonItemizedOverlay<PugOverlayItem> {
