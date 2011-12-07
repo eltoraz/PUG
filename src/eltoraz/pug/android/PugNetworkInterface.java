@@ -363,4 +363,62 @@ public class PugNetworkInterface {
 		Games = getGamesFromServer(page);
 		return Games;
 	}
+	
+	
+	/**
+	 * Parse the given JSON array for the contained Person
+	 * @param jsonArray <code>JSONArray</code> containing containing the Persons
+	 * @return <code>ArrayList</code> containing the decoded Persons
+	 */
+	private static ArrayList<Person> parsePersonJSONArray(JSONArray jsonArray) {
+		Person user;
+		ArrayList<Person> users = new ArrayList<Person>();
+		
+		try {
+			for(int i = 0; i < jsonArray.length(); i++) {
+				
+				// Get the JSON object at index i
+				JSONObject personJson = jsonArray.getJSONObject(i);
+				user = new Person(personJson);
+
+				// Add the game to the list
+				users.add(user);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return users;
+	}
+	
+	/**
+	 * Retrieve a list of users who have joined the specified game
+	 * @param gameId <code>int</code> unique game ID
+	 * @return <code>ArrayList\<Person\></code> containing the users who have joined the game
+	 */
+	public static ArrayList<Person> getPlayers(int gameId) {
+		ArrayList<Person> users  = new ArrayList<Person>();
+
+		String page = "http://pug.myrpi.org/getplayers.php";
+		page += "?game=" + gameId;
+
+		HttpClient httpClient = new DefaultHttpClient();
+		
+
+		try {			
+			HttpGet httpGet = new HttpGet (page);
+			HttpResponse response = httpClient.execute(httpGet);
+			HttpEntity entity = response.getEntity();
+			JSONArray jsonArray = new JSONArray(EntityUtils.toString(entity));
+
+			users = parsePersonJSONArray(jsonArray);	
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
+	
 }
+
