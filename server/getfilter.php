@@ -45,7 +45,8 @@ $i = 0;
 $arr = array();
 while($row = mysql_fetch_array($result))
   {
-  $arr[$i] = array("sport" => $row[1], 
+  $arr[$i] = array("id" => $row[0],
+    "sport" => $row[1], 
     "descr" => $row[2], 
     "creator"=>array("id"=>$row[3],
     	"name"=>$row[13], 

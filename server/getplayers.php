@@ -22,7 +22,8 @@ while($row = mysql_fetch_array($result))
   $arr[$i] = $row[0];
 }
 
-echo $arr;
+$earr = json_encode($arr);
+echo $earr;
 
 mysql_close($con);
 ?> 
