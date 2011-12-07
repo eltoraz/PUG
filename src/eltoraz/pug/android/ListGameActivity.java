@@ -1,7 +1,7 @@
 package eltoraz.pug.android;
 
 import eltoraz.pug.Game;
-import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.widget.Toast;
 
@@ -17,56 +17,19 @@ import android.widget.Toast;
  */
 public class ListGameActivity extends PugGamesListActivity {
 	@Override
-	protected void ownedGameClickAction(Game g) {
+	protected void setOwnedGameDialogPositiveAction(Builder builder, final Game g) {
+		// TODO: implement edit button
 	}
 	
 	@Override
-	protected void unownedGameClickAction(Game g) {
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setCancelable(true);
-		if (g.getGameType().toString().compareTo("Basketball")==0){
-			builder.setIcon(R.drawable.basketball);
-		}
-		
-		if (g.getGameType().toString().compareTo("Baseball")==0){
-			builder.setIcon(R.drawable.baseball);
-		}
-		
-		if (g.getGameType().toString().compareTo("Football")==0){
-			builder.setIcon(R.drawable.football);
-		}
-		
-		if (g.getGameType().toString().compareTo("Soccer")==0){
-			builder.setIcon(R.drawable.soccer);
-		}
-	
-		builder.setTitle("Join Game");
-		builder.setInverseBackgroundForced(true);
-		
-					
-			final String game = listItem(g);
-			builder.setMessage(game);
-		
-		builder.setPositiveButton("Join Game", new DialogInterface.OnClickListener() {
-	
-		@Override
-		  public void onClick(DialogInterface dialog, int which) {
-			Game arg=games.get(gameText.indexOf(game));
-			PugNetworkInterface.joinGame(user.getId(), arg.getId());
-			Toast.makeText(getApplicationContext(), "Joined Game!", Toast.LENGTH_LONG).show();
-		  	dialog.dismiss();
-		  }
+	protected void setUnownedGameDialogPositiveAction(Builder builder, final Game g) {
+		builder.setPositiveButton(R.string.join, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				PugNetworkInterface.joinGame(user.getId(), g.getId());
+				Toast.makeText(getApplicationContext(), "Joined Game!", Toast.LENGTH_LONG).show();
+				dialog.dismiss();
+			}
 		});
-		builder.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
-	
-		@Override
-		  public void onClick(DialogInterface dialog, int which) {
-		    dialog.dismiss();
-		  }
-		});
-			AlertDialog alert = builder.create();
-			alert.show();
-		
 	}
 }

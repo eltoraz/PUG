@@ -41,4 +41,11 @@
     <string name="profile_joinedgames_label">Games You\'ve Joined</string>
     <string name="list_label">Game List</string>
     <string name="edit_label">Edit Game</string>
+    <string name="details_label">Game Details</string>
+    <string name="leave">Leave Game</string>
+    <string name="cancel">Cancel</string>
+    <string-array name="no_games">
+        <item >No Games to Show!</item>
+    </string-array>
+    <string name="join">Join Game</string>
 </resources>
